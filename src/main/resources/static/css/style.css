@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'beanpoleotM00';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/beanpoleotM00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ul, li {margin: 0; padding: 0; list-style: none;}
+a {color: inherit; text-decoration: none;}
+a:hover {color: inherit; text-decoration: none;}
+*:focus {outline: none; box-shadow: none; outline-width: 0;}
+
+
+.w80 {width: 80%; margin: auto;}
+.font {font-family: beanpoleotM00;}
+.font12 {font-size: 12px;}
+.font15 {font-size: 15px;}
+.font40 {font-size: 40px;}
+.blue:hover {color: #35C5F0;}
+.mr10 {margin-right: 10%;}
+.ml10 {margin-left: 10%;}
+.img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%;}
+.img-center {width: 100%; height: 100%; overflow: hidden; position: relative; margin: auto;}
+.box-radius-5 {border-radius: 5px; overflow: hidden;}
+.box-radius-10 {border-radius: 10px; overflow: hidden;}
+.border-1-white {border: 1px solid #fff;}
+.flexBetween {display: flex; justify-content: space-between; padding: 0;}
+.column4 {width: 269px;}
+.textShadow2 {text-shadow: 1px 1px 1px gray;}
+.font-gray-15 {font-size: 15px; color: #757575; font-weight: 700; line-height: 20px;}
+
+
+header {border-bottom: 1px solid #EDEDED; height: 100px; background-color: #fff; position: relative; top: 0; left: 0; right: 0; z-index: 100;}
+.contents {padding-top: 80px; padding-bottom: 50px;}
+footer {height: 100px; text-align: center; line-height: 100px;}
+
+/* header */
+#mainMenu {height: 100%;}
+#mainMenu > li {margin: auto; line-height: 80px; padding-right: 30px; vertical-align: top;}
+#mainMenu > #communityMenuBtn:hover > ul#communityMenu {z-index: 100;}
+#mainMenu > #storeMenuBtn:hover > ul#storeMenu {z-index: 100;}
+.subMenu {background-color: #fff; border-bottom: 1px solid #EDEDED; position: absolute; top: 100px; left: 0; right: 0; height: 50px; display: flex; padding-top: 20px; padding-left: 10%;}
+.subMenu > li {padding: 0; padding-right: 50px; text-align: left;}
+.subMenu > li > a {padding-left: 0; line-height: 10px; vertical-align: top; font-weight: bold;}
+
+.layout-navigation-search__input__icon {position: absolute; margin: 5px;}
+#keyword {padding-left: 35px; width: 270px; height: 40px; border: 1px solid #757575;}
+.nav-link {color: #424242; font-weight: bold; display: block;}
+.basket {margin-top: 5px; color: #757575;}
+.borderSide {border-left: 1px solid #757575; border-right: 1px solid #757575;}
+
+.userBtn {width: 32px; height: 32px; border-radius: 16px; background-color: #757575; overflow: hidden;}
+#createBtn {color: #fff; background-color: #35C5F0;}
+.moreIcon {padding-top: 5px;}
+
+/* community main */
+.bannerArea {overflow: hidden; height: 550px; display: flex; justify-content: space-between;}
+.mainBanner {width: 69%; height: 100%; border-radius: 10px; overflow: hidden;}
+.smallBanner {width: 29%; height: 100%; border-radius: 10px; overflow: hidden;}
+.bannerTitle {font-size: 32px; color: #fff; font-weight: 700; margin: 10px 0;}
+.mainBanner > div.infoArea {bottom: 30px; left: 30px;}
+.iconArea {display: flex; justify-content: center; padding: 30px 0;}
+.iconMenu {height: 80px; width: 150px; }
+.iconText {width: 100%; text-align: center; font-weight: 500; padding-top: 10px;}
+
+.todayStoryArea {margin: 30px 0;}
+.categoryIndexBox {padding: 20px 0; display: flex; justify-content: space-between;}
+.categoryIndexBox > .moreBtn {color: #35C5F0; font-weight: 700;}
+.categoryIndex {font-size: 20px; font-weight: 700;}
+.postImgBox {height: 180px;}
+.postTitle {font-weight: 600; font-size: 15px; margin-bottom: 10px;}
+.writerInfo {display: flex;}
+.postWritherImg {width: 22px; height: 22px; border-radius: 50%; background-color: #434343; margin-right: 10px;}
+.writerNickName {font-size: 13px; color: #424242;}
+
+.todayDeal {display: flex; justify-content: space-between; padding: 0;}
+.dealCard {width: 269px;}
+.dealImgBox {height: 269px;}
+.infoArea {margin: 15px 10px;}
+.storeName {font-size: 11px; color: #757575; line-height: 13px;}
+.dealTitle {margin-top: 5px; font-size: 13px; font-weight: 400; line-height: 17px;}
+.discountRate {font-size: 17px; line-height: 23px; font-weight: 700; color: #f77;}
+.price {font-size: 17px; line-height: 23px; font-weight: 700; color: #000; margin-left: 10px;}
+
+.absolute {position: absolute; bottom: 0; z-index: 100;}
+.relative {position: relative;}

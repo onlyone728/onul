@@ -38,7 +38,7 @@ public class TestController {
 		 
 		 List<User> user = userBO.getUserList();
 		 model.addAttribute("user", user);
-		 return "test/test";
+		 return "template/layout";
 	 }
 	 
 }
