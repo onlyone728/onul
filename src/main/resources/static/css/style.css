@@ -19,9 +19,9 @@ a:hover {color: inherit; text-decoration: none;}
 .blue:hover {color: #35C5F0;}
 .mr10 {margin-right: 10%;}
 .ml10 {margin-left: 10%;}
-.img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%;}
+.img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%; width: auto;}
 .img-center {width: 100%; height: 100%; overflow: hidden; position: relative; margin: auto;}
-.box-radius-5 {border-radius: 5px; overflow: hidden;}
+.box-radius-5 {border-radius: 5px; overflow: hidden; }
 .box-radius-10 {border-radius: 10px; overflow: hidden;}
 .border-1-white {border: 1px solid #fff;}
 .flexBetween {display: flex; justify-content: space-between; padding: 0;}
@@ -52,6 +52,12 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .userBtn {width: 32px; height: 32px; border-radius: 16px; background-color: #757575; overflow: hidden;}
 #createBtn {color: #fff; background-color: #35C5F0;}
 .moreIcon {padding-top: 5px;}
+
+/* 글쓰기 메뉴 */
+#writeMenu {z-index:100; position: absolute; top: 80px; right: 10%;  width: 180px; background-color: #fff; box-shadow: 2px 2px 4px #b5b5b5; border-radius: 5px;}
+#writeMenu > ul > li {padding: 10px 10px; border-bottom: 1px solid #DBDBDB;}
+#writeMenu > ul > li:last-child {border: none;}
+#writeMenu > ul > li > a {display: block; text-align: center;}
 
 /* community main */
 .bannerArea {overflow: hidden; height: 550px; display: flex; justify-content: space-between;}

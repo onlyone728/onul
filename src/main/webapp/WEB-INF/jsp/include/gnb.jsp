@@ -43,9 +43,9 @@
 	
 	<%-- 로그인 전 --%>
 	<div class="signMenuArea d-flex">
-		<div class="signInBtn font-gray-15 px-2"><a href="#">로그인</a></div>
-		<div class="signUpBtn font-gray-15 px-2 borderSide"><a href="#">회원가입</a></div>
-		<div class="customerCenterBtn font-gray-15 px-2"><a href="#">고객센터</a></div>
+		<div class="signInBtn font-gray-15 px-2 blue"><a href="#">로그인</a></div>
+		<div class="signUpBtn font-gray-15 px-2 borderSide blue"><a href="#">회원가입</a></div>
+		<div class="customerCenterBtn font-gray-15 px-2 blue"><a href="#">고객센터</a></div>
 	</div>
 	
 	<%-- 로그인 후 --%>
@@ -55,12 +55,20 @@
 		</a>
 	</div> -->
 	
-	<button type="button" id="createBtn" class="btn ml-3 mr10">
+	<a href="#writeMenu" id="createBtn" class="btn ml-3 mr10">
 		<span>글쓰기</span>
 		<svg class="moreIcon" width="1em" height="1em" viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet">
 			<path fill="currentColor" fill-rule="evenodd" d="M2.87 4L1.33 5.5 8 12l6.67-6.5L13.13 4 8 9z"></path>
 		</svg>
-	</button>
+	</a>
+	<div id="writeMenu" class="d-none">
+		<ul>
+			<li><a href="#" class="photoCreateBtn">사진올리기</a></li>
+			<li><a href="#" class="introduceCreateBtn">집들이 글쓰기</a></li>
+			<li><a href="#" class="knowhowCreateBtn">노하우 글쓰기</a></li>
+			<li><a href="#" class="reviewCreateBtn">상품 리뷰 쓰기</a></li>
+		</ul>
+	</div>
 </div>
 
 
@@ -92,6 +100,19 @@ $(document).ready(function() {
 		}
 	});
 	
+	// 글쓰기 버튼 클릭
+	$(document).on('click', '#createBtn', function (e){
+		e.preventDefault();
+		let target = $(this).attr('href');
+		$(target).removeClass('d-none');
+	});
+	// 외부영역 클릭 시 팝업 닫기
+	$(document).mouseup(function(e){
+		let LayerPopup = $('#writeMenu');
+		if(LayerPopup.has(e.target).length === 0){
+			LayerPopup.addClass('d-none');
+		};
+	});	
 	
 });
 </script>
