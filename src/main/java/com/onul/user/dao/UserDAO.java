@@ -1,7 +1,5 @@
 package com.onul.user.dao;
 
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +20,7 @@ public interface UserDAO {
 			@Param("loginId") String loginId, 
 			@Param("password") String password, 
 			@Param("nickName") String nickName, 
-			@Param("profileImage") Map<String, String> profileImage, 
+			@Param("profileImage") String profileImage, 
 			@Param("name") String name, 
 			@Param("email") String email);
 }

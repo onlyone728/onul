@@ -32,28 +32,32 @@ public class UserRestController {
 		Map<String, Object> result = new HashMap<>();
 		
 		result.put("result", "success");
-		
-		// TODO: salt 분리 후 비밀번호 암호화  
-		String salt = password.substring(password.length() - 8, password.length());
-		
-		String temp = password + salt;
-		
-		String encPassword = EncryptUtils.getEncrypt(temp, salt);
-		
+
 		// TODO: 암호화된 비번과 로그인 아이디로 DB select
-		User user = userBO.getUserByLoginIdAndPassword(loginId, encPassword);
+		User user = userBO.getUserByLoginId(loginId);
 		
-		// TODO: 로그인이 성공하면 session에 정보를 저장한다.
-		if (user != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("userLoginId", user.getLoginId());
-			session.setAttribute("userId", user.getId());
-			session.setAttribute("userNickName", user.getNickName());
-		} else {
+		if (user == null) {
 			result.put("result", "error");
-			result.put("errorMessage", "존재하지 않는 사용자입니다. 관리자에게 문의해주세요.");
+			result.put("errorMessage", "아이디가 존재하지않습니다.");
+		} else {
+			// TODO: salt 분리 후 비밀번호 암호화  
+			String salt = user.getPassword().substring(64);
+			String encPw = EncryptUtils.getEncrypt(password, salt);
+			String tempPw = encPw + salt;
+			String userPw = user.getPassword();
+			
+			if (userPw == tempPw) {
+				result.put("result", "success");
+				// TODO: 로그인이 성공하면 session에 정보를 저장한다.
+				HttpSession session = request.getSession();
+				session.setAttribute("userLoginId", user.getLoginId());
+				session.setAttribute("userId", user.getId());
+				session.setAttribute("userNickName", user.getNickName());
+			} else {
+				result.put("result", "error");
+				result.put("errorMessage", "비밀번호가 일치하지 않습니다.");
+			}
 		}
-		
 		return result;
 	}
 	
@@ -102,11 +106,11 @@ public class UserRestController {
 		
 		// 비밀번호 암호화
 		String salt = EncryptUtils.generateSalt();	// 보안향상을 위한 salt 추가
-		String incPassword = EncryptUtils.getEncrypt(password, salt);	// sha256 해싱 
-		String incSaltPw = incPassword + salt;	// 저장될 비밀번호
+		String encPassword = EncryptUtils.getEncrypt(password, salt);	// sha256 해싱 
+		String encSaltPw = encPassword + salt;	// 저장될 비밀번호
 		
 		// TODO: DB insert
-		int count = userBO.addUser(loginId, incSaltPw, nickName, file, name, email);
+		int count = userBO.addUser(loginId, encSaltPw, nickName, file, name, email);
 		
 		if (count < 1) {
 			result.put("result", "error");
