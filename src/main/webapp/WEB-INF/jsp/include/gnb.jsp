@@ -43,8 +43,8 @@
 	
 	<%-- 로그인 전 --%>
 	<div class="signMenuArea d-flex">
-		<div class="signInBtn font-gray-15 px-2 blue"><a href="#">로그인</a></div>
-		<div class="signUpBtn font-gray-15 px-2 borderSide blue"><a href="#">회원가입</a></div>
+		<div class="signInBtn font-gray-15 px-2 blue"><a href="/user/sign_in_view">로그인</a></div>
+		<div class="signUpBtn font-gray-15 px-2 borderSide blue"><a href="/user/sign_up_view">회원가입</a></div>
 		<div class="customerCenterBtn font-gray-15 px-2 blue"><a href="#">고객센터</a></div>
 	</div>
 	

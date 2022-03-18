@@ -1,0 +1,28 @@
+package com.onul.user.dao;
+
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+import com.onul.user.model.User;
+
+@Repository
+public interface UserDAO {
+
+	public User selectUserByLoginIdAndPassword(
+			@Param("loginId") String loginId, 
+			@Param("password") String password);
+	
+	public User selectUserByLoginId(String loginId);
+	
+	public User selectUserByNickName(String nickName);
+	
+	public int insertUser(
+			@Param("loginId") String loginId, 
+			@Param("password") String password, 
+			@Param("nickName") String nickName, 
+			@Param("profileImage") Map<String, String> profileImage, 
+			@Param("name") String name, 
+			@Param("email") String email);
+}

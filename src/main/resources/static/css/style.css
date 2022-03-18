@@ -12,6 +12,8 @@ a:hover {color: inherit; text-decoration: none;}
 
 
 .w80 {width: 80%; margin: auto;}
+.w300 {width: 300px; margin: auto;}
+.w360 {width: 360px; margin: auto;}
 .font {font-family: beanpoleotM00;}
 .font12 {font-size: 12px;}
 .font15 {font-size: 15px;}
@@ -24,6 +26,7 @@ a:hover {color: inherit; text-decoration: none;}
 .box-radius-5 {border-radius: 5px; overflow: hidden; }
 .box-radius-10 {border-radius: 10px; overflow: hidden;}
 .border-1-white {border: 1px solid #fff;}
+.border-1-gray {border: 1px solid #d6d6d6;}
 .flexBetween {display: flex; justify-content: space-between; padding: 0;}
 .column4 {width: 269px;}
 .textShadow2 {text-shadow: 1px 1px 1px gray;}
@@ -31,7 +34,7 @@ a:hover {color: inherit; text-decoration: none;}
 
 
 header {border-bottom: 1px solid #EDEDED; height: 100px; background-color: #fff; position: relative; top: 0; left: 0; right: 0; z-index: 100;}
-.contents {padding-top: 80px; padding-bottom: 50px;}
+.contents {padding-top: 80px; padding-bottom: 50px; min-height: 650px;}
 footer {height: 100px; text-align: center; line-height: 100px;}
 
 /* header */
@@ -90,3 +93,41 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 
 .absolute {position: absolute; bottom: 0; z-index: 100;}
 .relative {position: relative;}
+
+/* 로그인 화면 */
+.loginBox {margin: auto; margin-top: 80px;}
+#loginForm {margin-top: 30px;}
+.signInArea #loginId {border-radius: 5px 5px 0 0; height: 50px; background-color: #fff; border-bottom: none;}
+.signInArea #password {border-radius: 0 0 5px 5px; height: 50px; background-color: #fff; margin-bottom: 30px;}
+.confirm-msg {font-size: 13px;}
+#login-btn {background-color: #35C5F0; color: #fff; height: 50px;}
+#join-btn {background-color: #DBDBDB; color: #000; height: 50px; line-height: 35px;}
+.bg-gray {background-color: #c1c1c1; color: #fff;}
+
+/* 회원가입 */
+.signUpInput > label {font-size: 15px; font-weight: 600;}
+.signUpInput > input {height: 40px; font-size: 15px; border: 1px solid #d6d6d6;}
+.redText {color: rgb(255, 119, 119);}
+.blueText {color: #35C5F0;}
+.grayText {color: #757575;}
+.agree {font-size: 14px; padding: 10px 0;}
+.allAgree {font-weight: 700; padding-bottom: 20px; border-bottom: 1px solid #d6d6d6;}
+.allAgree .checkLabel {font-size: 16px; margin-top: 3px; margin-left: 20px;}
+.agree .checkLabel {font-size: 14px; margin-top: 5px; margin-left: 20px;}
+.agree a {text-decoration: underline;}
+.agreementBox {padding: 20px;}
+
+/* 선택안된 체크박스 꾸미기 */
+.agreementBox input[type="checkbox"] {visibility: hidden;} 
+.agreementBox .cb {position: absolute; top: 0; left: 0; border: 1px solid #d6d6d6; border-radius: 3px; width: 20px; height: 20px; margin: 5px; margin-right: 10px;}
+
+/* 선택된 체크박스 꾸미기 */
+.agreementBox input[type="checkbox"]:checked + .cb {background-color: #35C5F0; border: none;}
+.agreementBox .cb:after {content: ""; position: absolute; display: none;}
+.agreementBox input[type="checkbox"]:checked + .cb:after {display: block;}
+.cb:after { width: 6px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); position: absolute; left: 7px; top: 4px; }
+
+.agreementBox label {vertical-align: center; margin: 0; position: relative;}
+#signUpBtn {height: 50px; background-color: #35C5F0; color: #fff; font-size: 17px; font-weight: 700; margin: 30px 0;}
+.goToSignIn span {font-weight: 400; font-size: 15px; margin-right: 10px;}
+.goToSignIn a {font-weight: 700; font-size: 15px; text-decoration: underline;}
