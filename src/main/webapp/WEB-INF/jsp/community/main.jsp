@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="w80">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
+<div id="communityMain" class="w80">
 	<%-- 배너 영역 --%>
 	<div class="bannerArea">
 		<div class="mainBanner relative">
@@ -65,89 +67,41 @@
 	</div>
 	
 	<%-- 오늘의 스토리 --%>
-	<div class="todayStoryArea">
+	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">오늘의 스토리</div>
 			<div class="moreBtn"><a href="#">더보기</a></div>
 		</div>
-		<div class="flexBetween">
-			<div class="column4">
-				<a href="#">
-					<div class="img-center box-radius-10 postImgBox bg-info">
-						<img alt="" src="https://cdn.pixabay.com/photo/2015/06/24/16/36/office-820390_1280.jpg" class="img  height="180">
-					</div>
-					<div class="infoArea">
-						<div class="postTitle">postTitle</div>
-						<div class="writerInfo">
-							<div class="postWritherImg">
-								<img alt="" src="">
-							</div>
-							<div class="writerNickName">writerNickName</div>
+		<div class="gridBetween">
+			<c:forEach var="house" items="${houseList}">
+				<div class="column4">
+					<a href="#">
+						<div class="img-center box-radius-10 postImgBox bg-info">
+							<img alt="" src="${house.imagePath}" class="img  height="180">
 						</div>
-					</div>
-				</a>
-			</div>
+						<div class="infoArea">
+							<div class="postTitle">${house.subject}</div>
+							<div class="writerInfo">
+								<div class="postWritherImg">
+									<img alt="" src="">
+								</div>
+								<div class="writerNickName">${house.nickName}</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</c:forEach>
 			
-			<div class="column4">
-				<a href="#">
-					<div class="img-center box-radius-10 postImgBox bg-info">
-						<img alt="" src="https://cdn.pixabay.com/photo/2015/05/31/10/58/golden-791072_1280.jpg" class="img height="180">
-					</div>
-					<div class="infoArea">
-						<div class="postTitle">postTitle</div>
-						<div class="writerInfo">
-							<div class="postWritherImg">
-								<img alt="" src="" height="22">
-							</div>
-							<div class="writerNickName">writerNickName</div>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-			<div class="column4 ">
-				<a href="#">
-					<div class="img-center box-radius-10 postImgBox bg-info">
-						<img alt="" src="https://cdn.pixabay.com/photo/2017/03/28/12/13/chairs-2181968_1280.jpg" class="img height="180">
-					</div>
-					<div class="infoArea">
-						<div class="postTitle">postTitle</div>
-						<div class="writerInfo">
-							<div class="postWritherImg">
-								<img alt="" src="" height="22">
-							</div>
-							<div class="writerNickName">writerNickName</div>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-			<div class="column4">
-				<a href="#">
-					<div class="img-center box-radius-10 postImgBox bg-info">
-						<img alt="" src="https://cdn.pixabay.com/photo/2016/03/27/20/00/coffee-1284041_1280.jpg" class="img height="180">
-					</div>
-					<div class="infoArea">
-						<div class="postTitle">postTitle</div>
-						<div class="writerInfo">
-							<div class="postWritherImg">
-								<img alt="" src="" height="22">
-							</div>
-							<div class="writerNickName">writerNickName</div>
-						</div>
-					</div>
-				</a>
-			</div>
 		</div>
 	</div>
 	
 	<%-- 오늘의딜 영역 --%>
-	<div class="todayDealArea">
+	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">오늘의딜</div>
 			<div class="moreBtn"><a href="#">더보기</a></div>
 		</div>
-		<div class="flexBetween">
+		<div class="gridBetween">
 			<div class="column4">
 				<a href="#">
 					<div class="dealImgBox img-center box-radius-5">
@@ -235,12 +189,12 @@
 	</div>
 	
 	<%-- 오늘의 인기사진 영역 --%>
-	<div class="todayPhotoArea">
+	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">오늘의 인기 사진</div>
 			<div class="moreBtn"><a href="#">더보기</a></div>
 		</div>
-		<div class="flexBetween">
+		<div class="gridBetween">
 			<div class="photoCard column4 relative">
 				<div class="dealImgBox img-center box-radius-5">
 					<a href="#">

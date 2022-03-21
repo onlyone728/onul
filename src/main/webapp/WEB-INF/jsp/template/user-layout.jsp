@@ -26,13 +26,5 @@
 			<jsp:include page="../include/footer.jsp" />
 		</footer>
 	</div>
-	
-	<script>
-		$(document).ready(function() {
-			$('a').on('click', function(e) {
-				e.preventDefault();
-			});
-		});
-	</script>
 </body>
 </html>

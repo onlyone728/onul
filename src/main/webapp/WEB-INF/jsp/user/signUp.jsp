@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="w360">
-	<div class="font font40 text-center mb-3">오늘의집</div>
+	<div class="font font40 text-center mb-3">
+		<a href="/community">오늘의집</a>
+	</div>
 	<div class="signUpInput form-group mb-2">
 		<label for="loginId">아이디</label>
 		<input type="text" id="loginId" class="form-control" placeholder="아이디">

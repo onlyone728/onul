@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,13 +17,12 @@ import com.onul.user.bo.UserBO;
 import com.onul.user.model.User;
 
 @RestController
-@RequestMapping("/user")
 public class UserRestController {
 
 	@Autowired
 	private UserBO userBO;
 	
-	@PostMapping("/sign_in")
+	@PostMapping("/user/sign_in")
 	public Map<String, Object> signIn (
 			@RequestParam("loginId") String loginId,
 			@RequestParam("password") String password,
@@ -46,13 +44,14 @@ public class UserRestController {
 			String tempPw = encPw + salt;
 			String userPw = user.getPassword();
 			
-			if (userPw == tempPw) {
+			if (userPw.equals(tempPw)) {
 				result.put("result", "success");
 				// TODO: 로그인이 성공하면 session에 정보를 저장한다.
 				HttpSession session = request.getSession();
 				session.setAttribute("userLoginId", user.getLoginId());
 				session.setAttribute("userId", user.getId());
 				session.setAttribute("userNickName", user.getNickName());
+				session.setAttribute("userImage", user.getProfileImage());
 			} else {
 				result.put("result", "error");
 				result.put("errorMessage", "비밀번호가 일치하지 않습니다.");
@@ -61,7 +60,7 @@ public class UserRestController {
 		return result;
 	}
 	
-	@PostMapping("/is_duplicated_id")
+	@PostMapping("/user/is_duplicated_id")
 	public Map<String, Object> isDuplicated(
 			@RequestParam("loginId") String loginId) {
 		Map<String, Object> result = new HashMap<>();
@@ -77,7 +76,7 @@ public class UserRestController {
 		return result;
 	}
 	
-	@PostMapping("/is_duplicated_nickname")
+	@PostMapping("/user/is_duplicated_nickname")
 	public Map<String, Object> isDuplicatedNickName(
 			@RequestParam("nickName") String nickName) {
 		Map<String, Object> result = new HashMap<>();
@@ -92,7 +91,7 @@ public class UserRestController {
 		return result;
 	}
 	
-	@PostMapping("/sign_up")
+	@PostMapping("/user/sign_up")
 	public Map<String, Object> signUp (
 			@RequestParam("loginId") String loginId,
 			@RequestParam("password") String password,
@@ -119,4 +118,5 @@ public class UserRestController {
 		
 		return result;
 	}
+	
 }

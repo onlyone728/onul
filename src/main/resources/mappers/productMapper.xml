@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.onul.product.dao.ProductDAO">
+	<select id="selectProductListBySalesType" resultType="com.onul.product.model.Product">
+		SELECT 
+			`id`
+			, `productName`
+			, `storeId`
+			, `storeName`
+			, `price`
+			, `productCategory`
+			, `delivery`
+			, `origin`
+			, `subject`
+			, `content`
+			, `imagePath`
+			, `thumbNail`
+			, `salesType`
+			, `countSales`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`product`
+		WHERE
+			`salesType`	= #{salesType}
+	</select>
+</mapper> 

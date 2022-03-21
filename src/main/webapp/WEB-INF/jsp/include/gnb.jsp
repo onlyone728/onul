@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <div id="gnb" class="d-flex align-items-center h-100">
 	<div class="ml10 font font40 mr-3">
-		<a href="#">오늘의집</a>
+		<a href="/community">오늘의집</a>
 	</div>
 	<nav class="h-100">
 		<ul id="mainMenu" class="nav">
 			<li id="communityMenuBtn" class="nav-item">
-				<a href="#" class="nav-link blue">커뮤니티</a>
+				<a href="/community" class="nav-link blue">커뮤니티</a>
 				<ul id="communityMenu" class="subMenu">
 					<li><a href="#" class="blue">홈</a></li>
 					<li><a href="#" class="blue">사진</a></li>
@@ -16,9 +18,9 @@
 				</ul>
 			</li>	
 			<li id="storeMenuBtn" class="nav-item">
-				<a href="#" class="nav-link blue">스토어</a>
+				<a href="/store" class="nav-link blue">스토어</a>
 				<ul id="storeMenu" class="subMenu">
-					<li><a href="#" class="blue">스토어홈</a></li>
+					<li><a href="/store" class="blue">스토어홈</a></li>
 					<li><a href="#" class="blue">카테고리</a></li>
 					<li><a href="#" class="blue">베스트</a></li>
 					<li><a href="#" class="blue">오늘의딜</a></li>
@@ -42,18 +44,35 @@
 	</div>
 	
 	<%-- 로그인 전 --%>
-	<div class="signMenuArea d-flex">
-		<div class="signInBtn font-gray-15 px-2 blue"><a href="/user/sign_in_view">로그인</a></div>
-		<div class="signUpBtn font-gray-15 px-2 borderSide blue"><a href="/user/sign_up_view">회원가입</a></div>
-		<div class="customerCenterBtn font-gray-15 px-2 blue"><a href="#">고객센터</a></div>
-	</div>
+	<c:choose>
+		<c:when test="${empty userId}">
+			<div class="signMenuArea d-flex">
+				<div class="signInBtn font-gray-15 px-2 blue"><a href="/user/sign_in_view">로그인</a></div>
+				<div class="signUpBtn font-gray-15 px-2 borderSide blue"><a href="/user/sign_up_view">회원가입</a></div>
+				<div class="customerCenterBtn font-gray-15 px-2 blue"><a href="#">고객센터</a></div>
+			</div>
+		</c:when>
 	
 	<%-- 로그인 후 --%>
-	<!-- <div class="userBtn ml-3">
-		<a href="#">
-			<img src="" alt="님의 프로필 사진">
-		</a>
-	</div> -->
+		<c:when test="${not empty userId}">
+			<div class="ml-3 userBtnArea">
+				<a href="#userMenu" id="userBtn">
+					<c:if test="${not empty usrImage}">
+						<img src="${userImage}" alt="${userNickName}님의 프로필 사진" height="32">
+					</c:if>
+					<div class="w-100 h-100"></div>
+				</a>
+			</div>
+			<div id="userMenu" class="d-none">
+				<ul>
+					<li><a href="#" class="myPageeBtn">마이페이지</a></li>
+					<li><a href="#" class="myShppingBtn">나의 쇼핑</a></li>
+					<li><a href="#" class="userInfoBtn">회원 정보</a></li>
+					<li><a href="/user/sign_out" class="logOutBtn">로그아웃</a></li>
+				</ul>
+			</div>
+		</c:when>
+	</c:choose>
 	
 	<a href="#writeMenu" id="createBtn" class="btn ml-3 mr10">
 		<span>글쓰기</span>
@@ -63,7 +82,7 @@
 	</a>
 	<div id="writeMenu" class="d-none">
 		<ul>
-			<li><a href="#" class="photoCreateBtn">사진올리기</a></li>
+			<li><a href="/post/photo_create_view" class="photoCreateBtn">사진올리기</a></li>
 			<li><a href="#" class="introduceCreateBtn">집들이 글쓰기</a></li>
 			<li><a href="#" class="knowhowCreateBtn">노하우 글쓰기</a></li>
 			<li><a href="#" class="reviewCreateBtn">상품 리뷰 쓰기</a></li>
@@ -99,6 +118,19 @@ $(document).ready(function() {
 			$('.subMenu').css('display', 'flex');
 		}
 	});
+	// user 버튼 클릭
+	$(document).on('click', '#userBtn', function (e){
+		e.preventDefault();
+		let target = $(this).attr('href');
+		$(target).removeClass('d-none');
+	});
+	// 외부영역 클릭 시 팝업 닫기
+	$(document).mouseup(function(e){
+		let LayerPopup = $('#userMenu');
+		if(LayerPopup.has(e.target).length === 0){
+			LayerPopup.addClass('d-none');
+		};
+	});	
 	
 	// 글쓰기 버튼 클릭
 	$(document).on('click', '#createBtn', function (e){
