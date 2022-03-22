@@ -1,4 +1,4 @@
-package com.onul.photo;
+package com.onul.post;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.onul.photo.bo.PhotoBO;
 
 @RestController
-public class PhotoRestController {
-	
+public class PostRestController {
+
 	@Autowired
 	private PhotoBO photoBO;
 
@@ -49,4 +49,7 @@ public class PhotoRestController {
 		}
 		return result;
 	}
+	
+	
+	
 }

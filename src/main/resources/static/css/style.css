@@ -9,8 +9,11 @@ ul, li {margin: 0; padding: 0; list-style: none;}
 a {color: inherit; text-decoration: none;}
 a:hover {color: inherit; text-decoration: none;}
 *:focus {outline: none; box-shadow: none; outline-width: 0;}
+select option[value=""][disabled] {display: none;}
+button:focus {outline: 0;}
 
 /* 공통 */
+.w60 {width: 60%; margin: auto;}
 .w70 {width: 70%; margin: auto;}
 .w80 {width: 80%; margin: auto;}
 .w300 {width: 300px; margin: auto;}
@@ -28,6 +31,7 @@ a:hover {color: inherit; text-decoration: none;}
 .box-radius-10 {border-radius: 10px; overflow: hidden;}
 .border-1-white {border: 1px solid #fff;}
 .border-1-gray {border: 1px solid #d6d6d6;}
+.border-1-red {border: 1px solid rgb(255, 119, 119);}
 .gridBetween {display: grid; grid-template-columns: 269px 269px 269px 269px; justify-content: space-between; row-gap: 20px; padding: 0;}
 .column4 {width: 269px;}
 .textShadow2 {text-shadow: 1px 1px 1px gray;}
@@ -64,14 +68,11 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .subMenu {background-color: #fff; border-bottom: 1px solid #EDEDED; position: absolute; top: 100px; left: 0; right: 0; height: 50px; display: flex; padding: 0; padding-top: 20px; padding-left: 10%;}
 .subMenu > li {padding: 0; padding-right: 50px; text-align: left;}
 .subMenu > li > a {display: block; padding-left: 0; line-height: 10px; font-weight: bold; width: 100%; height: 100%;}
-
-
 .layout-navigation-search__input__icon {position: absolute; margin: 7px;}
 #keyword {padding-left: 35px; width: 270px; height: 40px; border: 1px solid #dbdbdb;}
 .nav-link {color: #424242; font-weight: bold; display: block;}
 .basket {margin-top: 5px; color: #757575;}
 .borderSide {border-left: 1px solid #757575; border-right: 1px solid #757575;}
-
 .userBtnArea {width: 32px; height: 32px; border-radius: 16px; background-color: #757575; overflow: hidden;}
 #createBtn {color: #fff; background-color: #35C5F0;}
 .moreIcon {padding-top: 5px;}
@@ -88,6 +89,10 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #writeMenu > ul > li:last-child {border: none;}
 #writeMenu > ul > li > a {display: block; text-align: center;width: 100%; height: 100%; line-height: 35px;}
 #writeMenu > ul > li > a:hover {background-color: #efefef;}
+
+/* create gnb */
+.createGnb .saveBtn {background-color: #35C5F0; color: #fff; font-weight: 700;}
+.createGnb .cancelBtn {background-color: #DBDBDB; color: #000; font-weight: 500; margin-right: 10px;}
 
 /* community main */
 #communityMain {padding-top: 30px;}
@@ -156,13 +161,13 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .specialPrice {font-size: 12px; font-weight: 600; color: #fff; background-color: rgb(255, 119, 119); padding: 2px 5px; border-radius: 5px;}
 
 /* photo create view */
-#photoCreate {padding-top: 50px;}
-#photoCreate .PhotoImgArea {width: 48%; background-color: #F7F8FA;  text-align: center; border: 1px dashed #d6d6d6;}
-#photoCreate .photoBtn {width: 100%; height: 100%; font-weight: 700; color: #757575; display: flex; justify-content: center; align-items: center;}
-#photoCreate .reselectBtn {cursor: pointer;}
+#photoCreate {padding-top: 40px;}
+#photoCreate .photoImgArea {width: 48%; background-color: #F7F8FA;  text-align: center; border: 1px dashed #d6d6d6;}
+.photoBtn {width: 100%; height: 100%; font-weight: 700; color: #757575; display: flex; justify-content: center; align-items: center;}
+.reselectBtn {cursor: pointer;}
 
 #photoCreate .contentArea {width: 48%;}
-#photoCreate .contentArea > #content {width: 100%;}
+#photoCreate .contentArea > #content {width: 100%; height: 420px; padding: 20px; resize: none;}
 #photoCreate .contentArea .btnArea {display: flex; justify-content: end;}
 #photoCreate .contentArea .cancelBtn {font-weight: 600; margin-top: 10px; margin-right: 10px;}
 #photoCreate .contentArea .createBtn {background-color: #35C5F0; color: #fff; font-weight: 600; margin-top: 10px;}
@@ -200,4 +205,18 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #photoDetail .userArea .writerPostArea .writerPost:before {content: ""; display: block; padding-top: 100%;}
 #photoDetail .userArea .writerPostArea .writerPost .square {position: absolute; top: 0; bottom: 0; right: 0; left: 0;}
 
+#createHouse .requiredArea .openInputBtn {cursor: pointer; width: 100%; padding: 20px 30px; background-color: #fff; text-align: left; font-weight: 700; color: rgb(63, 71, 77); display: flex; justify-content: space-between;}
+#createHouse .requiredArea .requiredContents {padding: 30px; display:none; border-radius: 0 0 5px 5px; border-top: 0;}
+#createHouse .requiredArea .requiredContents .required {display: flex; padding: 5px 0;}
+#createHouse .requiredArea .requiredContents .required .requiredLabel {width: 15%; line-height: 40px; color: rgb(63, 71, 77); font-weight: 700;}
+#createHouse .requiredArea .requiredContents .required .requiredContent {width: 85%;}
+#createHouse .requiredArea .requiredContents .required .requiredContent select {width: 200px; height: 40px;}
+#createHouse .requiredArea .requiredContents .required .requiredContent #area {width: 100px; height: 40px; margin-right: 10px;}
+#createHouse .requiredArea .requiredContents .required .requiredContent span {line-height: 40px;}
+
+#createHouse .coverImgArea {padding: 20px 0;}
+#createHouse .coverImgArea #coverImg {display: none;}
+#createHouse .coverImgArea .coverImgBox {width: 500px; height: 500px; margin: auto; background-color: #F7F8FA; text-align: center; border: 1px dashed #d6d6d6;}
+#createHouse .subjectArea #subject {width: 100%; height: 70px; color: rgb(63, 71, 77); font-size: 34px; font-weight: 600; padding: 5px 0; border: none; border-bottom: 1px solid #d6d6d6;}
+#createHouse .subjectArea #content {width: 100%; color: rgb(63, 71, 77); font-size: 17px; margin: 30px 0; border: none; resize: none;}
 

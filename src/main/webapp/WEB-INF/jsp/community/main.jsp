@@ -195,21 +195,23 @@
 			<div class="moreBtn"><a href="#">더보기</a></div>
 		</div>
 		<div class="gridBetween">
-			<div class="photoCard column4 relative">
-				<div class="dealImgBox img-center box-radius-5">
-					<a href="#">
-						<img alt="" src="https://cdn.pixabay.com/photo/2020/03/21/22/14/dublin-4955328_1280.jpg" class="img" height="269">
-					</a>	
+			<c:forEach var="photo" items="${photo}">
+				<div class="photoCard column4 relative">
+					<div class="dealImgBox img-center box-radius-5">
+						<a href="#">
+							<img alt="" src="${photo.imagePath}" class="img" height="269">
+						</a>	
+					</div>
+					<div class="infoArea absolute">
+						<a href="#" class="d-flex">
+							<div class="postWritherImg border-1-white img-center m-0 mr-2">
+								<img alt="" src="https://cdn.pixabay.com/photo/2015/09/09/18/25/feet-932346_1280.jpg" class="img" height="100">
+							</div>
+							<div class="text-white font15 textShadow2"><b>${photo.nickName}</b></div>
+						</a>
+					</div>
 				</div>
-				<div class="infoArea absolute">
-					<a href="#" class="d-flex">
-						<div class="postWritherImg border-1-white img-center m-0 mr-2">
-							<img alt="" src="https://cdn.pixabay.com/photo/2015/09/09/18/25/feet-932346_1280.jpg" class="img" height="100">
-						</div>
-						<div class="text-white font15 textShadow2"><b>writerNickName</b></div>
-					</a>
-				</div>
-			</div>
+			</c:forEach>
 			
 			<div class="photoCard column4 relative">
 				<div class="dealImgBox img-center box-radius-5">

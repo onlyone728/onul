@@ -49,7 +49,7 @@
 			<input type="text" id="email" class="form-control" placeholder="이메일 주소">
 			<div class="mx-1">@</div>
 			<select class="form-control" id="emailDomain" name="emailDomain">
-				<option selected>선택하기</option>
+				<option value="" selected>선택하기</option>
 				<option value="naver.com">naver.com</option>
 				<option value="hanmail.net">hanmail.net</option>
 				<option value="daum.net">daum.net</option>

@@ -3,7 +3,7 @@
 
 <div id="photoCreate" class="w70">
 	<div class="d-flex justify-content-between">
-		<div class="PhotoImgArea box-radius-5">
+		<div class="photoImgArea box-radius-5">
 			<img src="" alt="미리보기 이미지" class="prevImg d-none reselectBtn" height="420">
 			<div class="photoBtn">
 				<a href="#"> 
@@ -14,11 +14,7 @@
 			<input type="file" id="file" class="d-none" accept=".jpg, .jpeg, .gif, .png">
 		</div>
 		<div class="contentArea">
-			<textarea rows="15" id="content" class="border-1-gray"></textarea>
-			<div class="btnArea ">
-				<a href="/community" class="btn cancelBtn">취소</a>
-				<button class="btn createBtn">올리기</button>
-			</div>
+			<textarea rows="15" id="content" class="box-radius-5 border-1-gray"></textarea>
 		</div>
 	</div>
 
@@ -71,7 +67,7 @@
 		});
 		
 		// 글 올리기
-		$('.createBtn').on('click', function() {
+		$('.saveBtn').on('click', function() {
 			let content = $('#content').val();
 			let file = $('#file').val();
 			
