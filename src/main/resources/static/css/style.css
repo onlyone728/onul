@@ -169,7 +169,7 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 
 #photoDetail {display: flex;}
 #photoDetail .postArea {width: 70%; height: 100%; padding: 0; margin: 0; padding-top: 30px; padding-right: 30px; border-right: 1px solid #EDEDED;}
-#photoDetail .userArea {width: 30%; padding-top: 30px;}
+#photoDetail .userArea {width: 342px; padding-top: 30px; position: fixed; right: 10%; top: 150px;}
 #photoDetail .photoArea {width: 100%; overflow: hidden;}
 #photoDetail .contentArea {width: 100%;}
 #photoDetail .photoInfo {padding: 20px 0; }
@@ -185,3 +185,19 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #photoDetail .postArea .commentArea .commentList .comment-box {display: flex; margin-bottom: 10px; font-size: 14px;}
 #photoDetail .postArea .commentArea .commentList .comment-writer-id {font-weight: 700; margin-right: 10px; margin-top: 6px;}
 #photoDetail .postArea .commentArea .commentList .writed-comment {margin-top: 6px;}
+
+#photoDetail .userArea .likeArea .like {margin: auto;}
+#photoDetail .userArea .likeArea .like .likeBtn {padding: 12px 30px; display: flex; margin: auto;}
+#photoDetail .userArea .likeArea .like .likeBtn .likeCount {font-weight: 600; color: #757575; margin-left: 10px;}
+#photoDetail .userArea .userInfoArea {padding: 50px 0 50px 30px; display: flex; justify-content: space-between;}
+#photoDetail .userArea .userInfoArea .userImg {width: 50px; height: 50px; border-radius: 25px; overflow: hidden; min-width: 50px;}
+#photoDetail .userArea .userInfoArea .userInfo {margin-left: 15px;}
+#photoDetail .userArea .userInfoArea .userInfo .userNickName {font-size: 15px; color: #424242; font-weight: 600;}
+#photoDetail .userArea .userInfoArea .userInfo .userIntro {font-size: 11px; color: #424242;}
+#photoDetail .userArea .userInfoArea .followBtn {background-color: #35C5F0; color: #fff; font-weight: 700; width: 80px; height: 38px; margin-top: 6px; }
+#photoDetail .userArea .writerPostArea {display: grid; grid-template-columns: 155px 155px; justify-content: space-between; row-gap: 2px; margin-left: 30px; border-radius: 10px; overflow: hidden}
+#photoDetail .userArea .writerPostArea .writerPost {position: relative; width: 100%; }
+#photoDetail .userArea .writerPostArea .writerPost:before {content: ""; display: block; padding-top: 100%;}
+#photoDetail .userArea .writerPostArea .writerPost .square {position: absolute; top: 0; bottom: 0; right: 0; left: 0;}
+
+
