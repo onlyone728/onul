@@ -114,7 +114,7 @@ public class UserRestController {
 		if (count < 1) {
 			result.put("result", "error");
 			result.put("errorMessage", "회원가입에 실패하였습니다.");
-		}
+		} 
 		
 		return result;
 	}

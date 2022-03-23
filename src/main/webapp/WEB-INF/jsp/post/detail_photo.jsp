@@ -5,7 +5,7 @@
 <div id="photoDetail" class="w80">
 	<div class="postArea">
 		<div class="photoArea">
-			<img alt="님의 사진" src="https://cdn.pixabay.com/photo/2021/03/16/21/46/tea-6101059_1280.jpg" class="w-100">
+			<img alt="${photo.nickName}님의 사진" src="${photo.imgPath}" class="w-100">
 		</div>
 		<div class="contentArea"></div>
 		<div class="photoInfo">
@@ -16,7 +16,9 @@
 			<div class="commentArea">
 				<div class="inputComment">
 					<div class="userImg">
-						<img alt="유저 프로필 이미지 없음" src="/images/avatar.webp" height="30">
+						<c:if test="${is null userInfo.profileImage}">
+							<img alt="유저 프로필 이미지 없음" src="/images/avatar.webp" height="30">
+						</c:if>
 					</div>
 					<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
 					<input type="text" id="commentText" class="comment box-radius-5">

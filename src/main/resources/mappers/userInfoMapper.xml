@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.onul.userInfo.dao.UserInfoDAO">
+	<insert id="insertUserInfo" parameterType="map">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT `id`
+			FROM `user`
+			WHERE `nickName` =  #{nickName}
+		</selectKey>
+		INSERT INTO `userInfo`
+		(
+			`userId`
+			, `nickName`
+			, `profileImage`
+			, `introduce`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{id}
+			, #{nickName}
+			, #{profileImage}
+			, #{introduce}
+			, NOW()
+			, NOW()
+		)
+	</insert> 
+	
+	<select id="selectUserInfoByUserId" resultType="com.onul.userInfo.model.UserInfo">
+		SELECT 
+			`userId`
+			, `nickName`
+			, `profileImage`
+			, `introduce`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`userInfo`
+		WHERE
+			`userId` = #{userId}		
+	</select>
+ </mapper>

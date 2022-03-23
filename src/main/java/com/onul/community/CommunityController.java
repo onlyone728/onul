@@ -12,9 +12,14 @@ import com.onul.introduceHousePost.bo.IntroduceHousePostBO;
 import com.onul.knowhowPost.bo.KnowhowPostBO;
 import com.onul.photo.bo.PhotoBO;
 import com.onul.photo.model.Photo;
+import com.onul.userInfo.bo.UserInfoBO;
+import com.onul.userInfo.model.UserInfo;
 
 @Controller
 public class CommunityController {
+	
+	@Autowired
+	private UserInfoBO userInfoBO;
 	
 	@Autowired
 	private PhotoBO photoBO;
@@ -50,7 +55,10 @@ public class CommunityController {
 		Photo photo = photoBO.getPhotoById(id);
 		int userId = photo.getUserId();
 		List<Photo> photoList = photoBO.getPhotoListByUserId(userId);
+		UserInfo userInfo = userInfoBO.getUserInfoByUserId(userId);
 		
+		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("photoList", photoList);
 		model.addAttribute("photo", photo);
 		model.addAttribute("viewPath", "photo/photo_detail");
 		
