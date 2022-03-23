@@ -18,6 +18,38 @@
 		ORDER BY `hit` DESC
 		LIMIT 4		
  	</select>
+ 		
+ 	<select id="selectPhotoById" resultType="com.onul.photo.model.Photo">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickName`
+			, `content`
+			, `imagePath`
+			, `hit`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`photo`
+		WHERE
+			`id` = #{id}
+ 	</select>
+ 	
+ 	<select id="selectPhotoListByUserId" resultType="com.onul.photo.model.Photo">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickName`
+			, `content`
+			, `imagePath`
+			, `hit`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`photo`
+		WHERE
+			`userId` = #{userId}
+ 	</select>
  	
  	<insert id="insertPhoto" parameterType="map">
  		INSERT INTO `photo`

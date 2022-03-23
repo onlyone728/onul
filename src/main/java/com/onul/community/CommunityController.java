@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.onul.introduceHousePost.bo.IntroduceHousePostBO;
 import com.onul.knowhowPost.bo.KnowhowPostBO;
@@ -42,7 +43,15 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/community/photo_detail_view")
-	public String photoDetailView(Model model) {
+	public String photoDetailView(
+			@RequestParam("postId") String id,
+			Model model) {
+		// BO -> DB select : photo & userInfo
+		Photo photo = photoBO.getPhotoById(id);
+		int userId = photo.getUserId();
+		List<Photo> photoList = photoBO.getPhotoListByUserId(userId);
+		
+		model.addAttribute("photo", photo);
 		model.addAttribute("viewPath", "photo/photo_detail");
 		
 		return "template/layout";

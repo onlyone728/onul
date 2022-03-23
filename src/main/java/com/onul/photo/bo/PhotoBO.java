@@ -23,6 +23,14 @@ public class PhotoBO {
 		return photoDAO.selectphotoListOrderByHit();
 	}
 	
+	public Photo getPhotoById(String id) {
+		return photoDAO.selectPhotoById(id);
+	}
+	
+	public List<Photo> getPhotoListByUserId(int userId) {
+		return photoDAO.selectPhotoListByUserId(userId);
+	}
+	
 	public int addPhoto(int userId, String userLoginId, String nickName, String postType, String content, MultipartFile file) {
 		// 파일매니저서비스
 		String imagePath = fms.saveFile(userLoginId, file);

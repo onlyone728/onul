@@ -73,11 +73,11 @@
 			<div class="moreBtn"><a href="#">더보기</a></div>
 		</div>
 		<div class="gridBetween">
-			<c:forEach var="house" items="${houseList}">
+			<%-- <c:forEach var="house" items="${houseList}">
 				<div class="column4">
 					<a href="#">
 						<div class="img-center box-radius-10 postImgBox bg-info">
-							<img alt="" src="${house.imagePath}" class="img  height="180">
+							<img alt="" src="${house.imagePath}" class="img"  height="180">
 						</div>
 						<div class="infoArea">
 							<div class="postTitle">${house.subject}</div>
@@ -90,7 +90,7 @@
 						</div>
 					</a>
 				</div>
-			</c:forEach>
+			</c:forEach> --%>
 			
 		</div>
 	</div>
@@ -105,7 +105,7 @@
 			<div class="column4">
 				<a href="#">
 					<div class="dealImgBox img-center box-radius-5">
-						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2017/03/01/05/12/tea-cup-2107599_1280.jpg" class="img height="269">
+						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2017/03/01/05/12/tea-cup-2107599_1280.jpg" class="img" height="269">
 					</div>
 					<div class="infoArea">
 						<div class="storeName">storeName</div>
@@ -126,7 +126,7 @@
 			<div class="column4">
 				<a href="#">
 					<div class="dealImgBox img-center box-radius-5">
-						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2017/05/11/11/15/workplace-2303851_1280.jpg" class="img height="269">
+						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2017/05/11/11/15/workplace-2303851_1280.jpg" class="img" height="269">
 					</div>
 					<div class="infoArea">
 						<div class="storeName">storeName</div>
@@ -147,7 +147,7 @@
 			<div class="column4">
 				<a href="#">
 					<div class="dealImgBox img-center box-radius-5">
-						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2016/04/08/13/52/daffodils-1316127_1280.jpg" class="img height="269">
+						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2016/04/08/13/52/daffodils-1316127_1280.jpg" class="img" height="269">
 					</div>
 					<div class="infoArea">
 						<div class="storeName">storeName</div>
@@ -168,7 +168,7 @@
 			<div class="column4">
 				<a href="#">
 					<div class="dealImgBox img-center box-radius-5">
-						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2016/04/18/08/50/kitchen-1336160_1280.jpg" class="img height="269">
+						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2016/04/18/08/50/kitchen-1336160_1280.jpg" class="img" height="269">
 					</div>
 					<div class="infoArea">
 						<div class="storeName">storeName</div>
@@ -198,7 +198,7 @@
 			<c:forEach var="photo" items="${photo}">
 				<div class="photoCard column4 relative">
 					<div class="dealImgBox img-center box-radius-5">
-						<a href="#">
+						<a href="/community/photo_detail_view?postId=${photo.id}">
 							<img alt="" src="${photo.imagePath}" class="img" height="269">
 						</a>	
 					</div>
@@ -212,57 +212,8 @@
 					</div>
 				</div>
 			</c:forEach>
-			
-			<div class="photoCard column4 relative">
-				<div class="dealImgBox img-center box-radius-5">
-					<a href="#">
-						<img alt="" src="https://cdn.pixabay.com/photo/2020/10/13/04/29/house-5650705_1280.jpg" class="img" height="269">
-					</a>	
-				</div>
-				<div class="infoArea absolute">
-					<a href="#" class="d-flex">
-						<div class="postWritherImg border-1-white img-center m-0 mr-2">
-							<img alt="" src="https://cdn.pixabay.com/photo/2015/09/09/18/25/feet-932346_1280.jpg" class="img" height="100">
-						</div>
-						<div class="text-white font15 textShadow2"><b>writerNickName</b></div>
-					</a>
-				</div>
-			</div>
-			
-			<div class="photoCard column4 relative">
-				<div class="dealImgBox img-center box-radius-5">
-					<a href="#">
-						<img alt="" src="https://cdn.pixabay.com/photo/2016/11/19/17/25/furniture-1840463_1280.jpg" class="img" height="269">
-					</a>	
-				</div>
-				<div class="infoArea absolute">
-					<a href="#" class="d-flex">
-						<div class="postWritherImg border-1-white img-center m-0 mr-2">
-							<img alt="" src="https://cdn.pixabay.com/photo/2015/09/09/18/25/feet-932346_1280.jpg" class="img" height="100">
-						</div>
-						<div class="text-white font15 textShadow2"><b>writerNickName</b></div>
-					</a>
-				</div>
-			</div>
-			
-			<div class="photoCard column4 relative">
-				<div class="dealImgBox img-center box-radius-5">
-					<a href="#">
-						<img alt="" src="https://cdn.pixabay.com/photo/2015/05/31/13/40/book-791824_1280.jpg" class="img" height="269">
-					</a>
-				</div>
-				<div class="infoArea absolute">
-					<a href="#" class="d-flex">
-						<div class="postWritherImg border-1-white img-center m-0 mr-2">
-							<img alt="" src="https://cdn.pixabay.com/photo/2015/09/09/18/25/feet-932346_1280.jpg" class="img" height="100">
-						</div>
-						<div class="text-white font15 textShadow2"><b>writerNickName</b></div>
-					</a>
-				</div>
-			</div>
 		</div>
 	</div>	
-	
 </div>
 <script>
 $(document).ready(function() {

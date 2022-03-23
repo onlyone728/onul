@@ -12,7 +12,7 @@ public class Photo {
 	private int userId;
 	private String nickName;
 	private String content;
-	private String imagaPath;
+	private String imagePath;
 	private int hit;
 	private Date createdAt;
 	private Date updatedAt;
