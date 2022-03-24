@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class KnowhowPost {
+public class Knowhow {
 
 	private int id;
 	private int userId;
 	private String nickName;
+	private String postType;
 	private String category;
 	private String subject;
 	private String content;

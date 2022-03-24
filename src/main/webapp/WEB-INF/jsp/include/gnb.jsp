@@ -83,7 +83,7 @@
 	<div id="writeMenu" class="d-none">
 		<ul>
 			<li><a href="/post/photo_create_view" class="photoCreateBtn">사진올리기</a></li>
-			<li><a href="#" class="introduceCreateBtn">집들이 글쓰기</a></li>
+			<li><a href="/post/introduce_create_view" class="introduceCreateBtn">집들이 글쓰기</a></li>
 			<li><a href="#" class="knowhowCreateBtn">노하우 글쓰기</a></li>
 			<li><a href="#" class="reviewCreateBtn">상품 리뷰 쓰기</a></li>
 		</ul>

@@ -25,7 +25,7 @@ button:focus {outline: 0;}
 .blue:hover {color: #35C5F0;}
 .mr10 {margin-right: 10%;}
 .ml10 {margin-left: 10%;}
-.img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%; width: 100%;}
+.img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%; width: auto;}
 .img-center {width: 100%; height: 100%; overflow: hidden; position: relative; margin: auto;}
 .box-radius-5 {border-radius: 5px; overflow: hidden; }
 .box-radius-10 {border-radius: 10px; overflow: hidden;}
@@ -176,12 +176,12 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #photoDetail .postArea {width: 70%; height: 100%; padding: 0; margin: 0; padding-top: 30px; padding-right: 30px; border-right: 1px solid #EDEDED;}
 #photoDetail .userArea {width: 342px; padding-top: 30px; position: fixed; right: 10%; top: 150px;}
 #photoDetail .photoArea {width: 100%; overflow: hidden;}
-#photoDetail .contentArea {width: 100%;}
-#photoDetail .photoInfo {padding: 20px 0; }
+#photoDetail .contentArea {width: 100%; padding: 30px 30px;}
+#photoDetail .photoInfo {padding: 20px 0;}
 #photoDetail .photoInfo .count {font-size: 13px; color: #757575; display: flex; padding-bottom: 20px; border-bottom: 1px solid #EDEDED;}
 #photoDetail .photoInfo .commentArea {padding: 20px 0;}
 #photoDetail .postArea .commentArea .inputComment {display: flex; position: relative;}
-#photoDetail .postArea .commentArea .userImg {width: 30px; height: 30px; border-radius: 15px; overflow: hidden; margin: auto; margin-right: 10px; margin-left: 0;}
+#photoDetail .postArea .commentArea .userImg {width: 30px; height: 30px; border-radius: 15px; overflow: hidden; margin: auto; margin-right: 10px; margin-left: 0; background-color: #000;}
 #photoDetail .postArea .commentArea .inputComment .comment {height: 38px; width: 95%; font-size: 15px; border: 1px solid #d6d6d6; padding-left: 15px;}
 #photoDetail .postArea .commentArea .inputComment .commentPlace {position: absolute; top: 8px; left: 50px; font-size: 15px; color: #757575;}
 #photoDetail .postArea .commentArea .inputComment .commentBtn {position: absolute; right: 15px; top: 8px; height: 50px; color: #35C5F0; font-weight: bold;}
@@ -195,7 +195,7 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #photoDetail .userArea .likeArea .like .likeBtn {padding: 12px 30px; display: flex; margin: auto;}
 #photoDetail .userArea .likeArea .like .likeBtn .likeCount {font-weight: 600; color: #757575; margin-left: 10px;}
 #photoDetail .userArea .userInfoArea {padding: 50px 0 50px 30px; display: flex; justify-content: space-between;}
-#photoDetail .userArea .userInfoArea .userImg {width: 50px; height: 50px; border-radius: 25px; overflow: hidden; min-width: 50px;}
+#photoDetail .userArea .userInfoArea .userImg {width: 50px; height: 50px; border-radius: 25px; overflow: hidden; min-width: 50px; background-color: #000;}
 #photoDetail .userArea .userInfoArea .userInfo {margin-left: 15px;}
 #photoDetail .userArea .userInfoArea .userInfo .userNickName {font-size: 15px; color: #424242; font-weight: 600;}
 #photoDetail .userArea .userInfoArea .userInfo .userIntro {font-size: 11px; color: #424242;}
@@ -217,6 +217,7 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #createHouse .coverImgArea {padding: 20px 0;}
 #createHouse .coverImgArea #coverImg {display: none;}
 #createHouse .coverImgArea .coverImgBox {width: 500px; height: 500px; margin: auto; background-color: #F7F8FA; text-align: center; border: 1px dashed #d6d6d6;}
-#createHouse .subjectArea #subject {width: 100%; height: 70px; color: rgb(63, 71, 77); font-size: 34px; font-weight: 600; padding: 5px 0; border: none; border-bottom: 1px solid #d6d6d6;}
-#createHouse .subjectArea #content {width: 100%; color: rgb(63, 71, 77); font-size: 17px; margin: 30px 0; border: none; resize: none;}
+#createHouse .contentArea #subject {width: 100%; height: 70px; color: rgb(63, 71, 77); font-size: 34px; font-weight: 600; padding: 5px 0; border: none; border-bottom: 1px solid #d6d6d6;}
+#createHouse .contentArea #content {width: 100%; color: rgb(63, 71, 77); font-size: 17px; margin: 30px 0; border: none; resize: none;}
 
+#createHouse .delBtn {margin-left: 20px;}

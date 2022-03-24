@@ -35,7 +35,7 @@
 		<div class="iconMenu">
 			<a href="#">
 				<div class="iconMenu img-center">
-					<img class="img" alt="" src="../static/images/icon_shop.webp" height="80">
+					<img class="img" alt="" src="/image/icon_shop.webp" height="80">
 				</div>
 				<div class="iconText">쇼핑하기</div>
 			</a>
@@ -43,7 +43,7 @@
 		<div class="iconMenu">
 			<a href="#">
 				<div class="iconMenu img-center">
-					<img class="img" alt="" src="../static/images/icon_area.webp" height="80">
+					<img class="img" alt="" src="/image/icon_area.webp" height="80">
 				</div>
 				<div class="iconText">N평집들이</div>
 			</a>
@@ -51,7 +51,7 @@
 		<div class="iconMenu">
 			<a href="#">
 				<div class="iconMenu img-center">
-					<img class="img" alt="" src="/static/images/icon_place.webp" height="80">
+					<img class="img" alt="" src="/image/icon_place.webp" height="80">
 				</div>
 				<div class="iconText">공간별사진</div>
 			</a>
@@ -59,7 +59,7 @@
 		<div class="iconMenu">
 			<a href="#">
 				<div class="iconMenu img-center">
-					<img class="img" alt="" src="/static/images/icon_deal.png" height="80">
+					<img class="img" alt="" src="/image/icon_deal.png" height="80">
 				</div>
 				<div class="iconText">오늘의딜</div>
 			</a>
@@ -197,9 +197,9 @@
 		<div class="gridBetween">
 			<c:forEach var="photo" items="${photo}">
 				<div class="photoCard column4 relative">
-					<div class="dealImgBox img-center box-radius-5">
-						<a href="/community/photo_detail_view?postId=${photo.id}">
-							<img alt="" src="${photo.imagePath}" class="img" height="269">
+					<div class="dealImgBox box-radius-5">
+						<a href="/community/photo_detail_view?postId=${photo.id}" class="d-block img-center bg-dark">
+							<img alt="" src="${photo.imagePath}" class="img" width="269">
 						</a>	
 					</div>
 					<div class="infoArea absolute">

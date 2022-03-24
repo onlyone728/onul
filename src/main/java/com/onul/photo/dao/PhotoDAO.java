@@ -12,9 +12,11 @@ public interface PhotoDAO {
 
 	public List<Photo> selectphotoListOrderByHit();
 	
-	public Photo selectPhotoById(String id);
+	public Photo selectPhotoById(int id);
 	
 	public List<Photo> selectPhotoListByUserId(int userId);
+	
+	public void updateHit(int id);
 	
 	public int insertPhoto(
 			@Param("userId") int userId, 

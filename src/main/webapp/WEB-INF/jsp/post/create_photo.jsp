@@ -7,7 +7,7 @@
 			<img src="" alt="미리보기 이미지" class="prevImg d-none reselectBtn" height="420">
 			<div class="photoBtn">
 				<a href="#"> 
-					<img alt="" src="/images/photo.png" width="64">
+					<img alt="" src="/image/photo.png" width="64">
 					<div class="">사진 올리기</div>
 				</a>
 			</div>

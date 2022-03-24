@@ -11,6 +11,7 @@ public class Photo {
 	private int id;
 	private int userId;
 	private String nickName;
+	private String postType;
 	private String content;
 	private String imagePath;
 	private int hit;

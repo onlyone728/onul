@@ -8,6 +8,7 @@
  			`id`
 			, `userId`
 			, `nickName`
+			, `postType`
 			, `content`
 			, `imagePath`
 			, `hit`
@@ -24,6 +25,7 @@
  			`id`
 			, `userId`
 			, `nickName`
+			, `postType`
 			, `content`
 			, `imagePath`
 			, `hit`
@@ -40,6 +42,7 @@
  			`id`
 			, `userId`
 			, `nickName`
+			, `postType`
 			, `content`
 			, `imagePath`
 			, `hit`
@@ -50,6 +53,15 @@
 		WHERE
 			`userId` = #{userId}
  	</select>
+ 	
+ 	<update id="updateHit" parameterType="int">
+ 		UPDATE 
+ 			`photo`
+ 		SET
+ 			`hit` = hit + 1
+ 		WHERE
+ 			`id` = #{id}		
+ 	</update>
  	
  	<insert id="insertPhoto" parameterType="map">
  		INSERT INTO `photo`

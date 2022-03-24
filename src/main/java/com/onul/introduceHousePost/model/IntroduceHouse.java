@@ -6,13 +6,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class IntroduceHousePost {
+public class IntroduceHouse {
 
 	private int id;
 	private int userId;
 	private String nickName;
+	private String postType;
 	private String type;
-	private String area;
+	private int area;
 	private String familyType;
 	private String fieldOfWork;
 	private String worker;

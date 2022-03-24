@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.onul.like.dao.LikeDAO">
+	<select id="selectLikeCountByPostIdOrUserId" parameterType="map" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+			AND `postType` = #{postType}
+			<if test="userId != null">
+			AND `userId` = #{userId}
+			</if>		
+	</select> 
+	
+	<select id="selectLikeCountByPostId" parameterType="map" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+			AND `postType` = #{postType}
+	</select> 
+	
+	<insert id="insertLike" parameterType="map">
+		INSERT INTO `like`
+		(
+			`userId`
+			, `nickName`
+			, `postType`
+			, `postId`
+			, `createdAt`
+		)
+		VALUES
+		(
+			#{userId}
+			, #{nickName}
+			, #{postType}
+			, #{postId}
+			, NOW()
+		)
+	</insert>
+	
+	<delete id="deleteLikeByPostIdUserId" parameterType="map">
+		DELETE
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+			AND `postType` = #{postType}
+			AND `userId` = #{userId}
+	</delete>
+	
+	<delete id="deleteLikeByPostId" parameterType="map">
+		DELETE
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+			AND `postType` = #{postType}
+	</delete>
+ </mapper>

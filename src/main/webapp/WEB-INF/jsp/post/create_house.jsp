@@ -46,7 +46,7 @@
 					<select id="familyType" class="form-control">
 						<option value="" selected>선택해주세요.</option>
 						<option value="싱글라이프">싱글라이프</option>
-						<option value="신혼/부부가 사는 집">신혼/부부가 사는 집</option>
+						<option value="신혼,부부가 사는 집">신혼/부부가 사는 집</option>
 						<option value="자녀가 있는 집">자녀가 있는 집</option>
 						<option value="부모님과 함께 사는 집">부모님과 함께 사는 집</option>
 						<option value="룸메이트와 함께 사는 집">룸메이트와 함께 사는 집</option>
@@ -73,9 +73,9 @@
 			<div class="required">
 				<label for="worker" class="requiredLabel">작업자<span class="redText">*</span></label>
 				<div class="requiredContent">
-					<select id="fieldOfWork" class="form-control">
+					<select id="worker" class="form-control">
 						<option value="" selected>선택해주세요.</option>
-						<option value="셀프·DIY">셀프·DIY</option>
+						<option value="셀프,DIY">셀프·DIY</option>
 						<option value="반셀프">반셀프</option>
 						<option value="전문가">전문가</option>
 					</select>
@@ -152,8 +152,8 @@ $(document).ready(function() {
 	});
 	
 	$('#familyType').focusout(function() {
-		let type = $(this).val();
-		if (type == '') {
+		let familyType = $(this).val();
+		if (familyType == '') {
 			$(this).next('.confirm-msg').removeClass('d-none');
 			$(this).addClass('border-1-red');
 			return;
@@ -165,8 +165,8 @@ $(document).ready(function() {
 	});
 	
 	$('#fieldOfWork').focusout(function() {
-		let type = $(this).val();
-		if (type == '') {
+		let fieldOfWork = $(this).val();
+		if (fieldOfWork == '') {
 			$(this).next('.confirm-msg').removeClass('d-none');
 			$(this).addClass('border-1-red');
 			return;
@@ -178,8 +178,9 @@ $(document).ready(function() {
 	});
 	
 	$('#worker').focusout(function() {
-		let type = $(this).val();
-		if (type == '') {
+		let worker = $(this).val();
+		console.log(worker);
+		if (worker == '') {
 			$(this).next('.confirm-msg').removeClass('d-none');
 			$(this).addClass('border-1-red');
 			return;
@@ -229,15 +230,26 @@ $(document).ready(function() {
 		}
 	});
 	
+	
 	// file 선택
-	let formArray = {};  //파일을 담을 객체 key, value 형태로 파일을 담든다.
-	let fileList = new Object();
+	let inputFileList = new Array();
 
 	$('#file').change(function(e) {
-	    fileList = $(this)[0].files;  //파일 대상이 리스트 형태로 넘어온다.
+	    let fileList = $(this)[0].files;  
+	    let files = e.target.files;
+	    let filesArr = Array.prototype.slice.call(files);
+	    
+	    filesArr.forEach(function(f){
+	    	let reader = new FileReader();
+	    	reader.onload = function(e){
+	    		inputFileList.push(f);
+	    	}
+	    	reader.readAsDataURL(f);
+	    })
+	    
 	    for(let i = 0; i < fileList.length; i++){
 	        let file = fileList[i];
-	        let ext = file.name.split('.');
+	        let ext = file.name.toLowerCase().split('.');
 	        if (ext.length < 2 || 
 					(ext[ext.length - 1] != 'gif'
 							&& ext[ext.length - 1] != 'jpg'
@@ -247,7 +259,7 @@ $(document).ready(function() {
 				$(this).val('');	// 잘못된 파일 비워주기
 				return;
 			} else {
-				$('.fileList').append('<li class="fileName mb-1">' + file.name + '</li>');
+				$('.fileList').append('<li class="fileName mb-1">' + file.name + '<button class="delBtn btn">삭제하기</button></li>');
 			}     	
 	    }
 	});
@@ -276,6 +288,7 @@ $(document).ready(function() {
 			return;
 		}
 		let worker = $('#worker').val();
+		console.log(worker);
 		if (worker == '') {
 			alert('작업자를 선택해주세요.');
 			return;
@@ -303,19 +316,39 @@ $(document).ready(function() {
 			return;
 		}
 		let formData = new FormData();
+		formData.append('postType', 'IntroduceHouse');
 		formData.append('type', type);
 		formData.append('area', area);
 		formData.append('familyType', familyType);
 		formData.append('fieldOfWork', fieldOfWork);
 		formData.append('worker', worker);
-		formData.append('coverImage', $('#coverImg')[0].files[0]);
+		formData.append('coverImageFile', $('#coverImg')[0].files[0]);
 		formData.append('subject', subject);
 		formData.append('content', content);
-		let fileList = $('#file')[0].files; 
-	    for(let i = 0; i < fileList.length; i++){
-	        let file = fileList[i];
-	        formData.append('imagePath' + i, file);
-	    }   
+
+		for(let i = 0; i < inputFileList.length; i++){
+			// 이미지 값
+			formData.append("images", inputFileList[i]);
+		}
+		
+		// ajax
+		$.ajax({
+			type: "POST"
+			, url: "/post/introduce_create"
+			, data: formData
+			, enctype: "multipart/form-data"
+			, processData: false
+			, contentType: false
+			, success: function(data) {
+				if (data.result == "success") {
+					alert("글이 등록되었습니다.");
+					location.href = "/community";
+				} else {
+					alert(data.errorMessage);
+					location.href = "/community";
+				}
+			}
+		});
 	});
 	
 });

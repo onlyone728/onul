@@ -23,12 +23,16 @@ public class PhotoBO {
 		return photoDAO.selectphotoListOrderByHit();
 	}
 	
-	public Photo getPhotoById(String id) {
+	public Photo getPhotoById(int id) {
 		return photoDAO.selectPhotoById(id);
 	}
 	
 	public List<Photo> getPhotoListByUserId(int userId) {
 		return photoDAO.selectPhotoListByUserId(userId);
+	}
+	
+	public void addHit(int id) {
+		photoDAO.updateHit(id);
 	}
 	
 	public int addPhoto(int userId, String userLoginId, String nickName, String postType, String content, MultipartFile file) {

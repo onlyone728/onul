@@ -121,43 +121,43 @@
 		<%-- 아이콘 메뉴 --%>
 		<div class="iconArea">
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/funiture.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/funiture.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">가구</a></div>
 			</div>
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/fabric.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/fabric.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">패브릭</a></div>
 			</div>
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/light.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/light.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">조명</a></div>
 			</div>
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/tv.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/tv.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">가전</a></div>
 			</div>
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/kitchen.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/kitchen.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">주방용품</a></div>
 			</div>
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/deco.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/deco.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">데코/식물</a></div>
 			</div>
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/organize.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/organize.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">수납정리</a></div>
 			</div>
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/HouseholdGoods.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/HouseholdGoods.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">생활용품</a></div>
 			</div>
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/drawer.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/drawer.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">서랍/수납장</a></div>
 			</div>
 			<div class="iconItem">
-				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/images/dailyNecessity.webp" height="80"></a>
+				<a href="#" class="d-block img-center icon"><img class="img" alt="" src="/image/dailyNecessity.webp" height="80"></a>
 				<div class="iconLabel"><a href="#" class="d-block">생필품</a></div>
 			</div>
 		</div>

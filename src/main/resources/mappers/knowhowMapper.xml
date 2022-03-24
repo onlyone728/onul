@@ -2,27 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="com.onul.introduceHousePost.dao.IntroduceHousePostDAO">
- 	<select id="selectIntroduceListOrderByHit" resultType="com.onul.introduceHousePost.model.IntroduceHousePost">
+ <mapper namespace="com.onul.knowhowPost.dao.KnowhowDAO">
+ 	<select id="selectKnowhowOrderByHit">
  		SELECT
  			`id`
 			, `userId`
 			, `nickName`
-			, `type`
-			, `area`
-			, `familyType`
-			, `fieldOfWork`
-			, `worker`
+			, `postType`
+			, `category`
 			, `subject`
 			, `content`
 			, `coverImage`
-			, `imagePath`
 			, `hit`
 			, `createdAt`
 			, `updatedAt`
 		FROM
-			`introduceHousePost`
+			`knowhow`
 		ORDER BY `hit` DESC
-		LIMIT 4		
+		LIMIT 4
  	</select>
  </mapper>
