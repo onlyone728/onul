@@ -92,21 +92,30 @@
 			<img src="" alt="미리보기 이미지" class="prevImg img d-none reselectBtn" width="500">
 			<div class="photoBtn">
 				<a href="#"> 
-					<img alt="" src="/images/photo.png" width="64">
+					<img alt="" src="/image/photo.png" width="64">
 					<div>커버 사진 올리기</div>
 				</a>
 			</div>
 		</div>
 	</div>
 	
-	<div class="subjectArea">
+	<div class="contentArea">
 		<input type="text" id="subject" class="mb-2" placeholder="제목을 입력해주세요.">
 		<span class="confirm-msg redText d-none"><b>필수 입력 항목입니다.</b></span>
 		<textarea id="content" rows="15" placeholder="내용을 입력해주세요."></textarea>
 	</div>
 	
-	<div class="contentArea">
-		
+	<div class="fileArea">
+		<div class="categoryIndexBox">
+			<div class="categoryIndex">첨부파일</div>
+		</div>
+		<input type="file" id="file" accept=".jpg, .jpeg, .gif, .png" multiple="multiple">
+		<span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+	  	<div class="fileListArea my-3" id="fileNameArea">
+			<ul class="fileList">
+				
+			</ul>
+		</div>
 	</div>
 </div>
 
@@ -220,6 +229,95 @@ $(document).ready(function() {
 		}
 	});
 	
+	// file 선택
+	let formArray = {};  //파일을 담을 객체 key, value 형태로 파일을 담든다.
+	let fileList = new Object();
+
+	$('#file').change(function(e) {
+	    fileList = $(this)[0].files;  //파일 대상이 리스트 형태로 넘어온다.
+	    for(let i = 0; i < fileList.length; i++){
+	        let file = fileList[i];
+	        let ext = file.name.split('.');
+	        if (ext.length < 2 || 
+					(ext[ext.length - 1] != 'gif'
+							&& ext[ext.length - 1] != 'jpg'
+							&& ext[ext.length - 1] != 'jpeg'
+							&& ext[ext.length - 1] != 'png')) {	
+				alert("이미지 파일만 업로드 할 수 있습니다.");
+				$(this).val('');	// 잘못된 파일 비워주기
+				return;
+			} else {
+				$('.fileList').append('<li class="fileName mb-1">' + file.name + '</li>');
+			}     	
+	    }
+	});
+	
+	// saveBtn
+	$('.saveBtn').on('click', function() {
+		// validation check
+		let type = $('#type').val();
+		if (type == '') {
+			alert('주거형태를 선택해주세요.');
+			return;
+		}
+		let area = $('#area').val().trim();
+		if (area == '') {
+			alert('평형정보를 입력해주세요.');
+			return;
+		}
+		let familyType =  $('#familyType').val();
+		if (familyType == '') {
+			alert('가족형태를 선택해주세요.');
+			return;
+		}
+		let fieldOfWork = $('#fieldOfWork').val();
+		if (fieldOfWork == '') {
+			alert('작업분야를 선택해주세요.');
+			return;
+		}
+		let worker = $('#worker').val();
+		if (worker == '') {
+			alert('작업자를 선택해주세요.');
+			return;
+		}
+		let coverImg = $('#coverImg').val();
+		if (coverImg == '') {
+			alert('커버이미지를 업로드해주세요.');
+			return;
+		} else if (coverImg != '') {
+			let ext = coverImg.split('.').pop().toLowerCase();
+			if ($.inArray(ext, ['jpg', 'gif', 'png', 'jpeg']) == -1) {
+				alert("gif, jpg, jpeg, png 파일만 업로드 할 수 있습니다.");
+				$('#file').val('');	// 선택된 파일을 비운다.
+				return;
+			}
+		}
+		let subject = $('#subject').val();
+		if (subject == '') {
+			alert('제목을 입력해주세요.');
+			return;
+		}
+		let content = $('#content').val();
+		if (content == '') {
+			alert('내용을 입력해주세요.');
+			return;
+		}
+		let formData = new FormData();
+		formData.append('type', type);
+		formData.append('area', area);
+		formData.append('familyType', familyType);
+		formData.append('fieldOfWork', fieldOfWork);
+		formData.append('worker', worker);
+		formData.append('coverImage', $('#coverImg')[0].files[0]);
+		formData.append('subject', subject);
+		formData.append('content', content);
+		let fileList = $('#file')[0].files; 
+	    for(let i = 0; i < fileList.length; i++){
+	        let file = fileList[i];
+	        formData.append('imagePath' + i, file);
+	    }   
+	});
+	
 });
 //openInputBtn click
 function openClose() {
@@ -232,6 +330,6 @@ function openClose() {
 		$('.arrowIcon').css('transform', 'rotate(-180deg)');
 		$('.openInputBtn').css({'border-radius':'5px', 'border': '1px solid #d6d6d6'});
 		$('.requiredContents').hide();
-	}    
+	}  
 }
 </script>
