@@ -8,8 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.onul.introduceHousePost.bo.IntroduceHousePostBO;
-import com.onul.knowhowPost.bo.KnowhowPostBO;
+import com.onul.introduceHousePost.bo.IntroduceHouseBO;
+import com.onul.knowhowPost.bo.KnowhowBO;
+import com.onul.like.bo.LikeBO;
 import com.onul.photo.bo.PhotoBO;
 import com.onul.photo.model.Photo;
 import com.onul.userInfo.bo.UserInfoBO;
@@ -25,10 +26,13 @@ public class CommunityController {
 	private PhotoBO photoBO;
 	
 	@Autowired
-	private IntroduceHousePostBO introduceBO;
+	private IntroduceHouseBO introduceBO;
 	
 	@Autowired
-	private KnowhowPostBO knowhowBO;
+	private KnowhowBO knowhowBO;
+	
+	@Autowired
+	private LikeBO likeBO;
 	
 	@RequestMapping("/community")
 	public String communityView(Model model) {
@@ -36,7 +40,7 @@ public class CommunityController {
 //		// post 가져오기
 		List<Photo> photoList = photoBO.getphotoListOrderByHit();
 //		List<IntroduceHousePost> houseList = introduceBO.getIntroduceListOrderByHit();
-//		List<KnowhowPost> knowhowList = knowhowBO.getKnowhowPostOrderByHit();
+//		List<Knowhow> knowhowList = knowhowBO.getKnowhowOrderByHit();
 //		
 //		// product 가져오기
 //		
@@ -49,18 +53,26 @@ public class CommunityController {
 	
 	@RequestMapping("/community/photo_detail_view")
 	public String photoDetailView(
-			@RequestParam("postId") String id,
+			@RequestParam("postId") int postId,
 			Model model) {
+		// hit 증가
+		photoBO.addHit(postId);
+		
+		// like 가져오기
+		int likeCount = likeBO.getLikeCountByPostId(postId, "photo");
+				
 		// BO -> DB select : photo & userInfo
-		Photo photo = photoBO.getPhotoById(id);
+		Photo photo = photoBO.getPhotoById(postId);
+		
 		int userId = photo.getUserId();
 		List<Photo> photoList = photoBO.getPhotoListByUserId(userId);
 		UserInfo userInfo = userInfoBO.getUserInfoByUserId(userId);
 		
+		model.addAttribute("like", likeCount);
 		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("photoList", photoList);
 		model.addAttribute("photo", photo);
-		model.addAttribute("viewPath", "photo/photo_detail");
+		model.addAttribute("viewPath", "post/detail_photo");
 		
 		return "template/layout";
 	}
