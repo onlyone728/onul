@@ -56,12 +56,11 @@ public class IntroduceHouseBO {
 							introduceDAO.deleteIntroduceHouseById(postId);
 							log.error("[introduceHouse] 첨부파일 저장에 실패하였습니다.");
 							return 0;
+						} else {
+							for (int i = 0; i < imagePaths.size(); i++) {
+								introduceDAO.insertFile(postId, imagePaths.get(i));
+							}
 						}
-						for (int i = 0; i < imagePaths.size(); i++) {
-							introduceDAO.insertFile(postId, imagePaths.get(i));
-						}
-					
-						introduceDAO.insertFile(postId, imagePath);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

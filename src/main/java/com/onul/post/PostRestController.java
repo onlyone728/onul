@@ -61,7 +61,7 @@ public class PostRestController {
 	public Map<String, Object> createIntroduceHouse(
 			@ModelAttribute IntroduceHouse house,
 			@RequestParam("coverImageFile") MultipartFile coverImage,
-			@RequestParam(value="file", required=false) List<MultipartFile> files,
+			@RequestParam(value="images", required=false) List<MultipartFile> files,
 			HttpServletRequest request) {
 		
 		Map<String, Object> result = new HashMap<>();
