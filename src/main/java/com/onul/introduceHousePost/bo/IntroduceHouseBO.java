@@ -47,24 +47,24 @@ public class IntroduceHouseBO {
 				imagePath = fms.saveFile(userLoginId, files.get(0));
 				introduceDAO.insertFile(postId, imagePath);
 			} else {
-				try {
-					imagePaths = fms.saveFiles(userLoginId, files);
-					if (imagePaths.size() < 1) {
-						// 첨부 파일이 저장이 안되었을때
-						// post 삭제 & 커버 이미지 디렉토리 삭제
-						fms.deleteFile(coverImagePath);
-						introduceDAO.deleteIntroduceHouseById(postId);
-						log.error("[introduceHouse] 첨부파일 저장에 실패하였습니다.");
-						return 0;
-					}
-					for (int i = 0; i < imagePaths.size(); i++) {
-						introduceDAO.insertFile(postId, imagePaths.get(i));
-					}
+					try {
+						imagePaths = fms.saveFiles(userLoginId, files);
+						if (imagePaths.size() < 1) {
+							// 첨부 파일이 저장이 안되었을때
+							// post 삭제 & 커버 이미지 디렉토리 삭제
+							fms.deleteFile(coverImagePath);
+							introduceDAO.deleteIntroduceHouseById(postId);
+							log.error("[introduceHouse] 첨부파일 저장에 실패하였습니다.");
+							return 0;
+						}
+						for (int i = 0; i < imagePaths.size(); i++) {
+							introduceDAO.insertFile(postId, imagePaths.get(i));
+						}
 					
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				introduceDAO.insertFile(postId, imagePath);
+						introduceDAO.insertFile(postId, imagePath);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 			}
 		}
 		return postId;
