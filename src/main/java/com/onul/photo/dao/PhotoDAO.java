@@ -21,6 +21,7 @@ public interface PhotoDAO {
 	public int insertPhoto(
 			@Param("userId") int userId, 
 			@Param("nickName") String nickName, 
+			@Param("profileImage") String profileImage,
 			@Param("postType") String postType, 
 			@Param("content") String content, 
 			@Param("imagePath") String imagePath);

@@ -8,6 +8,7 @@
  			`id`
 			, `userId`
 			, `nickName`
+			, `profileImage`
 			, `postType`
 			, `type`
 			, `area`
@@ -31,6 +32,7 @@
  		(
 			`userId`
 			, `nickName`
+			, `profileImage`
 			, `postType`
 			, `type`
 			, `area`
@@ -47,6 +49,7 @@
  		(
  			#{userId}
  			, #{nickName}
+ 			, #{profileImage}
  			, #{postType}
  			, #{type}
  			, #{area}
@@ -68,4 +71,37 @@
  		WHERE
  			`id` = #{id}
  	</delete>
+ 	
+ 	<select id="selectIntroduceHouseById" resultType="com.onul.introduceHousePost.model.IntroduceHouse">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickName`
+			, `profileImage`
+			, `postType`
+			, `type`
+			, `area`
+			, `familyType`
+			, `fieldOfWork`
+			, `worker`
+			, `subject`
+			, `content`
+			, `coverImage`
+			, `hit`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`introduceHouse`
+		WHERE
+			`id` = #{id}		
+ 	</select>
+ 	
+ 	<update id="updateHit" parameterType="int">
+ 		UPDATE 
+ 			`introduceHouse`
+ 		SET
+ 			`hit` = hit + 1
+ 		WHERE
+ 			`id` = #{id}		
+ 	</update>
  </mapper>

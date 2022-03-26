@@ -75,7 +75,7 @@
 				<div class="requiredContent">
 					<select id="worker" class="form-control">
 						<option value="" selected>선택해주세요.</option>
-						<option value="셀프,DIY">셀프·DIY</option>
+						<option value="셀프·DIY">셀프·DIY</option>
 						<option value="반셀프">반셀프</option>
 						<option value="전문가">전문가</option>
 					</select>
@@ -179,7 +179,6 @@ $(document).ready(function() {
 	
 	$('#worker').focusout(function() {
 		let worker = $(this).val();
-		console.log(worker);
 		if (worker == '') {
 			$(this).next('.confirm-msg').removeClass('d-none');
 			$(this).addClass('border-1-red');
@@ -288,7 +287,6 @@ $(document).ready(function() {
 			return;
 		}
 		let worker = $('#worker').val();
-		console.log(worker);
 		if (worker == '') {
 			alert('작업자를 선택해주세요.');
 			return;

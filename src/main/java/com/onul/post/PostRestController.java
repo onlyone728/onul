@@ -41,13 +41,14 @@ public class PostRestController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		String userLoginId = (String) session.getAttribute("userLoginId");
 		String userNickName = (String) session.getAttribute("userNickName");
+		String userProfileImage = (String) session.getAttribute("userProfileImage");
 		
 		if (userId == null) {
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 다시 시도해주세요.");
 		} else {
 			// DB insert
-			int count = photoBO.addPhoto(userId, userLoginId, userNickName, postType, content, file);
+			int count = photoBO.addPhoto(userId, userLoginId, userNickName, userProfileImage, postType, content, file);
 			
 			if (count < 1) {
 				result.put("result", "error");
@@ -72,6 +73,7 @@ public class PostRestController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		String userLoginId = (String) session.getAttribute("userLoginId");
 		String userNickName = (String) session.getAttribute("userNickName");
+		String userProfileImage = (String) session.getAttribute("userProfileImage");
 		
 		if (userId == null) {
 			result.put("result", "error");
@@ -81,6 +83,7 @@ public class PostRestController {
 		
 		house.setUserId(userId);
 		house.setNickName(userNickName);
+		house.setProfileImage(userProfileImage);
 		
 		// BO insert DB
 		int postId = introduceBO.addIntroduceHouse(house, userLoginId, coverImage, files);

@@ -72,4 +72,12 @@ public class IntroduceHouseBO {
 	public void deleteIntroduceHouseById(int id) {
 		introduceDAO.deleteIntroduceHouseById(id);
 	}
+	
+	public IntroduceHouse getIntroduceHouseById(int id) {
+		return introduceDAO.selectIntroduceHouseById(id);
+	}
+	
+	public void addHit(int id) {
+		introduceDAO.updateHit(id);
+	}
 }

@@ -13,6 +13,7 @@ select option[value=""][disabled] {display: none;}
 button:focus {outline: 0;}
 
 /* 공통 */
+.w50 {width: 50%; margin: auto;}
 .w60 {width: 60%; margin: auto;}
 .w70 {width: 70%; margin: auto;}
 .w80 {width: 80%; margin: auto;}
@@ -25,7 +26,8 @@ button:focus {outline: 0;}
 .blue:hover {color: #35C5F0;}
 .mr10 {margin-right: 10%;}
 .ml10 {margin-left: 10%;}
-.img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%; width: auto;}
+.img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: auto; width: 100%;}
+.h-img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%; width: auto;}
 .img-center {width: 100%; height: 100%; overflow: hidden; position: relative; margin: auto;}
 .box-radius-5 {border-radius: 5px; overflow: hidden; }
 .box-radius-10 {border-radius: 10px; overflow: hidden;}
@@ -73,9 +75,10 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .nav-link {color: #424242; font-weight: bold; display: block;}
 .basket {margin-top: 5px; color: #757575;}
 .borderSide {border-left: 1px solid #757575; border-right: 1px solid #757575;}
-.userBtnArea {width: 32px; height: 32px; border-radius: 16px; background-color: #757575; overflow: hidden;}
+.userBtnArea {width: 32px; height: 32px; border-radius: 16px; overflow: hidden;}
 #createBtn {color: #fff; background-color: #35C5F0;}
 .moreIcon {padding-top: 5px;}
+.postTitle {font-size: 34px; color: rgb(47, 52, 56); font-weight: 700;}
 
 /* user 메뉴 */
 #userMenu {z-index:100; position: absolute; top: 80px; right: 17%;  width: 150px; background-color: #fff; box-shadow: 2px 2px 4px #b5b5b5; border-radius: 5px; border: 1px solid #DBDBDB;}
@@ -107,7 +110,7 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #communityMain .postImgBox {height: 180px;}
 #communityMain .postTitle {font-weight: 600; font-size: 15px; margin-bottom: 10px;}
 #communityMain .writerInfo {display: flex;}
-#communityMain .postWritherImg {width: 22px; height: 22px; border-radius: 50%; background-color: #434343; margin-right: 10px;}
+#communityMain .postWritherImg {width: 22px; height: 22px; border-radius: 50%; background-color: #434343; margin-right: 10px; overflow: hidden;}
 #communityMain .writerNickName {font-size: 13px; color: #424242;}
 
 
@@ -178,18 +181,18 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #photoDetail .photoArea {width: 100%; overflow: hidden;}
 #photoDetail .contentArea {width: 100%; padding: 30px 30px;}
 #photoDetail .photoInfo {padding: 20px 0;}
-#photoDetail .photoInfo .count {font-size: 13px; color: #757575; display: flex; padding-bottom: 20px; border-bottom: 1px solid #EDEDED;}
-#photoDetail .photoInfo .commentArea {padding: 20px 0;}
-#photoDetail .postArea .commentArea .inputComment {display: flex; position: relative;}
-#photoDetail .postArea .commentArea .userImg {width: 30px; height: 30px; border-radius: 15px; overflow: hidden; margin: auto; margin-right: 10px; margin-left: 0; background-color: #000;}
-#photoDetail .postArea .commentArea .inputComment .comment {height: 38px; width: 95%; font-size: 15px; border: 1px solid #d6d6d6; padding-left: 15px;}
-#photoDetail .postArea .commentArea .inputComment .commentPlace {position: absolute; top: 8px; left: 50px; font-size: 15px; color: #757575;}
-#photoDetail .postArea .commentArea .inputComment .commentBtn {position: absolute; right: 15px; top: 8px; height: 50px; color: #35C5F0; font-weight: bold;}
-#photoDetail .postArea .commentArea .inputComment .disabledBtn {pointer-events: none; opacity: 0.4;}
-#photoDetail .postArea .commentArea .commentList {padding: 20px 0;}
-#photoDetail .postArea .commentArea .commentList .comment-box {display: flex; margin-bottom: 10px; font-size: 14px;}
-#photoDetail .postArea .commentArea .commentList .comment-writer-id {font-weight: 700; margin-right: 10px; margin-top: 6px;}
-#photoDetail .postArea .commentArea .commentList .writed-comment {margin-top: 6px;}
+.count {font-size: 13px; color: #757575; display: flex; padding-bottom: 20px; border-bottom: 1px solid #EDEDED;}
+.commentArea {padding: 20px 0;}
+.commentArea .inputComment {display: flex; position: relative;}
+.commentArea .userImg {width: 30px; height: 30px; border-radius: 15px; overflow: hidden; margin: auto; margin-right: 10px; margin-left: 0; background-color: #000;}
+.commentArea .inputComment .comment {height: 38px; width: 95%; font-size: 15px; border: 1px solid #d6d6d6; padding-left: 15px;}
+.commentArea .inputComment .commentPlace {position: absolute; top: 8px; left: 50px; font-size: 15px; color: #757575;}
+.commentArea .inputComment .commentBtn {position: absolute; right: 15px; top: 8px; height: 50px; color: #35C5F0; font-weight: bold;}
+.commentArea .inputComment .disabledBtn {pointer-events: none; opacity: 0.4;}
+.commentArea .commentList {padding: 20px 0;}
+.commentArea .commentList .comment-box {display: flex; margin-bottom: 10px; font-size: 14px;}
+.commentArea .commentList .comment-writer-id {font-weight: 700; margin-right: 10px; margin-top: 6px;}
+.commentArea .commentList .writed-comment {margin-top: 6px;}
 
 #photoDetail .userArea .likeArea .like {margin: auto;}
 #photoDetail .userArea .likeArea .like .likeBtn {padding: 12px 30px; display: flex; margin: auto;}
@@ -221,3 +224,22 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #createHouse .contentArea #content {width: 100%; color: rgb(63, 71, 77); font-size: 17px; margin: 30px 0; border: none; resize: none;}
 
 #createHouse .delBtn {margin-left: 20px;}
+
+
+#detailIntroduce #coverImg {width: 100%; height: 320px;}
+#detailIntroduce .postContent {margin: 30px 0;}
+#detailIntroduce .coverImg {width: 100%;}
+#detailIntroduce .userInfoArea {display: flex; justify-content: space-between;}
+#detailIntroduce .userInfoArea .userArea {display: flex;}
+#detailIntroduce .userInfoArea .userArea .userImg {margin-right: 15px; width: 50px; height: 50px; border-radius: 25px; overflow: hidden; min-width: 50px; background-color: #000;}
+#detailIntroduce .userInfoArea .userInfo .userNickName {font-size: 16px; color: #2F3438; font-weight: 700;}
+#detailIntroduce .userInfoArea .userInfo .createdAt {font-size: 16px; color: #656E75; font-weight: 400;}
+#detailIntroduce .userInfoArea .btnArea {display: flex;}
+#detailIntroduce .userInfoArea .btnArea .followBtn {font-weight: 700; background-color: #35C5F0; color: #fff;  border-radius: 10px;}
+#detailIntroduce .userInfoArea .btnArea .likeBtn {font-weight: 600; background-color: #F5F5F5; color: #2F3438; border-radius: 10px;}
+#detailIntroduce .houseInfoArea {margin: 20px 0; padding: 30px 20px; background-color: #F5F5F5; border-radius: 10px; display: flex; justify-content: space-around;}
+#detailIntroduce .houseInfoArea .houseInfo {color: #424242; font-size: 14px;}
+#detailIntroduce .houseInfoArea .line {background-color: #656E75; width: 1px;}
+
+
+#detailIntroduce .postContent .postTextArea .postText {font-size: 16px; color: #2F3438;}

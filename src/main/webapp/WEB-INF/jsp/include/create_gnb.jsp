@@ -16,6 +16,12 @@
 
 <script>
 $(document).ready(function() {
-	
+	// scroll down할때 메뉴 상단 고정
+	let gnbHeight = $('#gnb').offset();
+	$(window).scroll(function() {
+		if ($(document).scrollTop() > gnbHeight.top) {
+			$('header').css('position', 'fixed');
+		}	
+	});
 });
 </script>

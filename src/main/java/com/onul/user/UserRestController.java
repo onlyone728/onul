@@ -51,7 +51,7 @@ public class UserRestController {
 				session.setAttribute("userLoginId", user.getLoginId());
 				session.setAttribute("userId", user.getId());
 				session.setAttribute("userNickName", user.getNickName());
-				session.setAttribute("userImage", user.getProfileImage());
+				session.setAttribute("userProfileImage", user.getProfileImage());
 			} else {
 				result.put("result", "error");
 				result.put("errorMessage", "비밀번호가 일치하지 않습니다.");

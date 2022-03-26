@@ -11,6 +11,7 @@ public class Knowhow {
 	private int id;
 	private int userId;
 	private String nickName;
+	private String profileImage;
 	private String postType;
 	private String category;
 	private String subject;

@@ -41,15 +41,7 @@ $(document).ready(function() {
 		$.post(url, params)
 		.done(function(data) {
 			if (data.result == 'success') {
-				// location.href = "/community";	// 로그인이 성공하면 글 목록으로 이동
-				// 뒤로 갈 히스토리가 있는 경우 및 우리 시스템에서 링크를 통해 유입된 경우
-				if (document.referrer && document.referrer.indexOf("/community") !== -1) {
-				    history.back();    // 뒤로가기
-				}
-				// 히스토리가 없는 경우 (URL을 직접 입력하여 유입된 경우)
-				else {
-				    location.href = "/community";    // 메인페이지로 
-				}
+			    location.href = "/community";    // 메인페이지로 
 			} else {
 				alert(data.errorMessage);
 			}

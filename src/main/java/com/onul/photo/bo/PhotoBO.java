@@ -35,11 +35,11 @@ public class PhotoBO {
 		photoDAO.updateHit(id);
 	}
 	
-	public int addPhoto(int userId, String userLoginId, String nickName, String postType, String content, MultipartFile file) {
+	public int addPhoto(int userId, String userLoginId, String nickName, String profileImage, String postType, String content, MultipartFile file) {
 		// 파일매니저서비스
 		String imagePath = fms.saveFile(userLoginId, file);
 		
 		// DAO
-		return photoDAO.insertPhoto(userId, nickName, postType, content, imagePath);
+		return photoDAO.insertPhoto(userId, nickName, profileImage, postType, content, imagePath);
 	}
 }

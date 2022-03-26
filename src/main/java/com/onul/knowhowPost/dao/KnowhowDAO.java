@@ -10,4 +10,6 @@ import com.onul.knowhowPost.model.Knowhow;
 public interface KnowhowDAO {
 
 	public List<Knowhow> selectKnowhowOrderByHit();
+	
+	public void updateHit(int id);
 }

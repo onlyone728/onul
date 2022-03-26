@@ -8,6 +8,7 @@
  			`id`
 			, `userId`
 			, `nickName`
+			, `profileImage`
 			, `postType`
 			, `category`
 			, `subject`
@@ -21,4 +22,13 @@
 		ORDER BY `hit` DESC
 		LIMIT 4
  	</select>
+ 	
+ 	<update id="updateHit" parameterType="int">
+ 		UPDATE 
+ 			`knowhow`
+ 		SET
+ 			`hit` = hit + 1
+ 		WHERE
+ 			`id` = #{id}		
+ 	</update>
  </mapper>

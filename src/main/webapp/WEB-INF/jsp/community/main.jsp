@@ -8,14 +8,14 @@
 		<div class="mainBanner relative">
 			<div class="img-center">
 				<a href="#">
-					<img class="img" alt="이미지" src="https://cdn.pixabay.com/photo/2017/03/22/17/39/kitchen-2165756_1280.jpg" height="550">
+					<img class="h-img" alt="이미지" src="https://cdn.pixabay.com/photo/2017/03/22/17/39/kitchen-2165756_1280.jpg" height="550">
 				</a>	
 			</div>
 			<div class="infoArea absolute">
 				<div class="bannerTitle"><a href="#">bannerTitle</a></div>
 				<a href="#" class="d-flex">
 					<div class="postWritherImg border-1-white img-center m-0 mr-2">
-						<img alt="" src="https://cdn.pixabay.com/photo/2015/09/09/18/25/feet-932346_1280.jpg" class="img" height="100">
+						<img alt="" src="https://cdn.pixabay.com/photo/2015/09/09/18/25/feet-932346_1280.jpg" class="h-img" width="100">
 					</div>
 					<div class="text-white font15 textShadow2">writerNickName</div>
 				</a>
@@ -24,7 +24,7 @@
 		<div class="smallBanner">
 			<div class="img-center">
 				<a href="#">
-					<img class="img" alt="" src="https://cdn.pixabay.com/photo/2017/08/01/09/34/white-2563976_1280.jpg" height="550">
+					<img class="h-img" alt="" src="https://cdn.pixabay.com/photo/2017/08/01/09/34/white-2563976_1280.jpg" height="550">
 				</a>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 		<div class="iconMenu">
 			<a href="#">
 				<div class="iconMenu img-center">
-					<img class="img" alt="" src="/image/icon_shop.webp" height="80">
+					<img class="h-img" alt="" src="/image/icon_shop.webp" height="80">
 				</div>
 				<div class="iconText">쇼핑하기</div>
 			</a>
@@ -43,7 +43,7 @@
 		<div class="iconMenu">
 			<a href="#">
 				<div class="iconMenu img-center">
-					<img class="img" alt="" src="/image/icon_area.webp" height="80">
+					<img class="h-img" alt="" src="/image/icon_area.webp" height="80">
 				</div>
 				<div class="iconText">N평집들이</div>
 			</a>
@@ -51,7 +51,7 @@
 		<div class="iconMenu">
 			<a href="#">
 				<div class="iconMenu img-center">
-					<img class="img" alt="" src="/image/icon_place.webp" height="80">
+					<img class="h-img" alt="" src="/image/icon_place.webp" height="80">
 				</div>
 				<div class="iconText">공간별사진</div>
 			</a>
@@ -59,7 +59,7 @@
 		<div class="iconMenu">
 			<a href="#">
 				<div class="iconMenu img-center">
-					<img class="img" alt="" src="/image/icon_deal.png" height="80">
+					<img class="h-img" alt="" src="/image/icon_deal.png" height="80">
 				</div>
 				<div class="iconText">오늘의딜</div>
 			</a>
@@ -73,24 +73,26 @@
 			<div class="moreBtn"><a href="#">더보기</a></div>
 		</div>
 		<div class="gridBetween">
-			<%-- <c:forEach var="house" items="${houseList}">
+			<c:forEach var="house" items="${house}">
 				<div class="column4">
-					<a href="#">
-						<div class="img-center box-radius-10 postImgBox bg-info">
-							<img alt="" src="${house.imagePath}" class="img"  height="180">
+					<a href="/community/introduce_detail_view?postId=${house.id}">
+						<div class="img-center box-radius-10 postImgBox">
+							<img alt="" src="${house.coverImage}" class="img"  width="180">
 						</div>
 						<div class="infoArea">
 							<div class="postTitle">${house.subject}</div>
 							<div class="writerInfo">
 								<div class="postWritherImg">
-									<img alt="" src="">
+									<a herf="" class="img-center d-block">
+										<img class="img" alt="" src="${house.profileImage}" height="100">
+									</a>
 								</div>
 								<div class="writerNickName">${house.nickName}</div>
 							</div>
 						</div>
 					</a>
 				</div>
-			</c:forEach> --%>
+			</c:forEach>
 			
 		</div>
 	</div>
@@ -205,7 +207,7 @@
 					<div class="infoArea absolute">
 						<a href="#" class="d-flex">
 							<div class="postWritherImg border-1-white img-center m-0 mr-2">
-								<img alt="" src="https://cdn.pixabay.com/photo/2015/09/09/18/25/feet-932346_1280.jpg" class="img" height="100">
+								<img alt="" src="${photo.profileImage}" class="img" height="100">
 							</div>
 							<div class="text-white font15 textShadow2"><b>${photo.nickName}</b></div>
 						</a>

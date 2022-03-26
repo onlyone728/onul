@@ -56,11 +56,13 @@
 	<%-- 로그인 후 --%>
 		<c:when test="${not empty userId}">
 			<div class="ml-3 userBtnArea">
-				<a href="#userMenu" id="userBtn">
-					<c:if test="${not empty usrImage}">
-						<img src="${userImage}" alt="${userNickName}님의 프로필 사진" height="32">
+				<a href="#userMenu" class="d-block img-center" id="userBtn">
+					<c:if test="${not empty userProfileImage}">
+						<img class="img" src="${userProfileImage}" alt="${userNickName}님의 프로필 사진" width="100%">
 					</c:if>
-					<div class="w-100 h-100"></div>
+					<c:if test="${empty userProfileImage}">
+						<div class="w-100 h-100 bg-dark"></div>
+					</c:if>
 				</a>
 			</div>
 			<div id="userMenu" class="d-none">

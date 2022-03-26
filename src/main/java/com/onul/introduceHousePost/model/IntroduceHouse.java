@@ -11,6 +11,7 @@ public class IntroduceHouse {
 	private int id;
 	private int userId;
 	private String nickName;
+	private String profileImage;
 	private String postType;
 	private String type;
 	private int area;

@@ -18,4 +18,8 @@ public class KnowhowBO {
 	public List<Knowhow> getKnowhowOrderByHit() {
 		return knowhowDAO.selectKnowhowOrderByHit();
 	}
+	
+	public void addHit(int id) {
+		knowhowDAO.updateHit(id);
+	}
 }

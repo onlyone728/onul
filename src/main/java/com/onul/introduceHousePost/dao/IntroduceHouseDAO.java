@@ -19,4 +19,8 @@ public interface IntroduceHouseDAO {
 			@Param("imagePath") String imagePath);
 	
 	public void deleteIntroduceHouseById(int id);
+	
+	public IntroduceHouse selectIntroduceHouseById(int id);
+	
+	public void updateHit(int id);
 }
