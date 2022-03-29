@@ -105,8 +105,10 @@
 				, success: function(data) {
 					if (data.result == "success") {
 						alert("사진이 등록되었습니다.");
+						location.reload = "/community/photo_detail_view?postId=" + data.postId;
 					} else {
 						alert(data.errorMessage);
+						location.reload = "/user/sign_in_view";
 					}
 				}
 				, error: function(e) {

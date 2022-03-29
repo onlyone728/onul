@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.onul.knowhowPost.dao.KnowhowDAO">
+ 	<insert id="insertFile" parameterType="map">
+ 		INSERT INTO `knowhowFiles`
+ 		(
+ 			`postId`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+		VALUES
+		(
+			#{postId}
+			, #{imagePath}
+			, NOW()
+			, NOW()
+		) 		
+ 	</insert>
+ 	
+ 	<select id="selectKnowhowFilesListByPostId" parameterType="int" resultType="com.onul.knowhowPost.model.Knowhow">
+ 		SELECT
+ 			`id`
+ 			, `postId`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`knowhowFiles`	
+		WHERE
+			`postId` = #{postId}	
+ 	</select>
+ </mapper>

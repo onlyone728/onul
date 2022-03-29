@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class introduceFiles {
+public class IntroduceFiles {
 
 	private int postId;
 	private String imagePath;

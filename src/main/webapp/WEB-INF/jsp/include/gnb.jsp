@@ -11,8 +11,8 @@
 			<li id="communityMenuBtn" class="nav-item">
 				<a href="/community" class="nav-link blue">커뮤니티</a>
 				<ul id="communityMenu" class="subMenu">
-					<li><a href="#" class="blue">홈</a></li>
-					<li><a href="#" class="blue">사진</a></li>
+					<li><a href="/community" class="blue">홈</a></li>
+					<li><a href="/community/photo_view" class="blue">사진</a></li>
 					<li><a href="#" class="blue">집들이</a></li>
 					<li><a href="#" class="blue">노하우</a></li>
 				</ul>
@@ -58,7 +58,7 @@
 			<div class="ml-3 userBtnArea">
 				<a href="#userMenu" class="d-block img-center" id="userBtn">
 					<c:if test="${not empty userProfileImage}">
-						<img class="img" src="${userProfileImage}" alt="${userNickName}님의 프로필 사진" width="100%">
+						<img class="img bg-dark" src="${userProfileImage}" alt="${userNickName}님의 프로필 사진" width="100%">
 					</c:if>
 					<c:if test="${empty userProfileImage}">
 						<div class="w-100 h-100 bg-dark"></div>
@@ -86,7 +86,7 @@
 		<ul>
 			<li><a href="/post/photo_create_view" class="photoCreateBtn">사진올리기</a></li>
 			<li><a href="/post/introduce_create_view" class="introduceCreateBtn">집들이 글쓰기</a></li>
-			<li><a href="#" class="knowhowCreateBtn">노하우 글쓰기</a></li>
+			<li><a href="/post/knowhow_create_view" class="knowhowCreateBtn">노하우 글쓰기</a></li>
 			<li><a href="#" class="reviewCreateBtn">상품 리뷰 쓰기</a></li>
 		</ul>
 	</div>

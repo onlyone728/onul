@@ -55,6 +55,23 @@
 			`nickName` = #{nickName}
  	</select>
  	
+ 	<select id="selectUserById" resultType="com.onul.user.model.User">
+ 		SELECT
+ 			`id`
+			, `loginId`
+			, `password`
+			, `nickName`
+			, `profileImage`
+			, `name`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`id` = #{id}
+ 	</select>
+ 	
  	<insert id="insertUser" parameterType="map">
  		INSERT INTO `user`
  		(

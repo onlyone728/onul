@@ -73,27 +73,56 @@
 			<div class="moreBtn"><a href="#">더보기</a></div>
 		</div>
 		<div class="gridBetween">
-			<c:forEach var="house" items="${house}">
+			<c:forEach var="house" items="${houseList}" varStatus="status" end="3">
 				<div class="column4">
-					<a href="/community/introduce_detail_view?postId=${house.id}">
+					<a href="/community/introduce_detail_view?postId=${house.house.id}">
 						<div class="img-center box-radius-10 postImgBox">
-							<img alt="" src="${house.coverImage}" class="img"  width="180">
+							<img alt="" src="${house.house.coverImage}" class="img"  width="180">
 						</div>
 						<div class="infoArea">
-							<div class="postTitle">${house.subject}</div>
+							<div class="postTitle">${house.house.subject}</div>
 							<div class="writerInfo">
 								<div class="postWritherImg">
 									<a herf="" class="img-center d-block">
-										<img class="img" alt="" src="${house.profileImage}" height="100">
+										<img class="img" alt="" src="${house.house.profileImage}" height="100">
 									</a>
 								</div>
-								<div class="writerNickName">${house.nickName}</div>
+								<div class="writerNickName">${house.house.nickName}</div>
 							</div>
 						</div>
 					</a>
 				</div>
 			</c:forEach>
-			
+		</div>
+	</div>
+	
+	<%-- 오늘의 스토리 --%>
+	<div class="postArea">
+		<div class="categoryIndexBox">
+			<div class="categoryIndex">오늘의 노하우</div>
+			<div class="moreBtn"><a href="#">더보기</a></div>
+		</div>
+		<div class="gridBetween">
+			<c:forEach var="knowhow" items="${knowhowList}" varStatus="status" end="3">
+				<div class="column4">
+					<a href="/community/knowhow_detail_view?postId=${knowhow.knowhow.id}">
+						<div class="img-center box-radius-10 postImgBox">
+							<img alt="" src="${knowhow.knowhow.coverImage}" class="h-img"  width="100%">
+						</div>
+						<div class="infoArea">
+							<div class="postTitle">${knowhow.knowhow.subject}</div>
+							<div class="writerInfo">
+								<div class="postWritherImg">
+									<a herf="" class="img-center d-block">
+										<img class="img" alt="" src="${knowhow.knowhow.profileImage}" height="100">
+									</a>
+								</div>
+								<div class="writerNickName">${knowhow.knowhow.nickName}</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	
@@ -107,7 +136,7 @@
 			<div class="column4">
 				<a href="#">
 					<div class="dealImgBox img-center box-radius-5">
-						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2017/03/01/05/12/tea-cup-2107599_1280.jpg" class="img" height="269">
+						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2017/03/01/05/12/tea-cup-2107599_1280.jpg" class="h-img" height="100%">
 					</div>
 					<div class="infoArea">
 						<div class="storeName">storeName</div>
@@ -128,7 +157,7 @@
 			<div class="column4">
 				<a href="#">
 					<div class="dealImgBox img-center box-radius-5">
-						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2017/05/11/11/15/workplace-2303851_1280.jpg" class="img" height="269">
+						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2017/05/11/11/15/workplace-2303851_1280.jpg" class="h-img" height="269">
 					</div>
 					<div class="infoArea">
 						<div class="storeName">storeName</div>
@@ -149,7 +178,7 @@
 			<div class="column4">
 				<a href="#">
 					<div class="dealImgBox img-center box-radius-5">
-						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2016/04/08/13/52/daffodils-1316127_1280.jpg" class="img" height="269">
+						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2016/04/08/13/52/daffodils-1316127_1280.jpg" class="h-img" height="269">
 					</div>
 					<div class="infoArea">
 						<div class="storeName">storeName</div>
@@ -170,7 +199,7 @@
 			<div class="column4">
 				<a href="#">
 					<div class="dealImgBox img-center box-radius-5">
-						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2016/04/18/08/50/kitchen-1336160_1280.jpg" class="img" height="269">
+						<img alt="오늘의딜 이미지" src="https://cdn.pixabay.com/photo/2016/04/18/08/50/kitchen-1336160_1280.jpg" class="h-img" height="269">
 					</div>
 					<div class="infoArea">
 						<div class="storeName">storeName</div>
@@ -194,22 +223,22 @@
 	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">오늘의 인기 사진</div>
-			<div class="moreBtn"><a href="#">더보기</a></div>
+			<div class="moreBtn"><a href="/community/photo_view">더보기</a></div>
 		</div>
 		<div class="gridBetween">
-			<c:forEach var="photo" items="${photo}">
+			<c:forEach var="photo" items="${photoList}" varStatus="status" end="3">
 				<div class="photoCard column4 relative">
 					<div class="dealImgBox box-radius-5">
-						<a href="/community/photo_detail_view?postId=${photo.id}" class="d-block img-center bg-dark">
-							<img alt="" src="${photo.imagePath}" class="img" width="269">
+						<a href="/community/photo_detail_view?postId=${photo.photo.id}" class="d-block img-center bg-dark">
+							<img alt="" src="${photo.photo.imagePath}" class="img" width="269">
 						</a>	
 					</div>
 					<div class="infoArea absolute">
 						<a href="#" class="d-flex">
 							<div class="postWritherImg border-1-white img-center m-0 mr-2">
-								<img alt="" src="${photo.profileImage}" class="img" height="100">
+								<img alt="" src="${photo.photo.profileImage}" class="img" height="100">
 							</div>
-							<div class="text-white font15 textShadow2"><b>${photo.nickName}</b></div>
+							<div class="text-white font15 textShadow2"><b>${photo.photo.nickName}</b></div>
 						</a>
 					</div>
 				</div>

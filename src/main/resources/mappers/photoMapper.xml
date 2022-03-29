@@ -55,6 +55,24 @@
 			`photo`
 		WHERE
 			`userId` = #{userId}
+		ORDER BY `id` DESC	
+ 	</select>
+ 	
+ 	<select id="selectPhotoList" resultType="com.onul.photo.model.Photo">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickName`
+			, `profileImage`
+			, `postType`
+			, `content`
+			, `imagePath`
+			, `hit`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`photo`
+		ORDER BY `id` DESC	
  	</select>
  	
  	<update id="updateHit" parameterType="int">
@@ -66,7 +84,7 @@
  			`id` = #{id}		
  	</update>
  	
- 	<insert id="insertPhoto" parameterType="map">
+ 	<insert id="insertPhoto" parameterType="map" useGeneratedKeys="true" keyProperty="id">
  		INSERT INTO `photo`
  		(
  			`userId`

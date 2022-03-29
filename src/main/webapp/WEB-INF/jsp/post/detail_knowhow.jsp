@@ -5,60 +5,43 @@
     
 <div id="detailIntroduce">
 	<div id="coverImg" class="img-center bg-info">
-		<img alt="커버 이미지" src="${post.house.coverImage}" class="img" width="100%">
+		<img alt="커버 이미지" src="${post.coverImage}" class="img" width="100%">
 	</div>
 	<div class="w50">
 		<div class="categoryIndexBox2">
-			<div class="categoryIndex mb-2">집들이</div>
-			<div class="postTitle">${post.house.subject}</div>
+			<div class="categoryIndex mb-2">노하우 / ${post.category}</div>
+			<div class="postTitle">${post.subject}</div>
 		</div>
 		<div class="userInfoArea">
 			<div class="userArea">
 				<div class="userImg">
 					<a href="" class="d-block img-center">
-						<img alt="user의 프로필 이미지" class="img" src="${post.house.profileImage}" height="100%">
+						<img alt="user의 프로필 이미지" class="img" src="${post.profileImage}" height="100%">
 					</a>
 				</div>
 				<div class="userInfo">
-					<div class="userNickName"><a href="">${post.house.nickName}</a></div>
+					<div class="userNickName"><a href="">${post.nickName}</a></div>
 					<div class="createdAt">
-						<fmt:formatDate value="${post.house.createdAt}" pattern="yyyy년 MM월 dd일"/>
+						<fmt:formatDate value="${post.createdAt}" pattern="yyyy년 MM월 dd일"/>
 					</div>
 				</div>
 			</div>
 			<div class="btnArea">
-				<c:choose>
-					<c:when test="${post.filledLike == false}">
-						<button class="likeBtn btn mr-2" data-post-id="${post.house.id}">+ 좋아요</button>
-					</c:when>
-					<c:when test="${post.filledLike == true}">
-						<button class="likeBtn btn mr-2" data-post-id="${post.house.id}">- 좋아요</button>
-					</c:when>
-				</c:choose>
-				<c:if test="${userId != post.house.userId && post.follow == false}">
-					<button class="followBtn btn" data-user-id="${post.house.userId}">+ 팔로우</button>
+				<button class="likeBtn btn mr-2" data-post-id="${post.id}">+ 좋아요</button>
+				<c:if test="${userId != post.userId && userId == null}">
+					<button class="followBtn btn" data-user-id="${post.userId}">+ 팔로우</button>
 				</c:if>
 			</div>
 		</div>
-		<div class="houseInfoArea">
-			<div class="houseInfo" id="type">${post.house.type}</div>
-			<div class="line"></div>
-			<div class="houseInfo" id="area">${post.house.area}평</div>
-			<div class="line"></div>
-			<div class="houseInfo" id="familyType">${post.house.familyType}</div>
-			<div class="line"></div>
-			<div class="houseInfo" id="fieldOfWork">${post.house.fieldOfWork}</div>
-			<div class="line"></div>
-			<div class="houseInfo" id="worker">${post.house.worker}</div>
-		</div>
+		
 		
 		<div class="postContent">
 			<div class="postTextArea">
-				<div class="postText">${post.house.content}</div>
+				<div class="postText">${post.content}</div>
 			</div>
-			<c:if test="${not empty house.fileList}">
+			<c:if test="${not empty files}">
 				<div class="postImgArea">
-					<c:forEach var="file" items="${house.fileList}">
+					<c:forEach var="file" items="${files}">
 						<div class="filesImage">
 							<img alt="" src="${file.imagePath}" width="100%">
 						</div>
@@ -69,10 +52,10 @@
 		
 		
 		<div class="count">
-			<div class="mr-1">조회수 ${post.house.hit}</div>
-			<div class="mr-1">· 팔로우 ${post.followCount}</div>
-			<div class="mr-1">· 좋아요 ${post.likeCount}</div>
-			<div>· 댓글 ${post.commentCount}</div>
+			<div class="mr-1">조회수 ${post.hit}</div>
+			<div class="mr-1">· 팔로우 ${followCount}</div>
+			<div class="mr-1">· 좋아요 ${like}</div>
+			<div>· 댓글 ${commentCount}</div>
 		</div>
 		<div class="commentArea">
 			<div class="inputComment">
@@ -86,16 +69,16 @@
 				</div>
 				<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
 				<input type="text" id="commentText" class="comment box-radius-5">
-				<a href="" class="commentBtn disabledBtn" data-post-id="${post.house.id}">등록</a>
+				<a href="" class="commentBtn disabledBtn" data-post-id="${post.id}">등록</a>
 			</div>
 			
 			<div class="commentList">
-				<c:forEach var="comment" items="${post.commentList}">
+				<c:forEach var="comment" items="${comments}">
 				<div class="comment-box">
 					<div class="userImg img-center">
 						<c:choose>
 							<c:when test="${empty comment.profileImage}">
-								<img alt="작성자 프로필 이미지 없음" src="/image/avatar.webp" height="100%">
+								<img class="img" alt="작성자 프로필 이미지 없음" src="/image/avatar.webp" height="30">
 							</c:when>	
 							<c:when test="${not empty comment.profileImage}">
 								<img class="img bg-dark" alt="${comment.nickName}님의 프로필 이미지" src="${comment.profileImage}" height="30">

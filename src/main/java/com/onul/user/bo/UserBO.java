@@ -33,7 +33,9 @@ public class UserBO {
 		return userDAO.selectUserByNickName(nickName);
 	}
 	
-	
+	public User getUserById(int id) {
+		return userDAO.selectUserById(id);
+	}
 
 	public int addUser(String loginId, String password, String nickName, MultipartFile file, String name,
 			String email) {

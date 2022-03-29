@@ -21,6 +21,8 @@ $(document).ready(function() {
 	$(window).scroll(function() {
 		if ($(document).scrollTop() > gnbHeight.top) {
 			$('header').css('position', 'fixed');
+		} else {
+			$('header').css('position', 'relative');
 		}	
 	});
 });

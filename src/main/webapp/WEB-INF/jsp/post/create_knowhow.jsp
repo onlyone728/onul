@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="createHouse" class="w60">
+    
+<div id="createknowhow" class="w60">
 	<div class="requiredArea">
 		<button type="button" onclick="openClose()" class="openInputBtn border-1-gray box-radius-5">
 			<div>필수 정보 입력</div>
@@ -10,74 +11,17 @@
 		</button>
 		<div id="requiredContents" class="requiredContents border-1-gray">
 			<div class="required">
-				<label for="type" class="requiredLabel">주거형태<span class="redText">*</span></label>
+				<label for="category" class="requiredLabel">카테고리<span class="redText">*</span></label>
 				<div class="requiredContent">
-					<select id="type" class="form-control">
+					<select id="category" class="form-control">
 						<option value="" selected>선택해주세요.</option>
-						<option value="본인 방">본인 방</option>
-						<option value="원룸">원룸</option>
-						<option value="오피스텔">오피스텔</option>
-						<option value="빌라&연립">빌라&연립</option>
-						<option value="아파트">아파트</option>
-						<option value="연립주택">연립주택</option>
-						<option value="협소주택">협소주택</option>
-						<option value="상업공간">상업공간</option>
-						<option value="사무공간">사무공간</option>
+						<option value="시공정보">시공정보</option>
+						<option value="수납">수납</option>
+						<option value="꾸미기 팁">꾸미기 팁</option>
+						<option value="청소">청소</option>
+						<option value="DIY&리폼">DIY&리폼</option>
+						<option value="생활정보">생활정보</option>
 						<option value="기타">기타</option>
-					</select>
-					<span id="" class="confirm-msg redText d-none"><b>필수 입력 항목입니다.</b></span>
-				</div>
-			</div>
-			
-			<div class="required">
-				<label for="area" class="requiredLabel">평수<span class="redText">*</span></label>
-				<div class="requiredContent">
-					<div class="d-flex">
-						<input type="text" id="area" class="form-control" onlyNumber> 
-						<span>평형</span>
-					</div>
-					<span class="confirm-msg redText d-none"><b>필수 입력 항목입니다.</b></span>
-				</div>
-			</div>
-			
-			<div class="required">
-				<label for="familyType" class="requiredLabel">가족형태<span class="redText">*</span></label>
-				<div class="requiredContent">
-					<select id="familyType" class="form-control">
-						<option value="" selected>선택해주세요.</option>
-						<option value="싱글라이프">싱글라이프</option>
-						<option value="신혼,부부가 사는 집">신혼/부부가 사는 집</option>
-						<option value="자녀가 있는 집">자녀가 있는 집</option>
-						<option value="부모님과 함께 사는 집">부모님과 함께 사는 집</option>
-						<option value="룸메이트와 함께 사는 집">룸메이트와 함께 사는 집</option>
-						<option value="기타">기타</option>
-					</select>
-					<span id="" class="confirm-msg redText d-none"><b>필수 입력 항목입니다.</b></span>
-				</div>
-			</div>
-			
-			<div class="required">
-				<label for="fieldOfWork" class="requiredLabel">작업분야<span class="redText">*</span></label>
-				<div class="requiredContent">
-					<select id="fieldOfWork" class="form-control">
-						<option value="" selected>선택해주세요.</option>
-						<option value="홈스타일링">홈스타일링</option>
-						<option value="리모델링">리모델링</option>
-						<option value="부분시공">부분시공 </option>
-						<option value="건축">건축</option>
-					</select>
-					<span id="" class="confirm-msg redText d-none"><b>필수 입력 항목입니다.</b></span>
-				</div>
-			</div>
-			
-			<div class="required">
-				<label for="worker" class="requiredLabel">작업자<span class="redText">*</span></label>
-				<div class="requiredContent">
-					<select id="worker" class="form-control">
-						<option value="" selected>선택해주세요.</option>
-						<option value="셀프·DIY">셀프·DIY</option>
-						<option value="반셀프">반셀프</option>
-						<option value="전문가">전문가</option>
 					</select>
 					<span id="" class="confirm-msg redText d-none"><b>필수 입력 항목입니다.</b></span>
 				</div>
@@ -121,65 +65,10 @@
 
 <script>
 $(document).ready(function() {
-	// 평형 숫자만 입력
-	$('input[onlyNumber]').on('keyup', function () {
-	    $(this).val($(this).val().replace(/[^0-9]/g, ""));
-	});
 	
-	$('#type').focusout(function() {
-		let type = $(this).val();
-		if (type == '') {
-			$(this).next('.confirm-msg').removeClass('d-none');
-			$(this).addClass('border-1-red');
-			return;
-		} else {
-			$(this).next('.confirm-msg').addClass('d-none');
-			$(this).removeClass('border-1-red');
-			return;
-		}
-	});
-	$('#area').focusout(function() {
-		let area = $(this).val();
-		if (area == '') {
-			$(this).parent().next('.confirm-msg').removeClass('d-none');
-			$(this).addClass('border-1-red');
-			return;
-		} else {
-			$(this).parent().next('.confirm-msg').addClass('d-none');
-			$(this).removeClass('border-1-red');
-			return;
-		}
-	});
-	
-	$('#familyType').focusout(function() {
-		let familyType = $(this).val();
-		if (familyType == '') {
-			$(this).next('.confirm-msg').removeClass('d-none');
-			$(this).addClass('border-1-red');
-			return;
-		} else {
-			$(this).next('.confirm-msg').addClass('d-none');
-			$(this).removeClass('border-1-red');
-			return;
-		}
-	});
-	
-	$('#fieldOfWork').focusout(function() {
-		let fieldOfWork = $(this).val();
-		if (fieldOfWork == '') {
-			$(this).next('.confirm-msg').removeClass('d-none');
-			$(this).addClass('border-1-red');
-			return;
-		} else {
-			$(this).next('.confirm-msg').addClass('d-none');
-			$(this).removeClass('border-1-red');
-			return;
-		}
-	});
-	
-	$('#worker').focusout(function() {
-		let worker = $(this).val();
-		if (worker == '') {
+	$('#category').focusout(function() {
+		let category = $(this).val();
+		if (category == '') {
 			$(this).next('.confirm-msg').removeClass('d-none');
 			$(this).addClass('border-1-red');
 			return;
@@ -233,7 +122,7 @@ $(document).ready(function() {
 	// file 선택
 	let inputFileList = new Array();
 
-	$('#file').change(function(e) {
+	$('#file').on('change', function(e) {
 	    let fileList = $(this)[0].files;  
 	    let files = e.target.files;
 	    let filesArr = Array.prototype.slice.call(files);
@@ -266,31 +155,14 @@ $(document).ready(function() {
 	// saveBtn
 	$('.saveBtn').on('click', function() {
 		// validation check
-		let type = $('#type').val();
-		if (type == '') {
-			alert('주거형태를 선택해주세요.');
+		let category = $('#category').val();
+		if (category == '') {
+			alert('카테고리를 선택해주세요.');
+			openClose();
+			$('#category').focus();
 			return;
 		}
-		let area = $('#area').val().trim();
-		if (area == '') {
-			alert('평형정보를 입력해주세요.');
-			return;
-		}
-		let familyType =  $('#familyType').val();
-		if (familyType == '') {
-			alert('가족형태를 선택해주세요.');
-			return;
-		}
-		let fieldOfWork = $('#fieldOfWork').val();
-		if (fieldOfWork == '') {
-			alert('작업분야를 선택해주세요.');
-			return;
-		}
-		let worker = $('#worker').val();
-		if (worker == '') {
-			alert('작업자를 선택해주세요.');
-			return;
-		}
+		
 		let coverImg = $('#coverImg').val();
 		if (coverImg == '') {
 			alert('커버이미지를 업로드해주세요.');
@@ -314,12 +186,8 @@ $(document).ready(function() {
 			return;
 		}
 		let formData = new FormData();
-		formData.append('postType', 'IntroduceHouse');
-		formData.append('type', type);
-		formData.append('area', area);
-		formData.append('familyType', familyType);
-		formData.append('fieldOfWork', fieldOfWork);
-		formData.append('worker', worker);
+		formData.append('postType', 'knowhow');
+		formData.append('category', category);
 		formData.append('coverImageFile', $('#coverImg')[0].files[0]);
 		formData.append('subject', subject);
 		formData.append('content', content);
@@ -332,7 +200,7 @@ $(document).ready(function() {
 		// ajax
 		$.ajax({
 			type: "POST"
-			, url: "/post/introduce_create"
+			, url: "/post/knowhow_create"
 			, data: formData
 			, enctype: "multipart/form-data"
 			, processData: false
@@ -340,7 +208,7 @@ $(document).ready(function() {
 			, success: function(data) {
 				if (data.result == "success") {
 					alert("글이 등록되었습니다.");
-					location.href = "/community/introduce_detail_view?postId=" + data.postId;
+					location.href = "/community/knowhow_detail_view?postId=" + data.postId;
 				} else {
 					alert(data.errorMessage);
 					location.href = "/community";

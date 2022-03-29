@@ -3,12 +3,14 @@ package com.onul.introduceHousePost.bo;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.onul.common.FileManagerService;
 import com.onul.introduceHousePost.dao.IntroduceHouseDAO;
+import com.onul.introduceHousePost.model.IntroduceFiles;
 import com.onul.introduceHousePost.model.IntroduceHouse;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,7 @@ public class IntroduceHouseBO {
 		return introduceDAO.selectIntroduceListOrderByHit();
 	}
 	
+	@Options(useGeneratedKeys=true, keyProperty="id")
 	public int addIntroduceHouse(IntroduceHouse house, String userLoginId, MultipartFile coverImage, List<MultipartFile> files) {
 		// coverImage 1개
 		String coverImagePath = null;
@@ -40,7 +43,12 @@ public class IntroduceHouseBO {
 		house.setCoverImage(coverImagePath);
 		
 		// DB insert 하면서 postId 받아오기
-		int postId = introduceDAO.insertIntroduceHouse(house);
+		int count = introduceDAO.insertIntroduceHouse(house);
+		if (count < 1) {
+			return 0;
+		}
+		
+		int postId = house.getId();
 		
 		if (files != null) {
 			if (files.size() == 1) {
@@ -69,12 +77,24 @@ public class IntroduceHouseBO {
 		return postId;
 	}
 	
-	public void deleteIntroduceHouseById(int id) {
+	public void deleteIntroduceHouseByPostId(int id) {
 		introduceDAO.deleteIntroduceHouseById(id);
 	}
 	
 	public IntroduceHouse getIntroduceHouseById(int id) {
 		return introduceDAO.selectIntroduceHouseById(id);
+	}
+	
+	public List<IntroduceHouse> getIntroduceHouseList() {
+		return introduceDAO.selectIntroduceHouseList();
+	}
+	
+	public List<IntroduceHouse> getIntroduceHouseListByUserId(int userId) {
+		return introduceDAO.selectIntroduceHouseListByUserId(userId);
+	}
+	
+	public List<IntroduceFiles> getIntroduceFilesByPostId(int postId) {
+		return introduceDAO.selectIntroduceFilesByPostId(postId);
 	}
 	
 	public void addHit(int id) {

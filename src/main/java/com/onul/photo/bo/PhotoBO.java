@@ -23,6 +23,10 @@ public class PhotoBO {
 		return photoDAO.selectphotoListOrderByHit();
 	}
 	
+	public List<Photo> getPhotoList() {
+		return photoDAO.selectPhotoList();
+	}
+	
 	public Photo getPhotoById(int id) {
 		return photoDAO.selectPhotoById(id);
 	}
@@ -35,11 +39,12 @@ public class PhotoBO {
 		photoDAO.updateHit(id);
 	}
 	
-	public int addPhoto(int userId, String userLoginId, String nickName, String profileImage, String postType, String content, MultipartFile file) {
+	public int addPhoto(Photo photo, String userLoginId, MultipartFile file) {
 		// 파일매니저서비스
 		String imagePath = fms.saveFile(userLoginId, file);
+		photo.setImagePath(imagePath);
 		
 		// DAO
-		return photoDAO.insertPhoto(userId, nickName, profileImage, postType, content, imagePath);
+		return photoDAO.insertPhoto(photo);
 	}
 }

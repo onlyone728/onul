@@ -33,7 +33,7 @@ public class CommentRestController {
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
 		String nickName = (String) session.getAttribute("userNickName");
-		String profileImage = (String) session.getAttribute("userPorfileImage");
+		String profileImage = (String) session.getAttribute("userProfileImage");
 		
 		if (userId == null) {
 			result.put("result", "error");

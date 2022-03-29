@@ -5,31 +5,31 @@
 <div id="photoDetail" class="w80">
 	<div class="postArea">
 		<div class="photoArea">
-			<img alt="${photo.nickName}님의 사진" src="${photo.imagePath}" class="w-100">
+			<img alt="${photoView.photo.nickName}님의 사진" src="${photoView.photo.imagePath}" class="w-100">
 		</div>
-		<div class="contentArea">${photo.content}</div>
+		<div class="contentArea">${photoView.photo.content}</div>
 		<div class="photoInfo">
 			<div class="count">
-				<div class="mr-1">조회수 ${photo.hit}</div>
-				<div>· 댓글 ${commentCount}</div>
+				<div class="mr-1">조회수 ${photoView.photo.hit}</div>
+				<div>· 댓글 ${photoView.commentCount}</div>
 			</div>
 			<div class="commentArea">
 			<div class="inputComment">
 				<div class="userImg img-center">
-					<c:if test="${empty userInfo.profileImage}">
+					<c:if test="${empty userProfileImage}">
 						<img class="img" alt="유저 프로필 이미지 없음" src="/image/avatar.webp" height="30">
 					</c:if>
-					<c:if test="${not empty userInfo.profileImage}">
-						<img class="img" alt="${userInfo.nickName}님의 프로필 이미지" src="${userInfo.profileImage}" height="30">
+					<c:if test="${not empty userProfileImage}">
+						<img class="img" alt="${userNickName}님의 프로필 이미지" src="${userProfileImage}" height="30">
 					</c:if>
 				</div>
 				<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
 				<input type="text" id="commentText" class="comment box-radius-5">
-				<a href="" class="commentBtn disabledBtn" data-post-id="${photo.id}">등록</a>
+				<a href="" class="commentBtn disabledBtn" data-post-id="${photoView.photo.id}">등록</a>
 			</div>
 			
 			<div class="commentList">
-				<c:forEach var="comment" items="${comments}">
+				<c:forEach var="comment" items="${photoView.commentList}">
 				<div class="comment-box">
 					<div class="userImg img-center">
 						<c:choose>
@@ -53,41 +53,58 @@
 	<div class="userArea">
 		<div class="likeArea">
 			<div class="like">
-				<button type="button" class="likeBtn btn" data-post-id="${photo.id}" data-post-type="${photo.postType}">
-					<svg width="24" height="24" fill="none" stroke="#757575" stroke-width="2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="css-pctok2 ek5sxnq1"><path d="M23.22 7.95c.4 4.94-2.92 9.71-10.92 13.85a.47.47 0 0 1-.42 0C3.88 17.66.56 12.9.96 7.93 1.54 2.48 8.28.3 12.1 4.7c3.8-4.4 10.55-2.22 11.13 3.25z"></path></svg>
-					<div class="likeCount">${like}</div>
+				<button type="button" class="likeBtn btn" data-post-id="${photoView.photo.id}" data-post-type="${photoView.photo.postType}">
+					<c:choose>
+						<c:when test="${photoView.filledLike == false}">
+							<svg width="24" height="24" fill="none" stroke="#757575" stroke-width="2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="css-pctok2 ek5sxnq1"><path d="M23.22 7.95c.4 4.94-2.92 9.71-10.92 13.85a.47.47 0 0 1-.42 0C3.88 17.66.56 12.9.96 7.93 1.54 2.48 8.28.3 12.1 4.7c3.8-4.4 10.55-2.22 11.13 3.25z"></path></svg>
+						</c:when>
+						<c:when test="${photoView.filledLike == true}">
+							<svg width="24" height="24" fill="#757575" stroke="#757575" stroke-width="2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="css-pctok2 ek5sxnq1"><path d="M23.22 7.95c.4 4.94-2.92 9.71-10.92 13.85a.47.47 0 0 1-.42 0C3.88 17.66.56 12.9.96 7.93 1.54 2.48 8.28.3 12.1 4.7c3.8-4.4 10.55-2.22 11.13 3.25z"></path></svg>
+						</c:when>
+					</c:choose>
+					<div class="likeCount">${photoView.likeCount}</div>
 				</button>
 			</div>
+			
+			<%-- 글 수정 --%>
+			<c:if test="${userId == photoView.user.id}">
+				<div class="editPostArea">
+					<button type="button" class="editBtn btn">수정하기</button>
+					<button type="button" class="delBtn btn">삭제하기</button>
+				</div>
+			</c:if>
 			
 			<%-- 작성자 정보 --%>
 			<div class="userInfoArea">
 				<div class="d-flex">
 					<div class="userImg">
 						<a href="#" class="d-block img-center">
-							<c:if test="${empty userInfo.profileImage}">
+							<c:if test="${empty photoView.user.profileImage}">
 								<img height="50" class="img" alt="프로필사진 없음" src="/image/avatar.webp">
 							</c:if>
-							<c:if test="${not empty userInfo.profileImage}">
-								<img height="50" class="img" alt="${userInfo.nickName}님의 프로필사진" src="${userInfo.profileImage}">
+							<c:if test="${not empty photoView.user.profileImage}">
+								<img height="50" class="img" alt="${photoView.user.nickName}님의 프로필사진" src="${photoView.user.profileImage}">
 							</c:if>
 						</a>
 					</div>
 					<div class="userInfo">
-						<div class="userNickName">${userInfo.nickName}</div>
+						<div class="userNickName">${photoView.user.nickName}</div>
 						<div class="userIntro">${userInfo.introduce}</div>
 					</div>
 				</div>
-				<button type="button" class="followBtn btn" data-user-id="${userInfo.userId}">팔로우</button>
+				<c:if test="${userId != photoView.photo.userId && photoView.follow == false}">
+					<button type="button" class="followBtn btn" data-user-id="${photoView.user.id}">팔로우</button>
+				</c:if>
 			</div>
 			
 			<%-- 작성자 포스트 --%>
 			<div class="writerPostArea">
-				<c:forEach var="photo" items="${photoList}">
+				<c:forEach var="photo" items="${photoView.photoList}" varStatus="status" end="3">
 					<div class="writerPost">
 						<div class="square">
 							<a class="img-center d-block bg-dark"
-								href="/community/photo_detail_view?postId=${photo.id}"> <img
-								height="160" class="img" alt="" src="${photo.imagePath}">
+								href="/community/photo_detail_view?postId=${photo.id}"> 
+								<img height="160" class="img" alt="" src="${photo.imagePath}">
 							</a>
 						</div>
 					</div>
@@ -135,8 +152,8 @@ $(document).ready(function() {
 	});
 	
 	// like
-	// href="/like/${photo.postType}/${photo.id}" 
-	$('.likeBtn').on('click', function() {
+	$('.likeBtn').on('click', function(e) {
+		e.preventDefault();
 		let postId = $(this).data('post-id');
 		let postType = $(this).data('post-type');
 		

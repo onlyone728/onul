@@ -37,6 +37,12 @@ public class FollowRestController {
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 시도해주세요.");
 			return result;
+		} 
+		boolean exist = followBO.existFollow(userId, followId);
+		if (exist) {
+			result.put("result", "error");
+			result.put("errorMessage", "이미 팔로우 추가된 유저입니다.");
+			return result;
 		}
 		
 		// insert BO

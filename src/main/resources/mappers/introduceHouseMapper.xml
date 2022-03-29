@@ -27,7 +27,7 @@
 		LIMIT 4		
  	</select>
  	
- 	<insert id="insertIntroduceHouse" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+ 	<insert id="insertIntroduceHouse" parameterType="com.onul.introduceHousePost.model.IntroduceHouse" useGeneratedKeys="true" keyProperty="id">
  		INSERT INTO `introduceHouse`
  		(
 			`userId`
@@ -94,6 +94,54 @@
 			`introduceHouse`
 		WHERE
 			`id` = #{id}		
+ 	</select>
+ 	
+ 	<select id="selectIntroduceHouseListByUserId" parameterType="int" resultType="com.onul.introduceHousePost.model.IntroduceHouse">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickName`
+			, `profileImage`
+			, `postType`
+			, `type`
+			, `area`
+			, `familyType`
+			, `fieldOfWork`
+			, `worker`
+			, `subject`
+			, `content`
+			, `coverImage`
+			, `hit`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`introduceHouse`
+		WHERE
+			`userId` = #{userId}	
+		ORDER BY `id` DESC	
+ 	</select>
+ 	
+ 	<select id="selectIntroduceHouseList" resultType="com.onul.introduceHousePost.model.IntroduceHouse">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickName`
+			, `profileImage`
+			, `postType`
+			, `type`
+			, `area`
+			, `familyType`
+			, `fieldOfWork`
+			, `worker`
+			, `subject`
+			, `content`
+			, `coverImage`
+			, `hit`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`introduceHouse`
+		ORDER BY `id` DESC	
  	</select>
  	
  	<update id="updateHit" parameterType="int">

@@ -19,4 +19,17 @@
 			, NOW()
 		)
 	</insert> 
+	
+	<select id="selectIntroduceFilesByPostId" resultType="com.onul.introduceHousePost.model.IntroduceFiles" parameterType="int">
+		SELECT
+			`id`
+			, `postId`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`introduceFiles`
+		WHERE
+			`postId` = #{postId}		
+	</select>
  </mapper>

@@ -26,7 +26,7 @@ button:focus {outline: 0;}
 .blue:hover {color: #35C5F0;}
 .mr10 {margin-right: 10%;}
 .ml10 {margin-left: 10%;}
-.img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: auto; width: 100%;}
+.img {object-fit: cover; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: auto; width: 100%;}
 .h-img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%; width: auto;}
 .img-center {width: 100%; height: 100%; overflow: hidden; position: relative; margin: auto;}
 .box-radius-5 {border-radius: 5px; overflow: hidden; }
@@ -41,6 +41,7 @@ button:focus {outline: 0;}
 .postArea {margin: 30px 0;}
 .iconArea {display: flex; justify-content: center; padding: 30px 0;}
 .categoryIndexBox {padding: 20px 0; display: flex; justify-content: space-between;}
+.categoryIndexBox2 {padding: 20px 0;}
 .categoryIndexBox > .moreBtn {color: #35C5F0; font-weight: 700;}
 .categoryIndexBox > .redMoreBtn {color: rgb(255, 119, 119); font-weight: 700;}
 .categoryIndex {font-size: 20px; font-weight: 700;}
@@ -52,7 +53,7 @@ button:focus {outline: 0;}
 .dealTitle {margin-top: 5px; font-size: 13px; font-weight: 400; line-height: 17px;}
 .discountRate {font-size: 17px; line-height: 23px; font-weight: 700; color: #f77;}
 .price {font-size: 17px; line-height: 23px; font-weight: 700; color: #000; margin-left: 10px;}
-.absolute {position: absolute; bottom: 0; z-index: 100;}
+.absolute {position: absolute; bottom: 0; z-index: 50;}
 .relative {position: relative;}
 
 
@@ -207,6 +208,11 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #photoDetail .userArea .writerPostArea .writerPost {position: relative; width: 100%; }
 #photoDetail .userArea .writerPostArea .writerPost:before {content: ""; display: block; padding-top: 100%;}
 #photoDetail .userArea .writerPostArea .writerPost .square {position: absolute; top: 0; bottom: 0; right: 0; left: 0;}
+#photoDetail .userArea .editPostArea  {text-align: center; margin: auto; margin-top: 30px;}
+#photoDetail .userArea .editPostArea .editBtn {background-color: #35C5F0; color: #fff;}
+#photoDetail .userArea .editPostArea .delBtn {background-color: rgb(255, 119, 119); color: #fff;}
+
+
 
 #createHouse .requiredArea .openInputBtn {cursor: pointer; width: 100%; padding: 20px 30px; background-color: #fff; text-align: left; font-weight: 700; color: rgb(63, 71, 77); display: flex; justify-content: space-between;}
 #createHouse .requiredArea .requiredContents {padding: 30px; display:none; border-radius: 0 0 5px 5px; border-top: 0;}
@@ -228,6 +234,8 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 
 #detailIntroduce #coverImg {width: 100%; height: 320px;}
 #detailIntroduce .postContent {margin: 30px 0;}
+#detailIntroduce .postContent .postImgArea {margin-top: 30px;}
+#detailIntroduce .postContent .postImgArea .filesImage {margin-top: 20px;}
 #detailIntroduce .coverImg {width: 100%;}
 #detailIntroduce .userInfoArea {display: flex; justify-content: space-between;}
 #detailIntroduce .userInfoArea .userArea {display: flex;}
@@ -240,6 +248,37 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #detailIntroduce .houseInfoArea {margin: 20px 0; padding: 30px 20px; background-color: #F5F5F5; border-radius: 10px; display: flex; justify-content: space-around;}
 #detailIntroduce .houseInfoArea .houseInfo {color: #424242; font-size: 14px;}
 #detailIntroduce .houseInfoArea .line {background-color: #656E75; width: 1px;}
-
+.filesImage {width: 100%; height: auto;}
 
 #detailIntroduce .postContent .postTextArea .postText {font-size: 16px; color: #2F3438;}
+
+#createknowhow .requiredArea .openInputBtn {cursor: pointer; width: 100%; padding: 20px 30px; background-color: #fff; text-align: left; font-weight: 700; color: rgb(63, 71, 77); display: flex; justify-content: space-between;}
+#createknowhow .requiredArea .requiredContents {padding: 30px; display:none; border-radius: 0 0 5px 5px; border-top: 0;}
+#createknowhow .requiredArea .requiredContents .required {display: flex; padding: 5px 0;}
+#createknowhow .requiredArea .requiredContents .required .requiredLabel {width: 15%; line-height: 40px; color: rgb(63, 71, 77); font-weight: 700;}
+#createknowhow .requiredArea .requiredContents .required .requiredContent {width: 85%;}
+#createknowhow .requiredArea .requiredContents .required .requiredContent select {width: 200px; height: 40px;}
+#createknowhow .requiredArea .requiredContents .required .requiredContent #area {width: 100px; height: 40px; margin-right: 10px;}
+#createknowhow .requiredArea .requiredContents .required .requiredContent span {line-height: 40px;}
+
+#createknowhow .coverImgArea {padding: 20px 0;}
+#createknowhow .coverImgArea #coverImg {display: none;}
+#createknowhow .coverImgArea .coverImgBox {width: 500px; height: 500px; margin: auto; background-color: #F7F8FA; text-align: center; border: 1px dashed #d6d6d6;}
+#createknowhow .contentArea #subject {width: 100%; height: 70px; color: rgb(63, 71, 77); font-size: 34px; font-weight: 600; padding: 5px 0; border: none; border-bottom: 1px solid #d6d6d6;}
+#createknowhow .contentArea #content {width: 100%; color: rgb(63, 71, 77); font-size: 17px; margin: 30px 0; border: none; resize: none;}
+
+#createknowhow .delBtn {margin-left: 20px;}
+
+#list {margin-top: 30px;}
+#list .contentArea {margin: 10px 0; font-size: 15px; color: #424242; overflow: hidden; text-overflow: ellipsis; max-height: 66px; word-break: break-word; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;}
+#list .writerInfoArea {margin: 10px 0; display: flex;}
+#list .writerInfoArea .writerImg {width: 36px; height: 36px; margin-right: 10px; border-radius: 18px; overflow: hidden;}
+#list .writerInfoArea .writerNickName {font-size: 15px; font-weight: 500; line-height: 17px;}
+#list .writerInfoArea .followBtn {font-size: 15px; font-weight: 500; line-height: 17px; color: #35C5F0; margin-left: 5px;}
+#list .writerInfoArea .introduce {font-size: 12px; color: #757575;}
+#list .btnArea {margin: 10px 0; display: flex; justify-content: space-around;}
+#list .commentArea {display: flex; margin: 10px 0; padding: 0;}
+#list .commentArea .commentWriterImg {width: 24px; height: 24px; overflow: hidden; border-radius: 12px;}
+#list .commentArea .commentId {font-size: 15px; color: #424242; font-weight: 600; margin: 0 10px;}
+#list .commentArea .comment {font-size: 15px; color: #424242; font-weight: 400;}
+

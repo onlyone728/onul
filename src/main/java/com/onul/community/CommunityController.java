@@ -11,63 +11,45 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.onul.comment.bo.CommentBO;
-import com.onul.comment.follow.bo.FollowBO;
-import com.onul.comment.model.Comment;
-import com.onul.introduceHousePost.bo.IntroduceHouseBO;
-import com.onul.introduceHousePost.model.IntroduceHouse;
-import com.onul.knowhowPost.bo.KnowhowBO;
-import com.onul.like.bo.LikeBO;
-import com.onul.photo.bo.PhotoBO;
-import com.onul.photo.model.Photo;
-import com.onul.userInfo.bo.UserInfoBO;
-import com.onul.userInfo.model.UserInfo;
+import com.onul.community.bo.IntroduceHouseViewBO;
+import com.onul.community.bo.KnowhowViewBO;
+import com.onul.community.bo.PhotoViewBO;
+import com.onul.community.model.IntroduceHouseView;
+import com.onul.community.model.KnowhowView;
+import com.onul.community.model.PhotoView;
 
 @Controller
 public class CommunityController {
 	
 	@Autowired
-	private UserInfoBO userInfoBO;
+	private PhotoViewBO photoViewBO;
 	
 	@Autowired
-	private PhotoBO photoBO;
+	private IntroduceHouseViewBO introduceBO;
 	
 	@Autowired
-	private IntroduceHouseBO introduceBO;
-	
-	@Autowired
-	private KnowhowBO knowhowBO;
-	
-	@Autowired
-	private CommentBO commentBO;
-	
-	@Autowired
-	private FollowBO followBO;
-	
-	@Autowired
-	private LikeBO likeBO;
+	private KnowhowViewBO knowhowBO;
 	
 	@RequestMapping("/community")
 	public String communityView(
 			Model model,
 			HttpServletRequest request) {
-		
-//		// post 가져오기
-		List<Photo> photoList = photoBO.getphotoListOrderByHit();
-		List<IntroduceHouse> houseList = introduceBO.getIntroduceListOrderByHit();
-//		List<Knowhow> knowhowList = knowhowBO.getKnowhowOrderByHit();
-//		
-//		// product 가져오기
-//		
 		// session 가져오기
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
-		String userProfileImage = (String) session.getAttribute("userProfileImage");
-		String userNickName = (String) session.getAttribute("userNickName");
 		
-		model.addAttribute("photo", photoList);
-		model.addAttribute("house", houseList);
-//		model.addAttribute("knowhowList", knowhowList);
+		// post 가져오기
+		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewList(userId);
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(userId);
+		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(userId);
+		
+		// product 가져오기
+		
+		
+		
+		model.addAttribute("photoList", photoViewList);
+		model.addAttribute("houseList", houseList);
+		model.addAttribute("knowhowList", knowhowList);
 		model.addAttribute("viewPath", "community/main");
 		return "template/layout";
 	}
@@ -75,35 +57,20 @@ public class CommunityController {
 	@RequestMapping("/community/photo_detail_view")
 	public String photoDetailView(
 			@RequestParam("postId") int postId,
-			Model model) {
-		// hit 증가
-		photoBO.addHit(postId);
+			Model model,
+			HttpServletRequest request) {
 		
-		// like 가져오기
-		int likeCount = likeBO.getLikeCountByPostId(postId, "photo");
-				
-		// comment 가져오기
-		List<Comment> commentList = commentBO.getCommentListByPostTypeAndPostId("photo", postId);
-		// commentCount
-		int commentCount = commentBO.commentCount("photo", postId);
+		// session 가져오기
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		// hit 증가
+//		photoBO.addHit(postId);
 		
 		// BO -> DB select : photo & userInfo
-		Photo photo = photoBO.getPhotoById(postId);
+		PhotoView photoView = photoViewBO.photoViewByPostId(postId, userId);
 		
-		// follow 가져오기
-		int followCount = followBO.getFollowCountByFollowId(photo.getUserId());
-		
-		int userId = photo.getUserId();
-		List<Photo> photoList = photoBO.getPhotoListByUserId(userId);
-		UserInfo userInfo = userInfoBO.getUserInfoByUserId(userId);
-		
-		model.addAttribute("commentCount", commentCount);
-		model.addAttribute("comments", commentList);
-		model.addAttribute("followCount", followCount);
-		model.addAttribute("like", likeCount);
-		model.addAttribute("userInfo", userInfo);
-		model.addAttribute("photoList", photoList);
-		model.addAttribute("photo", photo);
+		model.addAttribute("photoView", photoView);
 		model.addAttribute("viewPath", "post/detail_photo");
 		
 		return "template/layout";
@@ -112,31 +79,60 @@ public class CommunityController {
 	@RequestMapping("/community/introduce_detail_view")
 	public String detailIntroduce(
 			@RequestParam("postId") int postId,
-			Model model) {
+			Model model,
+			HttpServletRequest request) {
+		
+		// session 가져오기
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		
 		// hit 증가
-		photoBO.addHit(postId);
+//		introduceBO.addHit(postId);
 		
-		// like 가져오기
-		int likeCount = likeBO.getLikeCountByPostId(postId, "introduceHouse");
+		// DB select 
+		IntroduceHouseView house = introduceBO.generateIntroduceHouseView(postId, userId);
 		
-		// comment 가져오기
-		List<Comment> commentList = commentBO.getCommentListByPostTypeAndPostId("introduceHouse", postId);
-		// commentCount
-		int commentCount = commentBO.commentCount("introduceHouse", postId);
-		
-		// DB select
-		IntroduceHouse house = introduceBO.getIntroduceHouseById(postId); 
-		
-		// follow 가져오기
-		int followCount = followBO.getFollowCountByFollowId(house.getUserId());
-		
-		model.addAttribute("commentCount", commentCount);
-		model.addAttribute("followCount", followCount);
-		model.addAttribute("comments", commentList);
 		model.addAttribute("post", house);
-		model.addAttribute("like", likeCount);
 		model.addAttribute("viewPath", "post/detail_introduce");
 		
+		return "template/layout";
+	}
+	
+	@RequestMapping("/community/knowhow_detail_view")
+	public String detailKnowhow(
+			@RequestParam("postId") int postId,
+			Model model,
+			HttpServletRequest request) {
+		
+		// session 가져오기
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		
+		// hit 증가
+//		introduceBO.addHit(postId);
+		
+		// DB select
+		KnowhowView knowhow = knowhowBO.generateKnowhowView(postId, userId);
+		
+		model.addAttribute("post", knowhow);
+		model.addAttribute("viewPath", "post/detail_knowhow");
+		return "template/layout";
+	}
+	
+	@RequestMapping("/community/photo_view")
+	public String listView(
+			Model model,
+			HttpServletRequest request) {
+		// session 가져오기
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+				
+		// DB select
+		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(userId);
+		
+		model.addAttribute("postList", photoList);
+		model.addAttribute("viewPath", "community/photo_view");
 		return "template/layout";
 	}
 }

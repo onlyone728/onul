@@ -18,6 +18,11 @@ public class PostController {
 	public String createIntroduceView(Model model) {
 		model.addAttribute("viewPath", "post/create_house");
 		return "template/post-layout";
-		
+	}
+
+	@RequestMapping("/post/knowhow_create_view")
+	public String create(Model model) {
+		model.addAttribute("viewPath", "post/create_knowhow");
+		return "template/post-layout";
 	}
 }
