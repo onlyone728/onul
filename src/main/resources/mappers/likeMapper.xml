@@ -55,7 +55,7 @@
 			AND `userId` = #{userId}
 	</delete>
 	
-	<delete id="deleteLikeByPostId" parameterType="map">
+	<delete id="deleteLikeByPostIdPostType" parameterType="map">
 		DELETE
 		FROM
 			`like`

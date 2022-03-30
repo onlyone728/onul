@@ -69,8 +69,8 @@
 			<%-- 글 수정 --%>
 			<c:if test="${userId == photoView.user.id}">
 				<div class="editPostArea">
-					<button type="button" class="editBtn btn">수정하기</button>
-					<button type="button" class="delBtn btn">삭제하기</button>
+					<button type="button" class="editBtn btn" data-post-id="${photoView.photo.id}" data-user-id="${userId}">수정하기</button>
+					<button type="button" class="delBtn btn" data-post-id="${photoView.photo.id}" data-user-id="${userId}">삭제하기</button>
 				</div>
 			</c:if>
 			
@@ -221,6 +221,44 @@ $(document).ready(function() {
 				alert("댓글 저장에 실패하였습니다.");
 			}
 		});
+	});
+	
+	// 수정하기
+	$('.editBtn').on('click', function() {
+		let postId = $(this).data('post-id');
+		let writerId = $(this).data('user-id');
+		let userId = ${userId};
+		
+		if (writerId != userId) {
+			alert("잘못된 접근입니다.");
+			return;
+		}
+		location.href = "/post/photo_update_view?postId=" + postId;
+	});
+	
+	// 삭제하기
+	$('.delBtn').on('click', function() {
+		let postId = $(this).data('post-id');
+		
+		let choice = confirm("삭제하시겠습니까?");
+		if (choice) {
+			$.ajax({
+				type: "DELETE"
+				, url: "/post/phote_delete"
+				, data: {"postId":postId}
+				, success: function(data) {
+					if (data.result == "success") {
+						alert("사진이 삭제되었습니다.");
+						location.href = "/community/photo_view";
+					} else {
+						alert(data.message);
+					}
+				}
+				, error: function(e) {
+					alert("삭제에 실패하였습니다.");
+				}
+			});		
+		}
 	});
 });
 </script>

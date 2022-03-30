@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 
 <div id="photoCreate" class="w70">
 	<div class="d-flex justify-content-between">
 		<div class="photoImgArea box-radius-5">
-			<div class="d-none prevImg img-center">
-				<img src="" alt="미리보기 이미지" class="img reselectBtn" height="420">
+			<div class="img-center prevImg">
+				<img src="${photo.imagePath}" alt="미리보기 이미지" class="img reselectBtn" height="420">
 			</div>
 			<div class="photoBtn">
 				<a href="#"> 
@@ -16,7 +17,7 @@
 			<input type="file" id="file" class="d-none" accept=".jpg, .jpeg, .gif, .png">
 		</div>
 		<div class="contentArea">
-			<textarea rows="15" id="content" class="box-radius-5 border-1-gray"></textarea>
+			<textarea rows="15" id="content" class="box-radius-5 border-1-gray">${photo.content}</textarea>
 		</div>
 	</div>
 
@@ -70,19 +71,17 @@
 		
 		// 글 올리기
 		$('.saveBtn').on('click', function() {
+			let postId = ${photo.id};
 			let content = $('#content').val();
 			let file = $('#file').val();
 			
-			if (file == '') {
-				alert("이미지 파일을 업로드해주세요.");
-				return;
-			} else {
+			if (file != '') {
 				let ext = file.split('.').pop().toLowerCase();
 				if ($.inArray(ext, ['jpg', 'gif', 'png', 'jpeg']) == -1) {
 					alert("gif, jpg, jpeg, png 파일만 업로드 할 수 있습니다.");
 					$('#file').val('');	// 선택된 파일을 비운다.
 					return;
-				}
+				}	
 			}
 			
 			if (content == '') {
@@ -92,30 +91,30 @@
 			
 			// form 
 			let formData = new FormData();
-			formData.append('postType', 'photo');
+			formData.append('postId', postId);
 			formData.append('content', content);
 			formData.append('file', $('#file')[0].files[0]);
 			
 			// ajax
 			$.ajax({
 				type: "POST"
-				, url: "/post/photo_create"
+				, url: "/post/update_photo" 
 				, data: formData
 				, enctype: "multipart/form-data"
 				, processData: false
 				, contentType: false
 				, success: function(data) {
 					if (data.result == "success") {
-						alert("사진이 등록되었습니다.");
+						alert("사진이 수정되었습니다.");
 						location.href = "/community/photo_detail_view?postId=" + data.postId;
 					} else {
 						alert(data.errorMessage);
-						location.href = "/user/sign_in_view";
+						location.reload = "/user/sign_in_view";
 					}
 				}
 				, error: function(e) {
 					alert("사진 올리기에 실패하였습니다. 관리자에게 문의해주세요.");
-					location.reload();
+					//location.reload();
 				}
 			});
 		});

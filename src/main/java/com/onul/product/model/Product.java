@@ -2,8 +2,6 @@ package com.onul.product.model;
 
 import java.util.Date;
 
-import com.onul.product.ProductCategory;
-
 import lombok.Getter;
 import lombok.Setter;
 

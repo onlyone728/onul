@@ -71,7 +71,7 @@ public class CommunityController {
 		PhotoView photoView = photoViewBO.photoViewByPostId(postId, userId);
 		
 		model.addAttribute("photoView", photoView);
-		model.addAttribute("viewPath", "post/detail_photo");
+		model.addAttribute("viewPath", "community/detail_photo");
 		
 		return "template/layout";
 	}
@@ -93,7 +93,7 @@ public class CommunityController {
 		IntroduceHouseView house = introduceBO.generateIntroduceHouseView(postId, userId);
 		
 		model.addAttribute("post", house);
-		model.addAttribute("viewPath", "post/detail_introduce");
+		model.addAttribute("viewPath", "community/detail_introduce");
 		
 		return "template/layout";
 	}
@@ -116,12 +116,12 @@ public class CommunityController {
 		KnowhowView knowhow = knowhowBO.generateKnowhowView(postId, userId);
 		
 		model.addAttribute("post", knowhow);
-		model.addAttribute("viewPath", "post/detail_knowhow");
+		model.addAttribute("viewPath", "community/detail_knowhow");
 		return "template/layout";
 	}
 	
 	@RequestMapping("/community/photo_view")
-	public String listView(
+	public String photoListView(
 			Model model,
 			HttpServletRequest request) {
 		// session 가져오기
@@ -132,7 +132,23 @@ public class CommunityController {
 		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(userId);
 		
 		model.addAttribute("postList", photoList);
-		model.addAttribute("viewPath", "community/photo_view");
+		model.addAttribute("viewPath", "community/photo_list");
+		return "template/layout";
+	}
+	
+	@RequestMapping("/community/introduce_view")
+	public String intoduceListView(
+			Model model,
+			HttpServletRequest request) {
+		// session 가져오기
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		// DB select
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(userId);
+		
+		model.addAttribute("houseList", houseList);
+		model.addAttribute("viewPath", "community/introduceHouse_list");
 		return "template/layout";
 	}
 }

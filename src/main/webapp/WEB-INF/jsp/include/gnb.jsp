@@ -9,21 +9,21 @@
 	<nav class="h-100">
 		<ul id="mainMenu" class="nav">
 			<li id="communityMenuBtn" class="nav-item">
-				<a href="/community" class="nav-link blue">커뮤니티</a>
+				<a href="/community" class="nav-link blue d-block">커뮤니티</a>
 				<ul id="communityMenu" class="subMenu">
-					<li><a href="/community" class="blue">홈</a></li>
-					<li><a href="/community/photo_view" class="blue">사진</a></li>
-					<li><a href="#" class="blue">집들이</a></li>
-					<li><a href="#" class="blue">노하우</a></li>
+					<li><a href="/community" class="blue d-block">홈</a></li>
+					<li><a href="/community/photo_view" class="blue d-block">사진</a></li>
+					<li><a href="/community/introduce_view" class="blue d-block">집들이</a></li>
+					<li><a href="#" class="blue d-block">노하우</a></li>
 				</ul>
 			</li>	
 			<li id="storeMenuBtn" class="nav-item">
-				<a href="/store" class="nav-link blue">스토어</a>
+				<a href="/store" class="nav-link blue d-block">스토어</a>
 				<ul id="storeMenu" class="subMenu">
-					<li><a href="/store" class="blue">스토어홈</a></li>
-					<li><a href="#" class="blue">카테고리</a></li>
-					<li><a href="#" class="blue">베스트</a></li>
-					<li><a href="#" class="blue">오늘의딜</a></li>
+					<li><a href="/store" class="blue d-block">스토어홈</a></li>
+					<li><a href="#" class="blue d-block">카테고리</a></li>
+					<li><a href="#" class="blue d-block">베스트</a></li>
+					<li><a href="#" class="blue d-block">오늘의딜</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -102,24 +102,28 @@ $(document).ready(function() {
 			$('header').css('position', 'fixed');
 			$('.subMenu').css('display', 'none');
 			
+			$('header').mouseover(function() {
+				$('.subMenu').css('display', 'flex');
+			});
 			// 서브메뉴 hover
 			$('#communityMenuBtn').mouseover(function() {
 				$('#communityMenu').css({"display":"flex", "z-index":"100"});
 			});
 			$('#communityMenuBtn').mouseout(function() {
-				$('#communityMenu').css({"display":"none", "z-index":"0"});
+				$('#communityMenu').css({"z-index":"0"});
 			});
 			$('#storeMenuBtn').mouseover(function() {
 				$('#storeMenu').css({"display":"flex", "z-index":"100"});
 			});
 			$('#storeMenuBtn').mouseout(function() {
-				$('#storeMenu').css({"display":"none", "z-index":"0"});
+				$('#storeMenu').css({"z-index":"0"});
 			});
 		} else {
 			$('header').css('position', 'relative');
 			$('.subMenu').css('display', 'flex');
 		}
 	});
+	
 	// user 버튼 클릭
 	$(document).on('click', '#userBtn', function (e){
 		e.preventDefault();

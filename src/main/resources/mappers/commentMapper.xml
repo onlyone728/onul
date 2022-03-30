@@ -56,4 +56,13 @@
 			`postType` = #{postType}
 			AND `postId` = #{postId}		
 	</select>
+	
+	<delete id="deleteCommentByPostIdPostType" parameterType="map">
+		DELETE
+		FROM
+			`comment`
+		WHERE
+			`postType` = #{postType}
+			AND `postId` = #{postId}	
+	</delete>
  </mapper>

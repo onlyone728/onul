@@ -25,4 +25,8 @@ public interface CommentDAO {
 	public int commentCount(
 			@Param("postType") String postType, 
 			@Param("postId") int postId); 
+	
+	public void deleteCommentByPostIdPostType(
+			@Param("postId") int postId, 
+			@Param("postType") String postType);
 }

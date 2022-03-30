@@ -282,3 +282,13 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #list .commentArea .commentId {font-size: 15px; color: #424242; font-weight: 600; margin: 0 10px;}
 #list .commentArea .comment {font-size: 15px; color: #424242; font-weight: 400;}
 
+#introduceList {margin-top: 30px; display: grid; grid-template-columns: 370px 370px 370px; justify-content: space-between; row-gap: 20px; padding: 0;}
+#introduceList .introduceCard {width: 370px;}
+#introduceList .introduceCard .imgArea {height: 245px; border-radius: 10px; overflow: hidden;}
+#introduceList .introduceCard .infoArea {margin: 20px 0; text-align: center;}
+#introduceList .introduceCard .infoArea .title {font-size: 20px; color: #424242; font-weight: 700; margin: 0 10px; overflow: hidden; text-overflow: ellipsis; max-height: 26px; word-break: break-word; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1;}
+#introduceList .introduceCard .infoArea .writerInfoArea {display: flex; justify-content: center; margin: 10px;}
+#introduceList .introduceCard .infoArea .writerInfoArea .imgArea {width: 16px; height: 16px; border-radius: 8px; overflow: hidden; margin-right: 10px;}
+#introduceList .introduceCard .infoArea .writerInfoArea .writerNick {font-size: 13px; font-weight: 400; color: #424242; line-height: 16px;}
+#introduceList .introduceCard .infoArea .postInfo {font-size: 13px; font-weight: 400; color: #757575;}
+

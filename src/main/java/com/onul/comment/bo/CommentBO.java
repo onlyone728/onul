@@ -25,4 +25,8 @@ public class CommentBO {
 	public int commentCount(String postType, int postId) {
 		return commentDAO.commentCount(postType, postId);
 	}
+	
+	public void deleteCommentByPostIdPostType(int postId, String postType) {
+		commentDAO.deleteCommentByPostIdPostType(postId, postType);
+	}
 }

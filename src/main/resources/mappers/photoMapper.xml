@@ -75,6 +75,19 @@
 		ORDER BY `id` DESC	
  	</select>
  	
+ 	<update id="updatePhoto" parameterType="map">
+ 		UPDATE 
+ 			`photo`
+ 		SET 	
+			`content` = #{content}
+			<if test="imagePath != null">
+			, `imagePath` = #{imagePath}
+			</if>
+			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{id}	
+ 	</update>
+ 	
  	<update id="updateHit" parameterType="int">
  		UPDATE 
  			`photo`
@@ -84,7 +97,7 @@
  			`id` = #{id}		
  	</update>
  	
- 	<insert id="insertPhoto" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+ 	<insert id="insertPhoto" parameterType="com.onul.photo.model.Photo" useGeneratedKeys="true" keyProperty="id">
  		INSERT INTO `photo`
  		(
  			`userId`
@@ -108,4 +121,13 @@
  			, NOW()
  		)
  	</insert>
+ 	
+ 	<delete id="deletePhoto" parameterType="map">
+ 		DELETE
+ 		FROM
+ 			`photo`
+ 		WHERE
+ 			`id` = #{id}
+ 			AND `userId` = #{userId}	
+ 	</delete>
  </mapper>

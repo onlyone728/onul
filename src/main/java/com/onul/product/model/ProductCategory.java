@@ -1,4 +1,4 @@
-package com.onul.product;
+package com.onul.product.model;
 
 public enum ProductCategory {
 

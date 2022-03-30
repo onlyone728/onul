@@ -39,12 +39,12 @@ public class IntroduceHouseViewBO {
 	public List<IntroduceHouseView> generateIntroduceHouseList(
 			@RequestParam(value="userId", required=false) Integer uId) {
 		
-		List<IntroduceHouseView> IntroduceHouseViewList = new ArrayList<>();
-		List<IntroduceHouse> IntroduceHouseList = new ArrayList<>();
+		List<IntroduceHouseView> introduceHouseViewList = new ArrayList<>();
+		List<IntroduceHouse> introduceHouseList = new ArrayList<>();
 		
-		IntroduceHouseList = introduceBO.getIntroduceHouseList();
+		introduceHouseList = introduceBO.getIntroduceHouseList();
 		
-		for (IntroduceHouse house : IntroduceHouseList) {
+		for (IntroduceHouse house : introduceHouseList) {
 			IntroduceHouseView houseView = new IntroduceHouseView();
 			houseView.setHouse(house);
 			
@@ -80,9 +80,9 @@ public class IntroduceHouseViewBO {
 			houseView.setFilledLike(filledLike);
 			
 			
-			IntroduceHouseViewList.add(houseView);		
+			introduceHouseViewList.add(houseView);		
 		}
-		return IntroduceHouseViewList;
+		return introduceHouseViewList;
 	}
 
 	public IntroduceHouseView generateIntroduceHouseView(

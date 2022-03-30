@@ -2,6 +2,7 @@ package com.onul.photo.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.onul.photo.model.Photo;
@@ -20,4 +21,13 @@ public interface PhotoDAO {
 	public void updateHit(int id);
 	
 	public int insertPhoto(Photo photo);
+	
+	public int updatePhoto(
+			@Param("id") int id,
+			@Param("content") String content,
+			@Param("imagePath") String imagePath);
+	
+	public int deletePhoto(
+			@Param("id") int id,
+			@Param("userId") int userId);
 }

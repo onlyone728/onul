@@ -106,7 +106,7 @@
 
 <script>
 $(document).ready(function() {
-	let postType = "introduceHouse";
+	let postType = "knowhow";
 	// follow
 	$('.followBtn').on('click', function() {
 		let followId = $(this).data('user-id');
