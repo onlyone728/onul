@@ -15,11 +15,14 @@
 						<div>		
 							<div class="d-flex">	
 								<a href="#">
-									<div class="writerNickName">${post.user.nickName} · </div>
+									<div class="writerNickName">${post.user.nickName}</div>
 								</a>
-								<div class="followBtn">
-									<a href="#">팔로우</a>
-								</div>
+								<c:if test="${userId != post.user.id && post.follow == false}">
+									<div> · </div>
+									<div class="followBtnArea">
+										<a class="followBtn" href="#" data-user-id="${post.user.id}">팔로우</a>
+									</div>
+								</c:if>
 							</div>
 							<div class="introduce">자기소개</div>	
 						</div>	
@@ -72,13 +75,36 @@
 
 <script>
 $(document).ready(function() {
+	// follow
+	$('.followBtn').on('click', function(e) {
+		e.preventDefault();
+		let followId = $(this).data('user-id');
+		
+		$.ajax({
+			type: "GET"
+			, url: "/follow/create"
+			, data: {"followId": followId}
+			, success: function(data) {
+				if (data.result == "success") {
+					alert(data.message);
+					location.reload();
+				} else {
+					alert(data.errorMessage);
+					location.reload();
+				}
+			}
+			, error: function(e) {
+				alert("팔로우에 실패하였습니다. 관리자에게 문의하세요.");
+				location.reload();
+			}
+		});
+	});
+	
 	// like
 	$('.likeBtn').on('click', function(e) {
-		e.preventdefault();
+		e.preventDefault();
 		let postId = $(this).data('post-id');
 		let postType = $(this).data('post-type');
-		alret(postId);
-		alret(postType);
 		
 		$.ajax({
 			type: "GET"
@@ -86,7 +112,6 @@ $(document).ready(function() {
 			, data: {"postId": postId, "postType": postType}
 			, success: function(data) {
 				if (data.result == "success") {
-					alert("좋아요가 추가되었습니다.");
 					location.reload();
 				} else {
 					alert(data.errorMessage);
@@ -96,5 +121,6 @@ $(document).ready(function() {
 				alert("좋아요에 실패하였습니다.");
 			}
 		});
+	});	
 });
 </script>

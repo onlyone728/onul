@@ -28,6 +28,7 @@ public class FollowRestController {
 		
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "success");
+		result.put("message", "팔로우를 추가하였습니다.");
 		
 		// session 가져오기
 		HttpSession session = request.getSession();
@@ -38,20 +39,17 @@ public class FollowRestController {
 			result.put("errorMessage", "로그인 후 시도해주세요.");
 			return result;
 		} 
-		boolean exist = followBO.existFollow(userId, followId);
-		if (exist) {
-			result.put("result", "error");
-			result.put("errorMessage", "이미 팔로우 추가된 유저입니다.");
-			return result;
-		}
 		
 		// insert BO
-		int count = followBO.addFollow(userId, followId);
+		String resultStr = followBO.addFollow(userId, followId);
 		
-		if (count < 1) {
+		if (resultStr == "error") {
 			result.put("result", "error");
 			result.put("errorMessage", "팔로우 추가에 실패하였습니다. 관리자에게 문의하세요.");
 			return result;
+		} else if (resultStr == "delete") {
+			result.put("result", "success");
+			result.put("message", "팔로우를 삭제하였습니다.");
 		}
 		
 		return result;

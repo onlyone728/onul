@@ -54,6 +54,7 @@ public class PostRestController {
 			return result;
 		} 
 		
+		photo.setUserId(userId);
 		photo.setNickName(userNickName);
 		photo.setProfileImage(userProfileImage);
 
@@ -131,7 +132,7 @@ public class PostRestController {
 			return result;
 		}
 		
-		knowhow.setId(userId);
+		knowhow.setUserId(userId);
 		knowhow.setNickName(userNickName);
 		knowhow.setProfileImage(userProfileImage);
 		

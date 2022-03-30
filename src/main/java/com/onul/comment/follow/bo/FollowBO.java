@@ -11,14 +11,19 @@ public class FollowBO {
 	@Autowired
 	private FollowDAO followDAO;
 
-	public int addFollow(int userId, int followId) {
+	public String addFollow(int userId, int followId) {
 		boolean follow = existFollow(userId, followId);
 		
 		if (follow) {	// follow 있음
 			followDAO.deleteFollowByUserIdAndFollowId(userId, followId);
-			return 0;
+			return "delete";
 		} else {	// follow 없음
-			return followDAO.insertFollow(userId, followId);
+			int count = followDAO.insertFollow(userId, followId);
+			if (count == 1) {
+				return "success";
+			} else {
+				return "errer";
+			}
 		}
 	}
 	

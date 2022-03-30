@@ -137,7 +137,7 @@ $(document).ready(function() {
 			, data: {"followId": followId}
 			, success: function(data) {
 				if (data.result == "success") {
-					alert("팔로우를 추가하였습니다.");
+					alert(data.message);
 					location.reload();
 				} else {
 					alert(data.errorMessage);

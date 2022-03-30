@@ -5,31 +5,41 @@
     
 <div id="detailIntroduce">
 	<div id="coverImg" class="img-center bg-info">
-		<img alt="커버 이미지" src="${post.coverImage}" class="img" width="100%">
+		<img alt="커버 이미지" src="${post.knowhow.coverImage}" class="img" width="100%">
 	</div>
 	<div class="w50">
 		<div class="categoryIndexBox2">
-			<div class="categoryIndex mb-2">노하우 / ${post.category}</div>
-			<div class="postTitle">${post.subject}</div>
+			<div class="categoryIndex mb-2">노하우 / ${post.knowhow.category}</div>
+			<div class="postTitle">${post.knowhow.subject}</div>
 		</div>
 		<div class="userInfoArea">
 			<div class="userArea">
 				<div class="userImg">
 					<a href="" class="d-block img-center">
-						<img alt="user의 프로필 이미지" class="img" src="${post.profileImage}" height="100%">
+						<img alt="user의 프로필 이미지" class="img" src="${post.knowhow.profileImage}" height="100%">
 					</a>
 				</div>
 				<div class="userInfo">
-					<div class="userNickName"><a href="">${post.nickName}</a></div>
+					<div class="userNickName"><a href="">${post.knowhow.nickName}</a></div>
 					<div class="createdAt">
-						<fmt:formatDate value="${post.createdAt}" pattern="yyyy년 MM월 dd일"/>
+						<fmt:formatDate value="${post.knowhow.createdAt}" pattern="yyyy년 MM월 dd일"/>
 					</div>
 				</div>
 			</div>
 			<div class="btnArea">
-				<button class="likeBtn btn mr-2" data-post-id="${post.id}">+ 좋아요</button>
-				<c:if test="${userId != post.userId && userId == null}">
-					<button class="followBtn btn" data-user-id="${post.userId}">+ 팔로우</button>
+				<c:choose>
+					<c:when test="${post.filledLike == false}">
+						<button class="likeBtn btn mr-2" data-post-id="${post.knowhow.id}">+ 좋아요</button>
+					</c:when>
+					<c:when test="${post.filledLike == true}">
+						<button class="likeBtn btn mr-2" data-post-id="${post.knowhow.id}">- 좋아요</button>
+					</c:when>
+				</c:choose>	
+				<c:if test="${userId != post.knowhow.userId && post.follow == false}">
+					<button class="followBtn btn" data-user-id="${post.user.id}">+ 팔로우</button>
+				</c:if>
+				<c:if test="${post.follow == true}">
+					<button class="followBtn btn" data-user-id="${post.user.id}">- 팔로우</button>
 				</c:if>
 			</div>
 		</div>
@@ -37,11 +47,11 @@
 		
 		<div class="postContent">
 			<div class="postTextArea">
-				<div class="postText">${post.content}</div>
+				<div class="postText">${post.knowhow.content}</div>
 			</div>
-			<c:if test="${not empty files}">
+			<c:if test="${not empty knowhow.fileList}">
 				<div class="postImgArea">
-					<c:forEach var="file" items="${files}">
+					<c:forEach var="file" items="${knowhow.fileList}">
 						<div class="filesImage">
 							<img alt="" src="${file.imagePath}" width="100%">
 						</div>
@@ -52,10 +62,10 @@
 		
 		
 		<div class="count">
-			<div class="mr-1">조회수 ${post.hit}</div>
-			<div class="mr-1">· 팔로우 ${followCount}</div>
-			<div class="mr-1">· 좋아요 ${like}</div>
-			<div>· 댓글 ${commentCount}</div>
+			<div class="mr-1">조회수 ${post.knowhow.hit}</div>
+			<div class="mr-1">· 팔로우 ${post.followCount}</div>
+			<div class="mr-1">· 좋아요 ${post.likeCount}</div>
+			<div>· 댓글 ${post.commentCount}</div>
 		</div>
 		<div class="commentArea">
 			<div class="inputComment">
@@ -69,11 +79,11 @@
 				</div>
 				<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
 				<input type="text" id="commentText" class="comment box-radius-5">
-				<a href="" class="commentBtn disabledBtn" data-post-id="${post.id}">등록</a>
+				<a href="" class="commentBtn disabledBtn" data-post-id="${post.knowhow.id}">등록</a>
 			</div>
 			
 			<div class="commentList">
-				<c:forEach var="comment" items="${comments}">
+				<c:forEach var="comment" items="${post.commentList}">
 				<div class="comment-box">
 					<div class="userImg img-center">
 						<c:choose>
@@ -130,6 +140,7 @@ $(document).ready(function() {
 			, data: {"postId": postId, "postType": postType}
 			, success: function(data) {
 				if (data.result == "success") {
+					alert(data.message);
 					location.reload();
 				} else {
 					alert(data.errorMessage);

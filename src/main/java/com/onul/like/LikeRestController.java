@@ -29,21 +29,28 @@ public class LikeRestController {
 			HttpServletRequest request) {
 		
 		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		result.put("message", "좋아요를 추가하였습니다.");
 		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
 		String nickName = (String) session.getAttribute("userNickName");
 		
-		if (userId == null ) {
+		if (userId == null) {
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 시도해주세요.");
 			log.error("[좋아요] 로그인 세션이 없습니다.");
 			return result;
 		}
 		
+		boolean existLike = likeBO.existLike(postId, postType, userId);
+		if (existLike) {
+			result.put("result", "success");
+			result.put("message", "좋아요를 삭제하였습니다.");
+		}
+		
 		// DB
 		likeBO.like(userId, nickName, postType, postId);
-		result.put("result", "success");
 		
 		return result;
 	}

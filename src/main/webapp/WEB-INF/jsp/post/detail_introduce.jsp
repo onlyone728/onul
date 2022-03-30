@@ -38,6 +38,9 @@
 				<c:if test="${userId != post.house.userId && post.follow == false}">
 					<button class="followBtn btn" data-user-id="${post.house.userId}">+ 팔로우</button>
 				</c:if>
+				<c:if test="${userId != post.house.userId && post.follow == true}">
+					<button class="followBtn btn" data-user-id="${post.house.userId}">- 팔로우</button>
+				</c:if>
 			</div>
 		</div>
 		<div class="houseInfoArea">
@@ -124,7 +127,7 @@ $(document).ready(function() {
 			, data: {"followId": followId}
 			, success: function(data) {
 				if (data.result == "success") {
-					alert("팔로우를 추가하였습니다.");
+					alert(data.message);
 					location.reload();
 				} else {
 					alert(data.errorMessage);
@@ -138,7 +141,8 @@ $(document).ready(function() {
 		});
 	});
 	// like
-	$('.likeBtn').on('click', function() {
+	$('.likeBtn').on('click', function(e) {
+		e.preventDefault();
 		let postId = $(this).data('post-id');
 		
 		$.ajax({

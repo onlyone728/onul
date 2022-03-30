@@ -274,7 +274,7 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #list .writerInfoArea {margin: 10px 0; display: flex;}
 #list .writerInfoArea .writerImg {width: 36px; height: 36px; margin-right: 10px; border-radius: 18px; overflow: hidden;}
 #list .writerInfoArea .writerNickName {font-size: 15px; font-weight: 500; line-height: 17px;}
-#list .writerInfoArea .followBtn {font-size: 15px; font-weight: 500; line-height: 17px; color: #35C5F0; margin-left: 5px;}
+#list .writerInfoArea .followBtnArea {font-size: 15px; font-weight: 500; line-height: 17px; color: #35C5F0; margin-left: 5px;}
 #list .writerInfoArea .introduce {font-size: 12px; color: #757575;}
 #list .btnArea {margin: 10px 0; display: flex; justify-content: space-around;}
 #list .commentArea {display: flex; margin: 10px 0; padding: 0;}
