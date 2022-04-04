@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -84,9 +85,9 @@ public class UserRestController {
 		
 		// nickName으로 DB select
 		User user = userBO.getUserByNickName(nickName);
-		if (user == null) {
+		if (user == null) {	// 중복된 닉네임 없음
 			result.put("result", false);
-		}
+		} 
 		
 		return result;
 	}
@@ -119,4 +120,57 @@ public class UserRestController {
 		return result;
 	}
 	
+	@PutMapping("/user/update")
+	public Map<String, Object> userInfoUpdate(
+			@RequestParam("id") int id,
+			@RequestParam("loginId") String loginId,
+			@RequestParam("email") String email,
+			@RequestParam(value="file", required=false) MultipartFile file,
+			@RequestParam(value="introduce", required=false) String introduce,
+			HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		// DB update
+		int count = userBO.updateUser(id, loginId, email, file, introduce);
+		
+		if(count < 1) {
+			result.put("result", "error");
+			result.put("errorMessage", "정보업데이트에 실패했습니다. 관리자에게 문의하세요.");
+		}
+		User user = userBO.getUserById(id);
+		session.setAttribute("userProfileImage", user.getProfileImage());
+		
+		return result;
+	}
+	
+	@PutMapping("/user/edit_password")
+	public Map<String, Object> editPassword(
+			@RequestParam("id") int id,
+			@RequestParam("password") String password) {
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		User user = userBO.getUserById(id);
+		if (user == null) {
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 시도해주세요.");
+			return result;
+		}
+		
+		// 비밀번호 암호화
+		String salt = EncryptUtils.generateSalt();
+		String encPassword = EncryptUtils.getEncrypt(password, salt);
+		String encSaltPw = encPassword + salt;	// 저장될 비밀번호
+		
+		// DB insert
+		int count = userBO.updatePasswordById(id, encSaltPw);
+		
+		if (count < 1) {
+			result.put("result", "error");
+			result.put("errorMessage", "비밀번호 저장에 실패했습니다.");
+		}
+		
+		return result;
+	}
 }

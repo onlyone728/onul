@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.onul.user.bo.UserBO;
+import com.onul.user.bo.UserViewBO;
 import com.onul.user.model.UserView;
 
 @Controller
 public class UserController {
 	
 	@Autowired
-	private UserBO userBO;
+	private UserViewBO userViewBO;
 
 	@RequestMapping("/user/sign_in_view")
 	public String signInView(Model model) {
@@ -47,7 +47,7 @@ public class UserController {
 			@PathVariable("uId") int uId,
 			Model model) {
 		// DB 가져오기
-		UserView user = userBO.generateUserView(uId);
+		UserView user = userViewBO.generateUserView(uId);
 		
 		model.addAttribute("user", user);
 		model.addAttribute("menuPath", "profile-all");
@@ -56,12 +56,21 @@ public class UserController {
 	}
 	@RequestMapping("/user/{uId}/{profileMenu}")
 	public String myPageMenu(
+			@PathVariable("uId") int uId,
 			@PathVariable("profileMenu") String profileMenu,
 			Model model) {
+		// DB 가져오기
+		UserView user = userViewBO.generateUserView(uId);
 		
+		model.addAttribute("user", user);
 		
-		model.addAttribute("menuPath", "profile-" + profileMenu);
-		model.addAttribute("viewPath", "user/profile");
+		if (profileMenu.equals("update") || profileMenu.equals("edit-password")) {
+			model.addAttribute("menuPath", "user-" + profileMenu);
+			model.addAttribute("viewPath", "user/update");
+		} else {
+			model.addAttribute("menuPath", "profile-" + profileMenu);
+			model.addAttribute("viewPath", "user/profile");
+		}
 		return "template/layout";
 	}
 }

@@ -22,9 +22,9 @@
 		<div class="notEmptyArea">
 			<c:forEach var="post" items="${user.photoList}">
 				<div class="postArea">
-					<a href="/community/photo_detail_view?postId=${post.id}"
+					<a href="/community/photo_detail_view?postId=${post.photo.id}"
 						class="img-center d-block bg-dark"> <img class="img" alt=""
-						src="${post.imagePath}" width="100%">
+						src="${post.photo.imagePath}" width="100%">
 					</a>
 				</div>
 			</c:forEach>
@@ -51,14 +51,14 @@
 		<div class="notEmptyArea">
 			<c:forEach var="post" items="${user.houseList}">
 				<div class="houseArea">
-					<a href="/community/introduce_detail_view?postId=${post.id}"
+					<a href="/community/introduce_detail_view?postId=${post.house.id}"
 						class="img-center d-block bg-dark"> <img class="img" alt=""
-						src="${post.coverImage}" width="100%">
+						src="${post.house.coverImage}" width="100%">
 					</a>
 					<div class="infoArea">
 						<div class="title">
-							<a href="/community/introduce_detail_view?postId=${post.id}">
-								${post.subject} </a>
+							<a href="/community/introduce_detail_view?postId=${post.house.id}">
+								${post.house.subject} </a>
 						</div>
 					</div>
 				</div>

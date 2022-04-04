@@ -1,26 +1,19 @@
 package com.onul.user.bo;
 
-import java.util.List;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.onul.comment.follow.bo.FollowBO;
 import com.onul.common.FileManagerService;
-import com.onul.introduceHousePost.bo.IntroduceHouseBO;
-import com.onul.introduceHousePost.model.IntroduceHouse;
-import com.onul.knowhowPost.bo.KnowhowBO;
-import com.onul.knowhowPost.model.Knowhow;
-import com.onul.like.bo.LikeBO;
-import com.onul.like.model.Like;
-import com.onul.photo.bo.PhotoBO;
-import com.onul.photo.model.Photo;
 import com.onul.user.dao.UserDAO;
 import com.onul.user.model.User;
-import com.onul.user.model.UserView;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class UserBO {
 
 	@Autowired
@@ -29,20 +22,6 @@ public class UserBO {
 	@Autowired
 	private UserDAO userDAO;
 	
-	@Autowired
-	private PhotoBO photoBO; 
-	
-	@Autowired
-	private IntroduceHouseBO introduceBO;
-	
-	@Autowired 
-	private KnowhowBO knowhowBO;
-	
-	@Autowired
-	private LikeBO likeBO;
-	
-	@Autowired
-	private FollowBO followBO;
 	
 	public User getUserByLoginIdAndPassword(String loginId, String password) {
 		return userDAO.selectUserByLoginIdAndPassword(loginId, password);
@@ -75,28 +54,29 @@ public class UserBO {
 		return count;
 	}
 	
-	public UserView generateUserView(int userId) {
-		UserView userView = new UserView();
-		User user = userDAO.selectUserById(userId);
-		userView.setUser(user);
+	public int updateUser(int id, String loginId, String email, MultipartFile file, String introduce) {
+		User user = userDAO.selectUserById(id);
+		if (user == null) {
+			log.error("[update user] 수정할 사용자가 존재하지않습니다.");
+			return 0;
+		}
 		
-		List<Photo> photoList = photoBO.getPhotoListByUserId(userId);
-		userView.setPhotoList(photoList);
+		String imagePath = null;
 		
-		List<IntroduceHouse> houseList = introduceBO.getIntroduceHouseListByUserId(userId);
-		userView.setHouseList(houseList);
+		if (file != null) {
+			imagePath = fms.saveFile(loginId, file);
+			try {
+				fms.deleteFile(user.getProfileImage());
+			} catch (IOException e) {
+				log.error("[update user] 파일 수정중 에러. postId:{}, error:{}", id, e.getMessage());
+			}
+		}
 		
-		List<Knowhow> knowhowList = knowhowBO.getKnowhowListByUserId(userId);
-		userView.setKnowhowList(knowhowList);
-		
-		List<Like> likeList = likeBO.getLikeListByUserId(userId);
-		userView.setLikeList(likeList);
-		
-		int followCount = followBO.getFollowCountByUserId(userId);
-		int followedCount = followBO.getFollowCountByFollowId(userId);
-		userView.setFollowCount(followCount);
-		userView.setFollowedCount(followedCount);
-		
-		return userView;
+		return userDAO.updateUser(id, email, imagePath, introduce);
 	}
+	
+	public int updatePasswordById(int id, String password) {
+		return userDAO.updatePasswordById(id, password);
+	}
+	
 }

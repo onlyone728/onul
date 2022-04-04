@@ -102,4 +102,28 @@
 			, NOW()
  		)
  	</insert>
+ 	
+ 	<update id="updateUser" parameterType="map">
+ 		UPDATE 
+ 			`user`
+ 		SET
+ 			`email` = #{email}
+ 			<if test="profileImage != null">
+ 			, `profileImage` = #{profileImage}
+ 			</if>
+ 			<if test="introduce != null">
+ 			, `introduce` = #{introduce}
+ 			</if>
+ 		WHERE
+ 			`id` = #{id}	
+ 	</update>
+ 	
+ 	<update id="updatePasswordById" parameterType="map">
+ 		UPDATE
+ 			`user`
+ 		SET
+ 			`password` = #{password}
+ 		WHERE
+ 			`id` = #{id}		
+ 	</update>
  </mapper>
