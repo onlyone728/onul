@@ -64,12 +64,12 @@
  		)
  	</insert>
  	
- 	<delete id="deleteIntroduceHouseById" parameterType="int">
+ 	<delete id="deleteIntroduceHouseByPostId" parameterType="int">
  		DELETE 
  		FROM 
- 			`intruduceHouse`
+ 			`introduceHouse`
  		WHERE
- 			`id` = #{id}
+ 			`postId` = #{postId}
  	</delete>
  	
  	<select id="selectIntroduceHouseById" resultType="com.onul.introduceHousePost.model.IntroduceHouse">

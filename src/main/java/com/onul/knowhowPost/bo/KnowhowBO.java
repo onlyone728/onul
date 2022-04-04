@@ -87,6 +87,10 @@ public class KnowhowBO {
 		return knowhowDAO.selectKnowhowList();
 	}
 	
+	public List<Knowhow> getKnowhowListByCategory(String category) {
+		return knowhowDAO.selectKnowhowListByCategory(category);
+	}
+	
 	public List<Knowhow> getKnowhowListByUserId(int userId) {
 		return knowhowDAO.selectKnowhowListByUserId(userId);
 	}

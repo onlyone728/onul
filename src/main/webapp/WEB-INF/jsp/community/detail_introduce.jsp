@@ -10,17 +10,25 @@
 	<div class="w50">
 		<div class="categoryIndexBox2">
 			<div class="categoryIndex mb-2">집들이</div>
-			<div class="postTitle">${post.house.subject}</div>
+			<div class="d-flex justify-content-between">
+				<div class="postTitle">${post.house.subject}</div>
+				<c:if test="${post.user.id == userId}">
+					<div class="editPostArea">
+						<button type="button" class="editBtn btn" data-post-id="${post.house.id}" data-user-id="${userId}">수정하기</button>
+						<button type="button" class="delBtn btn" data-post-id="${post.house.id}" data-user-id="${userId}">삭제하기</button>
+					</div>
+				</c:if>
+			</div>
 		</div>
 		<div class="userInfoArea">
 			<div class="userArea">
 				<div class="userImg">
-					<a href="" class="d-block img-center">
-						<img alt="user의 프로필 이미지" class="img" src="${post.house.profileImage}" height="100%">
+					<a href="/user/${post.user.id}" class="d-block img-center">
+						<img alt="user의 프로필 이미지" class="img" src="${post.user.profileImage}" height="100%">
 					</a>
 				</div>
 				<div class="userInfo">
-					<div class="userNickName"><a href="">${post.house.nickName}</a></div>
+					<div class="userNickName"><a href="/user/${post.user.id}">${post.user.nickName}</a></div>
 					<div class="createdAt">
 						<fmt:formatDate value="${post.house.createdAt}" pattern="yyyy년 MM월 dd일"/>
 					</div>
@@ -59,9 +67,9 @@
 			<div class="postTextArea">
 				<div class="postText">${post.house.content}</div>
 			</div>
-			<c:if test="${not empty house.fileList}">
+			<c:if test="${not empty post.fileList}">
 				<div class="postImgArea">
-					<c:forEach var="file" items="${house.fileList}">
+					<c:forEach var="file" items="${post.fileList}">
 						<div class="filesImage">
 							<img alt="" src="${file.imagePath}" width="100%">
 						</div>
@@ -78,20 +86,21 @@
 			<div>· 댓글 ${post.commentCount}</div>
 		</div>
 		<div class="commentArea">
-			<div class="inputComment">
-				<div class="userImg img-center">
-					<c:if test="${empty userProfileImage}">
-						<img class="img" alt="유저 프로필 이미지 없음" src="/image/avatar.webp" height="30">
-					</c:if>
-					<c:if test="${not empty userProfileImage}">
-						<img class="img" alt="${userNickName}님의 프로필 이미지" src="${userProfileImage}" height="30">
-					</c:if>
+			<c:if test="${not empty userId}">
+				<div class="inputComment">
+					<div class="userImg img-center">
+						<c:if test="${empty userProfileImage}">
+							<img class="img" alt="유저 프로필 이미지 없음" src="/image/avatar.webp" height="30">
+						</c:if>
+						<c:if test="${not empty userProfileImage}">
+							<img class="img" alt="${userNickName}님의 프로필 이미지" src="${userProfileImage}" height="30">
+						</c:if>
+					</div>
+					<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
+					<input type="text" id="commentText" class="comment box-radius-5">
+					<a href="" class="commentBtn disabledBtn" data-post-id="${post.house.id}">등록</a>
 				</div>
-				<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
-				<input type="text" id="commentText" class="comment box-radius-5">
-				<a href="" class="commentBtn disabledBtn" data-post-id="${post.house.id}">등록</a>
-			</div>
-			
+			</c:if>
 			<div class="commentList">
 				<c:forEach var="comment" items="${post.commentList}">
 				<div class="comment-box">
@@ -208,6 +217,44 @@ $(document).ready(function() {
 				alert("댓글 저장에 실패하였습니다.");
 			}
 		});
+	});
+	
+	// 수정하기
+	$('.editBtn').on('click', function() {
+		let postId = $(this).data('post-id');
+		let writerId = $(this).data('user-id');
+		let userId = ${userId};
+		
+		if (writerId != userId) {
+			alert("잘못된 접근입니다.");
+			return;
+		}
+		location.href = "/post/house_update_view?postId=" + postId;
+	});
+	
+	// 삭제하기
+	$('.delBtn').on('click', function() {
+		let postId = $(this).data('post-id');
+		
+		let choice = confirm("삭제하시겠습니까?");
+		if (choice) {
+			$.ajax({
+				type: "DELETE"
+				, url: "/post/house_delete"
+				, data: {"postId":postId}
+				, success: function(data) {
+					if (data.result == "success") {
+						alert("사진이 삭제되었습니다.");
+						location.href = "/community/introduce_view";
+					} else {
+						alert(data.message);
+					}
+				}
+				, error: function(e) {
+					alert("삭제에 실패하였습니다.");
+				}
+			});		
+		}
 	});
 });
 </script>

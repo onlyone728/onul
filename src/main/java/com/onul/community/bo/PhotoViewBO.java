@@ -42,7 +42,11 @@ public class PhotoViewBO {
 		List<Photo> photoList = new ArrayList<>();
 		String postType = "photo";
 		
-		photoList = photoBO.getPhotoList();
+		if (uId == null) {
+			photoList = photoBO.getPhotoList();
+		} else {
+			photoList = photoBO.getPhotoListByUserId(uId);
+		}
 		
 		for(Photo photo : photoList) {
 			PhotoView photoView = new PhotoView();
@@ -118,4 +122,5 @@ public class PhotoViewBO {
 		
 		return photoView;
 	}
+	
 }

@@ -8,13 +8,13 @@
 			<div class="photoCard column4 relative">
 				<div class="writerInfoArea">
 						<div class="writerImg bg-dark">
-							<a href="#" class="d-block img-center">
+							<a href="/user/${post.user.id}" class="d-block img-center">
 								<img alt="" src="${post.user.profileImage}" class="img" height="100%">
 							</a>
 						</div>
 						<div>		
 							<div class="d-flex">	
-								<a href="#">
+								<a href="/user/${post.user.id}">
 									<div class="writerNickName">${post.user.nickName}</div>
 								</a>
 								<c:if test="${userId != post.user.id && post.follow == false}">
@@ -24,7 +24,7 @@
 									</div>
 								</c:if>
 							</div>
-							<div class="introduce">자기소개</div>	
+							<div class="introduce">${post.user.introduce}</div>	
 						</div>	
 				</div>
 				

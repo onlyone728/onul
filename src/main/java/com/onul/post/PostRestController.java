@@ -208,4 +208,33 @@ public class PostRestController {
 		return result;
 	}
 	
+	@DeleteMapping("/post/house_delete")
+	public Map<String, Object> deleteHouse(int postId,
+			HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		IntroduceHouse house = introduceBO.getIntroduceHouseById(postId);
+		int writerId = house.getUserId();
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		if (userId == null) {
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 시도해주세요.");
+			return result;
+		} else if (userId != writerId) {
+			result.put("result", "error");
+			result.put("errorMessage", "잘못된 접근입니다.");
+			return result;
+		}
+		
+		int count = introduceBO.deleteIntroduceHouseByPostIdUserId(postId, userId);
+		
+		if (count < 1) {
+			result.put("result", "error");
+			result.put("errorMessage", "삭제에 실패하였습니다. 관리자에게 문의하세요.");
+		}
+		return result;
+	}
+	
 }

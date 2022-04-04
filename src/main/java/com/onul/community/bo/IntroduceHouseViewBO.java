@@ -42,7 +42,11 @@ public class IntroduceHouseViewBO {
 		List<IntroduceHouseView> introduceHouseViewList = new ArrayList<>();
 		List<IntroduceHouse> introduceHouseList = new ArrayList<>();
 		
-		introduceHouseList = introduceBO.getIntroduceHouseList();
+		if (uId != null) {
+			introduceHouseList = introduceBO.getIntroduceHouseListByUserId(uId);
+		} else {
+			introduceHouseList = introduceBO.getIntroduceHouseList();
+		}
 		
 		for (IntroduceHouse house : introduceHouseList) {
 			IntroduceHouseView houseView = new IntroduceHouseView();

@@ -32,4 +32,12 @@
 		WHERE
 			`postId` = #{postId}		
 	</select>
+	
+	<delete id="deleteIntrodeceFilesByPostId" parameterType="int">
+		DELETE
+		FROM
+			`introduceFiles`
+		WHERE
+			`postId` = #{postId}	
+	</delete>
  </mapper>

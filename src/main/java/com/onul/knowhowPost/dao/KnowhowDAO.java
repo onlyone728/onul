@@ -27,6 +27,8 @@ public interface KnowhowDAO {
 	
 	public List<Knowhow> selectKnowhowList();
 	
+	public List<Knowhow> selectKnowhowListByCategory(String category);
+	
 	public List<Knowhow> selectKnowhowListByUserId(int userId);
 	
 	public List<KnowhowFiles> selectKnowhowFilesListByPostId(int postId);

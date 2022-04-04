@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.onul.comment.bo.CommentBO;
 import com.onul.common.FileManagerService;
 import com.onul.introduceHousePost.dao.IntroduceHouseDAO;
 import com.onul.introduceHousePost.model.IntroduceFiles;
 import com.onul.introduceHousePost.model.IntroduceHouse;
+import com.onul.like.bo.LikeBO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +26,12 @@ public class IntroduceHouseBO {
 	
 	@Autowired
 	private IntroduceHouseDAO introduceDAO;
+	
+	@Autowired
+	private CommentBO commentBO;
+	
+	@Autowired
+	private LikeBO likeBO;
 	
 	public List<IntroduceHouse> getIntroduceListOrderByHit() {
 		return introduceDAO.selectIntroduceListOrderByHit();
@@ -61,7 +69,7 @@ public class IntroduceHouseBO {
 							// 첨부 파일이 저장이 안되었을때
 							// post 삭제 & 커버 이미지 디렉토리 삭제
 							fms.deleteFile(coverImagePath);
-							introduceDAO.deleteIntroduceHouseById(postId);
+							introduceDAO.deleteIntroduceHouseByPostId(postId);
 							log.error("[introduceHouse] 첨부파일 저장에 실패하였습니다.");
 							return 0;
 						} else {
@@ -77,8 +85,8 @@ public class IntroduceHouseBO {
 		return postId;
 	}
 	
-	public void deleteIntroduceHouseByPostId(int id) {
-		introduceDAO.deleteIntroduceHouseById(id);
+	public void deleteIntroduceHouseByPostPostId(int postId) {
+		introduceDAO.deleteIntroduceHouseByPostId(postId);
 	}
 	
 	public IntroduceHouse getIntroduceHouseById(int id) {
@@ -97,7 +105,47 @@ public class IntroduceHouseBO {
 		return introduceDAO.selectIntroduceFilesByPostId(postId);
 	}
 	
+	public void deleteIntrodeceFilesByPostId(int postId) {
+		
+	}
+	
 	public void addHit(int id) {
 		introduceDAO.updateHit(id);
+	}
+	
+	public int deleteIntroduceHouseByPostIdUserId(int postId, int userId) {
+		IntroduceHouse house = introduceDAO.selectIntroduceHouseById(postId);
+		List<IntroduceFiles> files = introduceDAO.selectIntroduceFilesByPostId(postId);
+		String postType = house.getPostType();
+		
+		// cover image 삭제
+		try {
+			fms.deleteFile(house.getCoverImage());
+		} catch (IOException e) {
+			log.error("[delete introduce] 이미지 삭제 실패 {}, {}", postId, house.getImagePath());
+		}
+		
+		// 첨부파일 삭제
+		if (files != null) {
+			for (int i =  0; i < files.size(); i++) {
+				try {
+					fms.deleteFile(files.get(i).getImagePath());
+				} catch (IOException e) {
+					log.error("[delete introduce] 첨부파일 삭제 실패 {}, {}", postId, files.get(i).getImagePath());
+				}
+			}
+		}
+		
+		// comment delete
+		commentBO.deleteCommentByPostIdPostType(postId, postType);
+		
+		// like delete
+		likeBO.deleteLikeByPostIdPostType(postId, postType);
+		
+		// 파일 목록 삭제
+		introduceDAO.deleteIntrodeceFilesByPostId(postId);
+		
+		// 글 삭제
+		return introduceDAO.deleteIntroduceHouseByPostId(postId);
 	}
 }

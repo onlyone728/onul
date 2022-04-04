@@ -20,7 +20,7 @@
 		) 		
  	</insert>
  	
- 	<select id="selectKnowhowFilesListByPostId" parameterType="int" resultType="com.onul.knowhowPost.model.Knowhow">
+ 	<select id="selectKnowhowFilesListByPostId" parameterType="int" resultType="com.onul.knowhowPost.model.KnowhowFiles">
  		SELECT
  			`id`
  			, `postId`

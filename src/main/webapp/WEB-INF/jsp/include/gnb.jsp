@@ -14,7 +14,7 @@
 					<li><a href="/community" class="blue d-block">홈</a></li>
 					<li><a href="/community/photo_view" class="blue d-block">사진</a></li>
 					<li><a href="/community/introduce_view" class="blue d-block">집들이</a></li>
-					<li><a href="#" class="blue d-block">노하우</a></li>
+					<li><a href="/community/knowhow_view" class="blue d-block">노하우</a></li>
 				</ul>
 			</li>	
 			<li id="storeMenuBtn" class="nav-item">
@@ -56,9 +56,9 @@
 	<%-- 로그인 후 --%>
 		<c:when test="${not empty userId}">
 			<div class="ml-3 userBtnArea">
-				<a href="#userMenu" class="d-block img-center" id="userBtn">
+				<a href="#userMenu" class="d-block img-center bg-dark" id="userBtn">
 					<c:if test="${not empty userProfileImage}">
-						<img class="img bg-dark" src="${userProfileImage}" alt="${userNickName}님의 프로필 사진" width="100%">
+						<img class="img" src="${userProfileImage}" alt="${userNickName}님의 프로필 사진" width="100%">
 					</c:if>
 					<c:if test="${empty userProfileImage}">
 						<div class="w-100 h-100 bg-dark"></div>
@@ -67,7 +67,7 @@
 			</div>
 			<div id="userMenu" class="d-none">
 				<ul>
-					<li><a href="#" class="myPageeBtn">마이페이지</a></li>
+					<li><a href="/user/${userId}" class="myPageeBtn">마이페이지</a></li>
 					<li><a href="#" class="myShppingBtn">나의 쇼핑</a></li>
 					<li><a href="#" class="userInfoBtn">회원 정보</a></li>
 					<li><a href="/user/sign_out" class="logOutBtn">로그아웃</a></li>

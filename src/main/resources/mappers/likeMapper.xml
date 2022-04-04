@@ -26,6 +26,20 @@
 			AND `postType` = #{postType}
 	</select> 
 	
+	<select id="selectLikeListByUserId" parameterType="int" resultType="com.onul.like.model.Like">
+		SELECT
+			`userId`
+			, `nickName`
+			, `postType`
+			, `postId`
+			, `createdAt`
+		FROM
+			`like`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY `createdAt` DESC			
+	</select>
+	
 	<insert id="insertLike" parameterType="map">
 		INSERT INTO `like`
 		(

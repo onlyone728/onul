@@ -37,11 +37,18 @@ public class KnowhowViewBO {
 	private LikeBO likeBO;
 
 	public List<KnowhowView> generateKnowhowList(
+			@RequestParam(value="category", required=false) String category,
 			@RequestParam(value="userId", required=false) Integer uId) {
 		List<KnowhowView> knowhowViewList = new ArrayList<>();
 		List<Knowhow> knowhowList = new ArrayList<>();
 		
-		knowhowList = knowhowBO.getKnowhowList();
+		if (category != null){
+			knowhowList = knowhowBO.getKnowhowListByCategory(category);
+		} else if (uId != null) {
+			knowhowList = knowhowBO.getKnowhowListByUserId(uId);
+		} else {
+			knowhowList = knowhowBO.getKnowhowList();
+		}
 		
 		for (Knowhow knowhow : knowhowList) {
 			KnowhowView knowhowView = new KnowhowView();

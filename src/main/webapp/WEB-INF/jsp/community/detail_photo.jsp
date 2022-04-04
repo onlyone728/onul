@@ -14,39 +14,43 @@
 				<div>· 댓글 ${photoView.commentCount}</div>
 			</div>
 			<div class="commentArea">
-			<div class="inputComment">
-				<div class="userImg img-center">
-					<c:if test="${empty userProfileImage}">
-						<img class="img" alt="유저 프로필 이미지 없음" src="/image/avatar.webp" height="30">
-					</c:if>
-					<c:if test="${not empty userProfileImage}">
-						<img class="img" alt="${userNickName}님의 프로필 이미지" src="${userProfileImage}" height="30">
-					</c:if>
-				</div>
-				<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
-				<input type="text" id="commentText" class="comment box-radius-5">
-				<a href="" class="commentBtn disabledBtn" data-post-id="${photoView.photo.id}">등록</a>
-			</div>
-			
-			<div class="commentList">
-				<c:forEach var="comment" items="${photoView.commentList}">
-				<div class="comment-box">
-					<div class="userImg img-center">
-						<c:choose>
-							<c:when test="${empty comment.profileImage}">
-								<img class="img" alt="작성자 프로필 이미지 없음" src="/image/avatar.webp" height="30">
-							</c:when>	
-							<c:when test="${not empty comment.profileImage}">
-								<img class="img" alt="${comment.nickName}님의 프로필 이미지" src="${comment.profileImage}" height="30">
-							</c:when>
-						</c:choose>
+				<c:if test="${not empty userId}">
+					<div class="inputComment">
+						<div class="userImg img-center">
+							<c:if test="${empty userProfileImage}">
+								<img class="img" alt="유저 프로필 이미지 없음" src="/image/avatar.webp" height="30">
+							</c:if>
+							<c:if test="${not empty userProfileImage}">
+								<img class="img" alt="${userNickName}님의 프로필 이미지" src="${userProfileImage}" height="30">
+							</c:if>
+						</div>
+						<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
+						<input type="text" id="commentText" class="comment box-radius-5">
+						<a href="" class="commentBtn disabledBtn" data-post-id="${photoView.photo.id}">등록</a>
 					</div>
-					<div class="comment-writer-id">${comment.nickName}</div>
-					<div class="writed-comment">${comment.content}</div>
+				</c:if>	
+				
+				<div class="commentList">
+					<c:forEach var="comment" items="${photoView.commentList}">
+					<div class="comment-box">
+						<div class="userImg img-center">
+							<a href="/user/${post.user.id}" class="img-center d-block">
+							<c:choose>
+								<c:when test="${empty comment.profileImage}">
+									<img class="img" alt="작성자 프로필 이미지 없음" src="/image/avatar.webp" height="30">
+								</c:when>	
+								<c:when test="${not empty comment.profileImage}">
+									<img class="img" alt="${comment.nickName}님의 프로필 이미지" src="${comment.profileImage}" height="30">
+								</c:when>
+							</c:choose>
+							</a>
+						</div>
+						<div class="comment-writer-id">${comment.nickName}</div>
+						<div class="writed-comment">${comment.content}</div>
+					</div>
+					</c:forEach>
 				</div>
-				</c:forEach>
 			</div>
-		</div>
 		</div>
 	</div>
 	
@@ -78,7 +82,7 @@
 			<div class="userInfoArea">
 				<div class="d-flex">
 					<div class="userImg">
-						<a href="#" class="d-block img-center">
+						<a href="/user/${photoView.user.id}" class="d-block img-center">
 							<c:if test="${empty photoView.user.profileImage}">
 								<img height="50" class="img" alt="프로필사진 없음" src="/image/avatar.webp">
 							</c:if>
@@ -88,8 +92,8 @@
 						</a>
 					</div>
 					<div class="userInfo">
-						<div class="userNickName">${photoView.user.nickName}</div>
-						<div class="userIntro">${userInfo.introduce}</div>
+						<div class="userNickName"><a href="/user/${photoView.user.id}">${photoView.user.nickName}</a></div>
+						<div class="userIntro">${photoView.user.introduce}</div>
 					</div>
 				</div>
 				<c:if test="${userId != photoView.photo.userId && photoView.follow == false}">

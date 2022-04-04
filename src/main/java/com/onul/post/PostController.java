@@ -1,11 +1,16 @@
 package com.onul.post;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.onul.introduceHousePost.bo.IntroduceHouseBO;
+import com.onul.introduceHousePost.model.IntroduceFiles;
+import com.onul.introduceHousePost.model.IntroduceHouse;
 import com.onul.photo.bo.PhotoBO;
 import com.onul.photo.model.Photo;
 
@@ -14,6 +19,9 @@ public class PostController {
 
 	@Autowired
 	private PhotoBO photoBO;
+	
+	@Autowired
+	private IntroduceHouseBO houseBO;
 	
 	@RequestMapping("/post/photo_create_view")
 	public String photoCreateView(Model model) {
@@ -44,6 +52,20 @@ public class PostController {
 		
 		model.addAttribute("photo", photo);
 		model.addAttribute("viewPath", "post/update_photo");
+		return "template/post-layout";
+	}
+	
+	@RequestMapping("/post/house_update_view")
+	public String updateHouse(
+			@RequestParam("postId") int postId,
+			Model model) {
+		
+		IntroduceHouse house = houseBO.getIntroduceHouseById(postId);
+		List<IntroduceFiles> fileList = houseBO.getIntroduceFilesByPostId(postId);
+		
+		model.addAttribute("fileList", fileList);
+		model.addAttribute("house", house);
+		model.addAttribute("viewPath", "post/update_house");
 		return "template/post-layout";
 	}
 	

@@ -19,6 +19,7 @@ button:focus {outline: 0;}
 .w80 {width: 80%; margin: auto;}
 .w300 {width: 300px; margin: auto;}
 .w360 {width: 360px; margin: auto;}
+.w500 {width: 500px; margin: auto;}
 .font {font-family: beanpoleotM00;}
 .font12 {font-size: 12px;}
 .font15 {font-size: 15px;}
@@ -58,13 +59,59 @@ button:focus {outline: 0;}
 
 
 header {border-bottom: 1px solid #EDEDED; height: 100px; background-color: #fff; position: relative; top: 0; left: 0; right: 0; z-index: 100;}
-.contents {padding-top: 50px; padding-bottom: 50px; min-height: 550px;}
+.contents {padding-top: 50px; /* padding-bottom: 50px; */ min-height: 550px;}
 footer {height: 100px; text-align: center; line-height: 100px;}
+
+/* #myPage {margin-bottom: 50px;} */
+#myPage .nav {border-bottom: 1px solid #EDEDED; height: 60px; background-color: #fff; position: relative; top: 0; left: 0; right: 0; z-index: 50;}
+#myPage .nav .mainMyMenu {font-size: 16px; font-weight: bold; display: flex; margin: auto; height: 100%; text-align: center;}
+#myPage .nav .mainMyMenu > li {margin: 0; padding: 0 30px; width: 150px;}
+#myPage .nav .mainMyMenu > li > a {font-size: 18px; display: block; width: 100%; height: 100%; margin: auto; line-height: 60px;} 
+#myPage .nav .mainMyMenu > .profileTab:hover > .subMyMenu {z-index: 60;} 
+#myPage .nav .mainMyMenu > .myShoppintab:hover > .subMyMenu {z-index: 60; visibility: visible;} 
+#myPage .nav .mainMyMenu > .configTab:hover > .subMyMenu {z-index: 60; visibility: visible;} 
+#myPage .nav .mainMyMenu .subMyMenu {padding: 0; display: flex; justify-content: center; margin: auto; height: 100%; text-align: center; background-color: #fff; border-bottom: 1px solid #EDEDED; position: absolute; top: 60px; left: 0; right: 0; height: 50px;}
+#myPage .nav .mainMyMenu .subMyMenu > li {margin: 0 10px; padding: 0 20px; text-align: center;}
+#myPage .nav .mainMyMenu .subMyMenu > li > a {display: block; width: 100%; height: 100%; margin: auto; line-height: 50px;}
+#myPage .nav .mainMyMenu .subMyMenu > li:hover {border-bottom: 3px solid #35C5F0;} 
+#myPage .nav .mainMyMenu .myShoppingMenu {visibility: hidden;}
+#myPage .nav .mainMyMenu .configMenu {visibility: hidden;}
+
+#myPage .myPageContents {margin-top: 80px; display: flex; height: auto;}
+#myPage .myPageContents .userCardArea {width: 30%; height: 100%;}
+#myPage .myPageContents .contentArea {width: 70%; height: 100%;}
+#myPage .myPageContents .userCardArea .userCard {width: 300px; height: auto; padding: 30px; border: 1px solid #DBDBDB; border-radius: 10px;}
+#myPage .myPageContents .userCardArea .userCard .userImg {width: 120px; height: 120px; border-radius: 60px; overflow: hidden;}
+#myPage .myPageContents .userCardArea .userNickNameArea {margin: 20px 0; text-align: center; font-size: 25px; font-weight: 700; color: #424242;}
+#myPage .myPageContents .userCardArea .followInfoArea {margin: auto; display: flex; justify-content: center;}
+#myPage .myPageContents .userCardArea .followInfo {padding: 0 10px; margin: 7px 0; font-size: 13px; line-height: 13px; color: #424242;}
+#myPage .myPageContents .userCardArea .btnArea {padding: 30px 0; margin: auto; display: flex; justify-content: center;}
+#myPage .myPageContents .userCardArea .btnArea .settingBtn {background-color: #fff; border: 1px solid #DBDBDB; font-size: 12px;}
+#myPage .myPageContents .userCardArea .btnArea .followBtn {background-color: #35C5F0; color: #fff; font-weight: bold; padding: 8px 50px;}
+#myPage .myPageContents .userCardArea .otherInfoArea {border-top: 1px solid #DBDBDB;padding-top: 30px; display: flex; justify-content: center;}
+#myPage .myPageContents .userCardArea .otherInfoArea .likeInfo {text-align: center;}
+#myPage .myPageContents .userCardArea .otherInfoArea .likeInfo .label {font-size: 13px; color: #424242;}
+#myPage .myPageContents .userCardArea .otherInfoArea .likeInfo .count {border: none; padding: 0px; font-size: 15px; color: #424242; font-weight: 700; display: flex; justify-content: center;}
+#myPage .myPageContents .userCardArea .introInfo {text-align: center; font-size: 15px; color: #424242; font-weight: 400; word-break: keep-all;}
+#myPage .myPageContents .contentArea .categoryLabel {padding: 20px 0; font-size: 18px; font-weight: 700;}
+#myPage .myPageContents .contentArea .postHistoryArea .emptyArea {border: 1px dashed rgb(219, 219, 219); width: 100%; padding: 65px 0;}
+#myPage .myPageContents .contentArea .postHistoryArea > .emptyArea:hover > div > a {color: rgb(219, 219, 219);}
+#myPage .myPageContents .contentArea .emptyArea > div {text-align: center; color: #424242; font-weight: 700; font-size: 13px; height: 100%; }
+#myPage .myPageContents .contentArea .emptyArea > a {text-align: center; color: #424242; font-weight: 700; font-size: 13px; height: 100%; }
+#myPage .myPageContents .contentArea .postHistoryArea {padding-bottom: 40px;}
+#myPage .myPageContents .contentArea .postHistoryArea .notEmptyArea {height: auto; display: grid; grid-template-columns: 190px 190px 190px 190px; justify-content: space-between; row-gap: 15px; padding: 0;}
+#myPage .myPageContents .contentArea .postHistoryArea .notEmptyArea .postArea {height: 190px; border-radius: 10px; overflow: hidden; margin: 0;}
+#myPage .myPageContents .contentArea .postHistoryArea .notEmptyArea .houseArea {width: 100%; height: auto;}
+#myPage .myPageContents .contentArea .postHistoryArea .notEmptyArea .houseArea > a {height: 130px; border-radius: 10px; overflow: hidden; margin: 0;}
+#myPage .myPageContents .contentArea .postHistoryArea .notEmptyArea .houseArea .infoArea {margin: 0;}
+#myPage .myPageContents .contentArea .postHistoryArea .notEmptyArea .houseArea .infoArea .title {margin: 10px 0; font-size: 13px; overflow: hidden; text-overflow: ellipsis; max-height: 50px; word-break: break-word; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;}
+
+
 
 /* header */
 #mainMenu {height: 100%;}
 #mainMenu > li {margin: auto; line-height: 80px; padding-right: 30px; vertical-align: top;}
-#mainMenu > li > a {display: block;}
+#mainMenu > li > a {display: block;} 
 #mainMenu > #communityMenuBtn:hover > ul#communityMenu {z-index: 100;}
 #mainMenu > #storeMenuBtn > ul#storeMenu {visibility: hidden;}
 #mainMenu > #storeMenuBtn:hover > ul#storeMenu {z-index: 100; visibility: visible;}
@@ -233,6 +280,8 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 
 
 #detailIntroduce #coverImg {width: 100%; height: 320px;}
+#detailIntroduce .editBtn {background-color: #35C5F0; color: #fff;}
+#detailIntroduce .delBtn {background-color: rgb(255, 119, 119); color: #fff;}
 #detailIntroduce .postContent {margin: 30px 0;}
 #detailIntroduce .postContent .postImgArea {margin-top: 30px;}
 #detailIntroduce .postContent .postImgArea .filesImage {margin-top: 20px;}
@@ -291,4 +340,38 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #introduceList .introduceCard .infoArea .writerInfoArea .imgArea {width: 16px; height: 16px; border-radius: 8px; overflow: hidden; margin-right: 10px;}
 #introduceList .introduceCard .infoArea .writerInfoArea .writerNick {font-size: 13px; font-weight: 400; color: #424242; line-height: 16px;}
 #introduceList .introduceCard .infoArea .postInfo {font-size: 13px; font-weight: 400; color: #757575;}
+
+#knowhowList {margin-top: 30px;}
+#knowhowList .categoryTabArea {margin-bottom: 30px;}
+#knowhowList .categoryTabArea .categoryTab {font-size: 15px; font-weight: 700; color: #757575; margin-right: 10px; padding: 5px 7px 6px;}
+#knowhowList .knowhowCard {width: 100%;}
+#knowhowList .knowhowCard .postImgBox {width: 100%; height: 180px; border-radius: 10px; overflow: hidden;}
+#knowhowList .knowhowCard .postInfoArea {margin: 20px 0; font-size: 12px; font-weight: 400; color: #757575;}
+#knowhowList .knowhowCard .postInfoArea .postTitle {font-size: 15px; font-weight: 500; color: #424242; overflow: hidden; text-overflow: ellipsis; max-height: 45px; word-break: break-word; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;}
+
+
+#myPage .myPhotoList {display: grid; grid-template-columns: 190px 190px 190px 190px; justify-content: space-between; row-gap: 15px; padding: 0;}
+#myPage .myPhotoList .photoCard {width: 100%; height: 300px; }
+#myPage .myPhotoList .photoCard .imageArea {width: 100%; height: 190px; border-radius: 10px; overflow: hidden;}
+#myPage .myPhotoList .photoCard .contentArea {margin: 10px 0; width: 100%; color: #424242; font-size: 15px; overflow: hidden; text-overflow: ellipsis; max-height: 66px; word-break: break-all; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;}
+#myPage .myPhotoList .photoCard .commentArea {display: flex; margin: 10px 0; padding: 0;}
+#myPage .myPhotoList .photoCard .commentArea .commentWriterImg {width: 24px; height: 24px; overflow: hidden; border-radius: 12px; min-width: 24px;}
+#myPage .myPhotoList .photoCard .commentArea .commentId {font-size: 15px; color: #424242; font-weight: 600; margin: 0 5px;}
+#myPage .myPhotoList .photoCard .commentArea .comment {font-size: 15px; color: #424242; font-weight: 400; overflow: hidden; text-overflow: ellipsis; max-height: 66px; word-break: break-all; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1;}
+
+#myHouseList {display: grid; grid-template-columns: 190px 190px 190px 190px; justify-content: space-between; row-gap: 15px; padding: 0;}
+#myHouseList .introduceCard {width: 190px;}
+#myHouseList .introduceCard .imgArea {height: 130px; border-radius: 10px; overflow: hidden;}
+#myHouseList .introduceCard .infoArea {margin: 10px 0 5px; text-align: center;}
+#myHouseList .introduceCard .infoArea .title {width: 100%; font-size: 20px; color: #424242; font-weight: 700; margin: 0 10px; overflow: hidden; text-overflow: ellipsis; max-height: 26px; word-break: break-word; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1;}
+#myHouseList .introduceCard .infoArea .postInfo {font-size: 13px; font-weight: 400; color: #757575;}
+
+#myKnowhowList {display: grid; grid-template-columns: 190px 190px 190px 190px; justify-content: space-between; row-gap: 15px; padding: 0;}
+#myKnowhowList .knowhowCard {width: 100%;}
+#myKnowhowList .knowhowCard .postImgBox {width: 100%; height: 140px; border-radius: 10px; overflow: hidden;}
+#myKnowhowList .knowhowCard .postInfoArea {margin: 10px 0; font-size: 12px; font-weight: 400; color: #757575;}
+#myKnowhowList .knowhowCard .postInfoArea .postTitle {font-size: 15px; font-weight: 500; color: #424242; overflow: hidden; text-overflow: ellipsis; max-height: 45px; word-break: break-word; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;}
+
+#myInfoUpdate .title {margin: 10px 0 30px; font-size: 24px; color: #292929; font-weight: 700;}
+#myInfoUpdate #updateBtn {height: 50px; background-color: #35C5F0; color: #fff; font-size: 17px; font-weight: 700; margin: 30px 0;}
 

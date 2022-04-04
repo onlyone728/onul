@@ -1,9 +1,12 @@
 package com.onul.like.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onul.like.dao.LikeDAO;
+import com.onul.like.model.Like;
 
 @Service
 public class LikeBO {
@@ -28,6 +31,10 @@ public class LikeBO {
 		
 		int count = likeDAO.selectLikeCountByPostIdOrUserId(postId, postType, userId);
 		return count > 0? true : false;
+	}
+	
+	public List<Like> getLikeListByUserId (int userId) {
+		return likeDAO.selectLikeListByUserId(userId);
 	}
 	
 	// like count

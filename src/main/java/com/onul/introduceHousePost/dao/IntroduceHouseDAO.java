@@ -19,7 +19,7 @@ public interface IntroduceHouseDAO {
 			@Param("postId") int postId,
 			@Param("imagePath") String imagePath);
 	
-	public void deleteIntroduceHouseById(int id);
+	public int deleteIntroduceHouseByPostId(int postId);
 	
 	public IntroduceHouse selectIntroduceHouseById(int id);
 	
@@ -28,6 +28,8 @@ public interface IntroduceHouseDAO {
 	public List<IntroduceHouse> selectIntroduceHouseListByUserId(int userId); 
 	
 	public List<IntroduceFiles> selectIntroduceFilesByPostId(int postId);
+	
+	public void deleteIntrodeceFilesByPostId(int postId);
 	
 	public void updateHit(int id);
 }

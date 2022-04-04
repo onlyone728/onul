@@ -8,19 +8,27 @@
 		<img alt="커버 이미지" src="${post.knowhow.coverImage}" class="img" width="100%">
 	</div>
 	<div class="w50">
-		<div class="categoryIndexBox2">
+		<div class="categoryIndexBox2 ">
 			<div class="categoryIndex mb-2">노하우 / ${post.knowhow.category}</div>
-			<div class="postTitle">${post.knowhow.subject}</div>
+			<div class="d-flex justify-content-between">
+				<div class="postTitle">${post.knowhow.subject}</div>
+				<c:if test="${post.user.id == userId}">
+					<div class="editPostArea">
+						<button type="button" class="editBtn btn" data-post-id="${post.knowhow.id}" data-user-id="${userId}">수정하기</button>
+						<button type="button" class="delBtn btn" data-post-id="${post.knowhow.id}" data-user-id="${userId}">삭제하기</button>
+					</div>
+				</c:if>
+			</div>
 		</div>
 		<div class="userInfoArea">
 			<div class="userArea">
 				<div class="userImg">
-					<a href="" class="d-block img-center">
-						<img alt="user의 프로필 이미지" class="img" src="${post.knowhow.profileImage}" height="100%">
+					<a href="/user/${post.user.id}" class="d-block img-center">
+						<img alt="user의 프로필 이미지" class="img" src="${post.user.profileImage}" height="100%">
 					</a>
 				</div>
 				<div class="userInfo">
-					<div class="userNickName"><a href="">${post.knowhow.nickName}</a></div>
+					<div class="userNickName"><a href="/user/${post.user.id}">${post.user.nickName}</a></div>
 					<div class="createdAt">
 						<fmt:formatDate value="${post.knowhow.createdAt}" pattern="yyyy년 MM월 dd일"/>
 					</div>
@@ -49,9 +57,9 @@
 			<div class="postTextArea">
 				<div class="postText">${post.knowhow.content}</div>
 			</div>
-			<c:if test="${not empty knowhow.fileList}">
+			<c:if test="${not empty post.fileList}">
 				<div class="postImgArea">
-					<c:forEach var="file" items="${knowhow.fileList}">
+					<c:forEach var="file" items="${post.fileList}">
 						<div class="filesImage">
 							<img alt="" src="${file.imagePath}" width="100%">
 						</div>
@@ -68,19 +76,21 @@
 			<div>· 댓글 ${post.commentCount}</div>
 		</div>
 		<div class="commentArea">
-			<div class="inputComment">
-				<div class="userImg img-center">
-					<c:if test="${empty userProfileImage}">
-						<img class="img" alt="유저 프로필 이미지 없음" src="/image/avatar.webp" height="30">
-					</c:if>
-					<c:if test="${not empty userProfileImage}">
-						<img class="img" alt="${userNickName}님의 프로필 이미지" src="${userProfileImage}" height="30">
-					</c:if>
+			<c:if test="${not empty userId}">
+				<div class="inputComment">
+					<div class="userImg img-center">
+						<c:if test="${empty userProfileImage}">
+							<img class="img" alt="유저 프로필 이미지 없음" src="/image/avatar.webp" height="30">
+						</c:if>
+						<c:if test="${not empty userProfileImage}">
+							<img class="img" alt="${userNickName}님의 프로필 이미지" src="${userProfileImage}" height="30">
+						</c:if>
+					</div>
+					<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
+					<input type="text" id="commentText" class="comment box-radius-5">
+					<a href="" class="commentBtn disabledBtn" data-post-id="${post.knowhow.id}">등록</a>
 				</div>
-				<div class="commentPlace">칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)</div> 
-				<input type="text" id="commentText" class="comment box-radius-5">
-				<a href="" class="commentBtn disabledBtn" data-post-id="${post.knowhow.id}">등록</a>
-			</div>
+			</c:if>	
 			
 			<div class="commentList">
 				<c:forEach var="comment" items="${post.commentList}">

@@ -32,16 +32,12 @@ public class CommunityController {
 	
 	@RequestMapping("/community")
 	public String communityView(
-			Model model,
-			HttpServletRequest request) {
-		// session 가져오기
-		HttpSession session = request.getSession();
-		Integer userId = (Integer) session.getAttribute("userId");
+			Model model) {
 		
 		// post 가져오기
-		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewList(userId);
-		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(userId);
-		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(userId);
+		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewList(null);
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null);
+		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, null);
 		
 		// product 가져오기
 		
@@ -65,7 +61,7 @@ public class CommunityController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		
 		// hit 증가
-//		photoBO.addHit(postId);
+		
 		
 		// BO -> DB select : photo & userInfo
 		PhotoView photoView = photoViewBO.photoViewByPostId(postId, userId);
@@ -122,14 +118,10 @@ public class CommunityController {
 	
 	@RequestMapping("/community/photo_view")
 	public String photoListView(
-			Model model,
-			HttpServletRequest request) {
-		// session 가져오기
-		HttpSession session = request.getSession();
-		Integer userId = (Integer) session.getAttribute("userId");
+			Model model) {
 				
 		// DB select
-		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(userId);
+		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(null);
 		
 		model.addAttribute("postList", photoList);
 		model.addAttribute("viewPath", "community/photo_list");
@@ -137,18 +129,27 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/community/introduce_view")
-	public String intoduceListView(
-			Model model,
-			HttpServletRequest request) {
-		// session 가져오기
-		HttpSession session = request.getSession();
-		Integer userId = (Integer) session.getAttribute("userId");
-		
+	public String introduceListView(
+			Model model) {
 		// DB select
-		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(userId);
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null);
 		
 		model.addAttribute("houseList", houseList);
 		model.addAttribute("viewPath", "community/introduceHouse_list");
 		return "template/layout";
 	}
+	
+	@RequestMapping("/community/knowhow_view")
+	public String knowhowListView(
+			@RequestParam(value="category", required=false) String category,
+			Model model) {
+		// DB select
+		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(category, null);
+			
+		model.addAttribute("postList", knowhowList);
+		model.addAttribute("viewPath", "community/knowhow_view");
+		return "template/layout";
+	}
+	
+	
 }
