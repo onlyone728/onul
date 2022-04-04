@@ -13,6 +13,7 @@ public class User {
 	private String password;
 	private String nickName;
 	private String profileImage;
+	private String introduce;
 	private String name;
 	private String email;
 	private Date createdAt;

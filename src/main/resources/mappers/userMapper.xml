@@ -10,6 +10,7 @@
 			, `password`
 			, `nickName`
 			, `profileImage`
+			, `introduce`
 			, `name`
 			, `email`
 			, `createdAt`
@@ -28,6 +29,7 @@
 			, `password`
 			, `nickName`
 			, `profileImage`
+			, `introduce`
 			, `name`
 			, `email`
 			, `createdAt`
@@ -45,6 +47,7 @@
 			, `password`
 			, `nickName`
 			, `profileImage`
+			, `introduce`
 			, `name`
 			, `email`
 			, `createdAt`
@@ -62,6 +65,7 @@
 			, `password`
 			, `nickName`
 			, `profileImage`
+			, `introduce`
 			, `name`
 			, `email`
 			, `createdAt`
@@ -79,6 +83,7 @@
 			, `password`
 			, `nickName`
 			, `profileImage`
+			, `introduce`
 			, `name`
 			, `email`
 			, `createdAt`
@@ -90,6 +95,7 @@
 			, #{password}
 			, #{nickName}
 			, #{profileImage}
+			, "자기소개를 작성해주세요."
 			, #{name}
 			, #{email}
 			, NOW()

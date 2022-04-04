@@ -1,13 +1,24 @@
 package com.onul.user.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.onul.comment.follow.bo.FollowBO;
 import com.onul.common.FileManagerService;
+import com.onul.introduceHousePost.bo.IntroduceHouseBO;
+import com.onul.introduceHousePost.model.IntroduceHouse;
+import com.onul.knowhowPost.bo.KnowhowBO;
+import com.onul.knowhowPost.model.Knowhow;
+import com.onul.like.bo.LikeBO;
+import com.onul.like.model.Like;
+import com.onul.photo.bo.PhotoBO;
+import com.onul.photo.model.Photo;
 import com.onul.user.dao.UserDAO;
 import com.onul.user.model.User;
-import com.onul.userInfo.bo.UserInfoBO;
+import com.onul.user.model.UserView;
 
 @Service
 public class UserBO {
@@ -19,8 +30,20 @@ public class UserBO {
 	private UserDAO userDAO;
 	
 	@Autowired
-	private UserInfoBO userInfoBO;
-
+	private PhotoBO photoBO; 
+	
+	@Autowired
+	private IntroduceHouseBO introduceBO;
+	
+	@Autowired 
+	private KnowhowBO knowhowBO;
+	
+	@Autowired
+	private LikeBO likeBO;
+	
+	@Autowired
+	private FollowBO followBO;
+	
 	public User getUserByLoginIdAndPassword(String loginId, String password) {
 		return userDAO.selectUserByLoginIdAndPassword(loginId, password);
 	}
@@ -49,10 +72,31 @@ public class UserBO {
 		// insert DAO
 		int count = userDAO.insertUser(loginId, password, nickName, imagePath, name, email);
 		
-		if (count > 0) {
-			userInfoBO.addUserInfo(nickName, imagePath, null);
-		}
-		
 		return count;
+	}
+	
+	public UserView generateUserView(int userId) {
+		UserView userView = new UserView();
+		User user = userDAO.selectUserById(userId);
+		userView.setUser(user);
+		
+		List<Photo> photoList = photoBO.getPhotoListByUserId(userId);
+		userView.setPhotoList(photoList);
+		
+		List<IntroduceHouse> houseList = introduceBO.getIntroduceHouseListByUserId(userId);
+		userView.setHouseList(houseList);
+		
+		List<Knowhow> knowhowList = knowhowBO.getKnowhowListByUserId(userId);
+		userView.setKnowhowList(knowhowList);
+		
+		List<Like> likeList = likeBO.getLikeListByUserId(userId);
+		userView.setLikeList(likeList);
+		
+		int followCount = followBO.getFollowCountByUserId(userId);
+		int followedCount = followBO.getFollowCountByFollowId(userId);
+		userView.setFollowCount(followCount);
+		userView.setFollowedCount(followedCount);
+		
+		return userView;
 	}
 }

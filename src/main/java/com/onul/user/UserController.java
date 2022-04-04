@@ -3,12 +3,20 @@ package com.onul.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.onul.user.bo.UserBO;
+import com.onul.user.model.UserView;
 
 @Controller
 public class UserController {
+	
+	@Autowired
+	private UserBO userBO;
 
 	@RequestMapping("/user/sign_in_view")
 	public String signInView(Model model) {
@@ -34,5 +42,26 @@ public class UserController {
 		return "redirect:/user/sign_in_view";
 	}
 	
-	
+	@RequestMapping("/user/{uId}")
+	public String myPage(
+			@PathVariable("uId") int uId,
+			Model model) {
+		// DB 가져오기
+		UserView user = userBO.generateUserView(uId);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("menuPath", "profile-all");
+		model.addAttribute("viewPath", "user/profile");
+		return "template/layout";
+	}
+	@RequestMapping("/user/{uId}/{profileMenu}")
+	public String myPageMenu(
+			@PathVariable("profileMenu") String profileMenu,
+			Model model) {
+		
+		
+		model.addAttribute("menuPath", "profile-" + profileMenu);
+		model.addAttribute("viewPath", "user/profile");
+		return "template/layout";
+	}
 }
