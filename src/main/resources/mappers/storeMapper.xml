@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.onul.store.dao.StoreDAO">
+ 	<select id="selectStoreByLoginId" resultType="com.onul.store.model.Store" parameterType="string">
+ 		SELECT
+ 			`id`
+			, `loginId`
+			, `password`
+			, `storeName`
+			, `storeImage`
+			, `businessNumber`
+			, `name`
+			, `phoneNumber`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`store`
+		WHERE
+			`loginId` = #{loginId}		
+ 	</select>
+ 	<insert id="insertStore" parameterType="com.onul.store.model.Store">
+ 		INSERT INTO `store`
+ 		(
+ 			`loginId`
+			, `password`
+			, `storeName`
+			, `storeImage`
+			, `businessNumber`
+			, `name`
+			, `phoneNumber`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{loginId}
+ 			, #{password}
+ 			, #{storeName}
+ 			, #{storeImage}
+ 			, #{businessNumber}
+ 			, #{name}
+ 			, #{phoneNumber}
+ 			, #{email}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ </mapper>

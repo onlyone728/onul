@@ -63,7 +63,7 @@ header {border-bottom: 1px solid #EDEDED; height: 100px; background-color: #fff;
 footer {height: 100px; text-align: center; line-height: 100px;}
 
 /* #myPage {margin-bottom: 50px;} */
-#myPage .nav {border-bottom: 1px solid #EDEDED; height: 60px; background-color: #fff; position: relative; top: 0; left: 0; right: 0; z-index: 50;}
+#myPage .nav {border-bottom: 1px solid #EDEDED; height: auto; background-color: #fff; position: relative; top: 0; left: 0; right: 0; z-index: 50;}
 #myPage .nav .mainMyMenu {font-size: 16px; font-weight: bold; display: flex; margin: auto; height: 100%; text-align: center;}
 #myPage .nav .mainMyMenu > li {margin: 0; padding: 0 30px; width: 150px;}
 #myPage .nav .mainMyMenu > li > a {font-size: 18px; display: block; width: 100%; height: 100%; margin: auto; line-height: 60px;} 
@@ -171,6 +171,7 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #login-btn {background-color: #35C5F0; color: #fff; height: 50px;}
 #join-btn {background-color: #DBDBDB; color: #000; height: 50px; line-height: 35px;}
 .bg-gray {background-color: #c1c1c1; color: #fff;}
+.siteName {font-family: beanpoleotM00; font-size: 40px; }
 
 /* 회원가입 */
 .signUpInput > label {font-size: 15px; font-weight: 600;}
@@ -182,18 +183,24 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .allAgree {font-weight: 700; padding-bottom: 20px; border-bottom: 1px solid #d6d6d6;}
 .allAgree .checkLabel {font-size: 16px; margin-top: 3px; margin-left: 20px;}
 .agree .checkLabel {font-size: 14px; margin-top: 5px; margin-left: 20px;}
+.agree .checkLabel2 {font-size: 16px; margin-top: 3px; margin-left: 20px; font-weight: 700;}
 .agree a {text-decoration: underline;}
 .agreementBox {padding: 20px;}
 
 /* 선택안된 체크박스 꾸미기 */
-.agreementBox input[type="checkbox"] {visibility: hidden;} 
+.agreementBox input[type="checkbox"] {visibility: hidden; position: relative;} 
 .agreementBox .cb {position: absolute; top: 0; left: 0; border: 1px solid #d6d6d6; border-radius: 3px; width: 20px; height: 20px; margin: 5px; margin-right: 10px;}
+.agreementBox .cbc {position: absolute; top: 0; left: 360px; border: 1px solid #d6d6d6; border-radius: 3px; width: 20px; height: 20px; margin: 5px; margin-right: 10px;}
 
 /* 선택된 체크박스 꾸미기 */
 .agreementBox input[type="checkbox"]:checked + .cb {background-color: #35C5F0; border: none;}
 .agreementBox .cb:after {content: ""; position: absolute; display: none;}
 .agreementBox input[type="checkbox"]:checked + .cb:after {display: block;}
 .cb:after { width: 6px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); position: absolute; left: 7px; top: 4px; }
+.agreementBox input[type="checkbox"]:checked + .cbc {background-color: #35C5F0; border: none;}
+.agreementBox .cbc:after {content: ""; position: absolute; display: none;}
+.agreementBox input[type="checkbox"]:checked + .cbc:after {display: block;}
+.cbc:after { width: 6px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); position: absolute; left: 7px; top: 4px; }
 
 .agreementBox label {vertical-align: center; margin: 0; position: relative;}
 #signUpBtn {height: 50px; background-color: #35C5F0; color: #fff; font-size: 17px; font-weight: 700; margin: 30px 0;}
@@ -375,3 +382,20 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #myInfoUpdate .title {margin: 10px 0 30px; font-size: 24px; color: #292929; font-weight: 700;}
 #myInfoUpdate #updateBtn {height: 50px; background-color: #35C5F0; color: #fff; font-size: 17px; font-weight: 700; margin: 30px 0;}
 
+.adminSignUp .infoArea {padding: 30px 0 60px; border-top: 1px solid #DBDBDB;}
+.adminSignUp .infoLabel {margin: 30px 0; font-size: 20px; font-weight: 700; }
+.adminSignUp .infoArea .titleLabel {width: 180px; font-size: 15px; font-weight: 700; line-height: 40px;}
+.adminSignUp .infoArea input {border: 1px solid #dbdbdb; border-radius: 5px; padding: 0 10px; height: 40px;}
+.adminSignUp .infoArea .line-1 {width: 260px;}
+.adminSignUp .infoArea #businessNumber1 {width: 78px;}
+.adminSignUp .infoArea #businessNumber2 {width: 50px;}
+.adminSignUp .infoArea #businessNumber3 {width: 95px;}
+.adminSignUp .infoArea #phoneNumber1 {width: 61px;}
+.adminSignUp .infoArea #phoneNumber2 {width: 80px;}
+.adminSignUp .infoArea #phoneNumber3 {width: 80px;}
+.adminSignUp .infoArea .imgBtn {height: 40px; color: #fff; font-weight: 700; background-color: #35C5F0;}
+.adminSignUp .infoArea #fileName {line-height: 40px;}
+.adminSignUp .infoArea .table {border: 1px solid #DBDBDB;} 
+.adminSignUp .infoArea .table td, th, tr {border: 1px solid #DBDBDB;} 
+.adminSignUp .infoArea .table th {border: 1px solid #DBDBDB; background-color: #F5F5F5;} 
+.adminSignUp #storeJoinBtn {margin-bottom: 50px; height: 60px; width: 200px; color: #fff; font-weight: 700; background-color: #35C5F0;}
