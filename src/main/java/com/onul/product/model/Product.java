@@ -18,7 +18,6 @@ public class Product {
 	private String origin;
 	private String subject;
 	private String content;
-	private String imagePath;
 	private String thumbNail;
 	private String salesType;
 	private int countSales;
