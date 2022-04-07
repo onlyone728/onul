@@ -188,14 +188,14 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .agreementBox {padding: 20px;}
 
 /* 선택안된 체크박스 꾸미기 */
-.agreementBox input[type="checkbox"] {visibility: hidden; position: relative;} 
-.agreementBox .cb {position: absolute; top: 0; left: 0; border: 1px solid #d6d6d6; border-radius: 3px; width: 20px; height: 20px; margin: 5px; margin-right: 10px;}
+input[type="checkbox"] {visibility: hidden; position: relative;} 
+.cb {position: absolute; top: 0; left: 0; background-color: #fff; border: 1px solid #d6d6d6; border-radius: 3px; width: 20px; height: 20px; margin: 5px; margin-right: 10px;}
 .agreementBox .cbc {position: absolute; top: 0; left: 360px; border: 1px solid #d6d6d6; border-radius: 3px; width: 20px; height: 20px; margin: 5px; margin-right: 10px;}
 
 /* 선택된 체크박스 꾸미기 */
-.agreementBox input[type="checkbox"]:checked + .cb {background-color: #35C5F0; border: none;}
-.agreementBox .cb:after {content: ""; position: absolute; display: none;}
-.agreementBox input[type="checkbox"]:checked + .cb:after {display: block;}
+input[type="checkbox"]:checked + .cb {background-color: #35C5F0; border: none;}
+.cb:after {content: ""; position: absolute; display: none;}
+input[type="checkbox"]:checked + .cb:after {display: block;}
 .cb:after { width: 6px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); position: absolute; left: 7px; top: 4px; }
 .agreementBox input[type="checkbox"]:checked + .cbc {background-color: #35C5F0; border: none;}
 .agreementBox .cbc:after {content: ""; position: absolute; display: none;}
@@ -220,7 +220,7 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 
 /* photo create view */
 #photoCreate {padding-top: 40px;}
-#photoCreate .photoImgArea {width: 48%; background-color: #F7F8FA;  text-align: center; border: 1px dashed #d6d6d6;}
+#photoCreate .photoImgArea {cursor: pointer; width: 48%; background-color: #F7F8FA;  text-align: center; border: 1px dashed #d6d6d6;}
 .photoBtn {width: 100%; height: 100%; font-weight: 700; color: #757575; display: flex; justify-content: center; align-items: center;}
 .reselectBtn {cursor: pointer;}
 
@@ -279,7 +279,7 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 
 #createHouse .coverImgArea {padding: 20px 0;}
 #createHouse .coverImgArea #coverImg {display: none;}
-#createHouse .coverImgArea .coverImgBox {width: 500px; height: 500px; margin: auto; background-color: #F7F8FA; text-align: center; border: 1px dashed #d6d6d6;}
+#createHouse .coverImgArea .coverImgBox {cursor: pointer; width: 500px; height: 500px; margin: auto; background-color: #F7F8FA; text-align: center; border: 1px dashed #d6d6d6;}
 #createHouse .contentArea #subject {width: 100%; height: 70px; color: rgb(63, 71, 77); font-size: 34px; font-weight: 600; padding: 5px 0; border: none; border-bottom: 1px solid #d6d6d6;}
 #createHouse .contentArea #content {width: 100%; color: rgb(63, 71, 77); font-size: 17px; margin: 30px 0; border: none; resize: none;}
 
@@ -399,3 +399,25 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .adminSignUp .infoArea .table td, th, tr {border: 1px solid #DBDBDB;} 
 .adminSignUp .infoArea .table th {border: 1px solid #DBDBDB; background-color: #F5F5F5;} 
 .adminSignUp #storeJoinBtn {margin-bottom: 50px; height: 60px; width: 200px; color: #fff; font-weight: 700; background-color: #35C5F0;}
+
+
+
+#cartView {background-color: #F5F5F5; height: 500px; padding: 30px 0; position: relative;}
+#cartView  .left {width: 70%;}
+#cartView  .right {width: 320px; position: fixed; right: 10%;}
+#cartView .checkbox {position: relative;}
+#cartView .checkLabel {font-size: 16px; margin-top: 3px; margin-left: 20px;}
+#cartView .cartCard {background-color: #fff; border: 1px solid #ededed; border-radius: 10px;}
+#cartView .cartCard .storeName {padding: 15px 0; text-align: center; font-size: 15px; color: #424242; font-weight: 500; border-bottom: 1px solid #ededed;}
+#cartView .cartCard .productInfoArea {display: flex; padding: 20px; border-bottom: 1px solid #ededed; position: relative;}
+#cartView .cartCard .productInfoArea .productInfo {margin-left: 30px; display: flex;}
+#cartView .cartCard .productInfoArea .productInfo .productImgArea {width: 70px; height: 70px; border-radius: 10px; overflow: hidden; margin-right: 10px;}
+#cartView .cartCard .productInfoArea .productInfo .info .productName {font-size: 15px; font-weight: 500; margin-bottom: 10px;}
+#cartView .cartCard .productInfoArea .productInfo .info .deliveryInfo {font-size: 11px; color: #757575;}
+#cartView .cartCard .deliveryFee {padding: 15px 0; text-align: center; font-size: 15px; color: #424242; font-weight: 500;}
+#cartView .billCard {background-color: #fff; border: 1px solid #ededed; border-radius: 10px; padding: 20px; margin-top: 35px;}
+#cartView .billCard .billTable {width: 100%;}
+#cartView .billCard .billTable tr {height: 30px;}
+#cartView .billCard .billTable tr, th {border: 0; font-size: 15px; color: #424242; font-weight: 400;}
+#cartView .billCard .billTable td {border: 0; text-align: right; font-size: 15px; font-weight: 700; color: #424242;}
+#cartView .billCard .billTable .finalPrice {font-size: 24px; font-weight: 700;}

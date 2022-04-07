@@ -14,6 +14,9 @@ button:focus {outline: 0;}
 header {background-color: #fff; position: relative; top: 0; left: 0; right: 0; z-index: 100;}
 footer {height: 100px; text-align: center; line-height: 100px;}
 
+.redText {color: rgb(255, 119, 119);}
+.blueText {color: #35C5F0;}
+
 .img {object-fit: cover; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: auto; width: 100%;}
 .h-img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 100%; width: auto;}
 .img-center {width: 100%; height: 100%; overflow: hidden; position: relative; margin: auto;}
@@ -22,11 +25,18 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .siteName {font-family: beanpoleotM00; font-size: 40px; }
 .header .gnb .nav {font-size: 18px; font-weight: bold; display: flex; margin: auto; height: 100%; text-align: center;}
 .header .gnb .nav .nav-link {padding: 8px 30px;}
-.header .storeInfoBtn {line-height: 0;}
-.header .storeInfoBtn .storeImg {width: 32px; height: 32px; border-radius: 16px; overflow: hidden;}
-.header .storeInfoBtn .storeMenu {visibility: hidden;}
-.contents {position: relative; min-height: 450px; margin: 50px;}
-.titleLabel {font-size: 30px; font-family: beanpoleotM00; margin: auto; text-align: center; padding: 20px 0;}
+.header .storeInfoBtnArea {line-height: 0;}
+.header .storeImg {width: 32px; height: 32px; border-radius: 16px; overflow: hidden;}
+.header #storeMenu {z-index: 200; position: absolute; top: 80px; right: 10%;  width: 150px; background-color: #fff; box-shadow: 2px 2px 4px #b5b5b5; border-radius: 5px; border: 1px solid #DBDBDB;}
+.header #storeMenu  > ul > li {height: 45px; padding: 5px;}
+.header #storeMenu  > ul > li > a {display: block; text-align: center;width: 100%; height: 100%; line-height: 35px;}
+.header #storeMenu  > ul > li > a:hover {background-color: #efefef;}
+.header .saveBtn {background-color: #35C5F0; color: #fff; font-weight: 700;}
+.header .cancelBtn {background-color: #DBDBDB; color: #000; font-weight: 500; margin-right: 10px;}
+
+
+.contents {position: relative; min-height: 450px;}
+.titleLabel {cursor: default; font-size: 30px; font-family: beanpoleotM00; margin: auto; text-align: center; padding: 20px 0;}
 .summaryTable {width: 800px; text-align: center; margin: auto;}
 
 /* 로그인 화면 */
@@ -38,3 +48,19 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .loginBox #login-btn {background-color: #35C5F0; color: #fff; height: 50px;}
 .loginBox #join-btn {background-color: #DBDBDB; color: #000; height: 50px; line-height: 35px;}
 .bg-gray {background-color: #c1c1c1; color: #fff;}
+
+
+.pageTitle {margin: 30px 0; font-size: 30px; font-weight: 700;}
+#createProductView .formArea .form-group .label {width: 120px; font-size: 15px; font-weight: 600;}
+.border-1-red {border: 1px solid rgb(255, 119, 119); padding: 0 15px; width: 400px; height: 40px; font-size: 15px; border-radius: 5px;}
+#createProductView .formArea .form-group .productInput {padding: 0 15px; width: 400px; height: 40px; font-size: 15px; border: 1px solid #d6d6d6; border-radius: 5px;}
+#createProductView .formArea .form-group #content {width: 100%; padding: 15px; height: 300px; font-size: 15px; border: 1px solid #d6d6d6; border-radius: 5px;}
+#createProductView .formArea .form-group #thumbnail {display: none;}
+#createProductView .formArea .form-group #subject {width: 100%; padding: 0 15px; height: 40px; font-size: 15px; border: 1px solid #d6d6d6; border-radius: 5px;}
+#createProductView .formArea .form-group .coverImgBox {cursor: pointer; width: 500px; height: 500px; margin: auto; background-color: #F7F8FA; text-align: center; border: 1px dashed #d6d6d6;}
+#createProductView .formArea .form-group .photoBtn {width: 100%; height: 100%; font-weight: 700; color: #757575; display: flex; justify-content: center; align-items: center;}
+#createProductView .message {color: rgb(255, 119, 119); font-size: 13px; margin-left: 130px; margin-bottom: 20px;}
+
+.ListTable {width: 100%; text-align: center;}
+.ListTable thead {background-color: #F5F5F5; cursor: default;}
+.ListTable tr {height: 50px; border: 1px solid #DBDBDB;}

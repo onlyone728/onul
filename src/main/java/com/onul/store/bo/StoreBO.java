@@ -21,6 +21,10 @@ public class StoreBO {
 		return storeDAO.selectStoreByLoginId(loginId);
 	}
 	
+	public Store getStorById(int id) {
+		return storeDAO.selectStorById(id);
+	}
+	
 	public int addStore(Store store, MultipartFile file) {
 		String imagePath = null;
 		

@@ -11,7 +11,7 @@
 			<input type="password" id="password" name="password" class="form-control font-size" placeholder="비밀번호">
 			<button type="submit" id="login-btn" class="btn btn-block">로그인</button>
 			<hr>
-			<a href="#" id="join-btn" class="btn btn-block">판매자 회원가입</a>
+			<a href="/admin/sign_up_view" id="join-btn" class="btn btn-block">판매자 회원가입</a>
 		</form>
 	</div>
 </div>

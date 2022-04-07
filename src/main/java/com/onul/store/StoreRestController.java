@@ -3,6 +3,8 @@ package com.onul.store;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,7 +66,8 @@ public class StoreRestController {
 	@PostMapping("/store/sign_in")
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId,
-			@RequestParam("password") String password) {
+			@RequestParam("password") String password,
+			HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "success");
 		
@@ -85,6 +88,11 @@ public class StoreRestController {
 			result.put("result", "error");
 			result.put("errorMessage", "비밀번호를 확인해 주세요.");
 		}
+		
+		session.setAttribute("storeId", store.getId());
+		session.setAttribute("storeName", store.getStoreName());
+		session.setAttribute("storeImage", store.getStoreImage());
+		session.setAttribute("storeLoginId", store.getLoginId());
 		
 		return result;
 	}

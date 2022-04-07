@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.onul.review.dao.ReviewDAO">
+ 	<select id="selectReviewListByProductId" resultType="com.onul.review.model.Review">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickname`
+			, `storeId`
+			, `productId`
+			, `point`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM	
+			`review`
+		WHERE
+			`productId` = #{productId}
+		ORDER BY `id` DESC			
+ 	</select>
+ </mapper>

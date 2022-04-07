@@ -21,6 +21,26 @@
 		WHERE
 			`loginId` = #{loginId}		
  	</select>
+ 	
+ 	<select id="selectStorById" resultType="com.onul.store.model.Store">
+ 		SELECT
+ 			`id`
+			, `loginId`
+			, `password`
+			, `storeName`
+			, `storeImage`
+			, `businessNumber`
+			, `name`
+			, `phoneNumber`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`store`
+		WHERE
+			`id` = #{id}
+ 	</select>
+ 	
  	<insert id="insertStore" parameterType="com.onul.store.model.Store">
  		INSERT INTO `store`
  		(

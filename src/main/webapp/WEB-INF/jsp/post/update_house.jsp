@@ -268,7 +268,7 @@ $(document).ready(function() {
 				$(this).val('');	// 잘못된 파일 비워주기
 				return;
 			} else {
-				$('.fileList').append('<li class="fileName mb-1">' + file.name + '<button class="delBtn btn">삭제하기</button></li>');
+				$('.fileList').append('<li class="fileName mb-1">' + file.name + '</li>');
 			}     	
 	    }
 	});

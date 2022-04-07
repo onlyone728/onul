@@ -9,5 +9,7 @@ public interface StoreDAO {
 
 	public Store selectStoreByLoginId(String loginId);
 	
+	public Store selectStorById(int id); 
+	
 	public int insertStore(Store store);
 }
