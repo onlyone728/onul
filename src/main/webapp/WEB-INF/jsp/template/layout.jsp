@@ -20,7 +20,7 @@
 <body>
 	<div id="wrap">
 		<header>
-			<jsp:include page="../include/gnb.jsp" />
+			<jsp:include page="../include/gnb_v1.jsp" />
 		</header>
 		<section class="contents">
 			<jsp:include page="../${viewPath}.jsp" />
