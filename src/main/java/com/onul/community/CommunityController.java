@@ -17,6 +17,10 @@ import com.onul.community.bo.PhotoViewBO;
 import com.onul.community.model.IntroduceHouseView;
 import com.onul.community.model.KnowhowView;
 import com.onul.community.model.PhotoView;
+import com.onul.knowhowPost.model.Category;
+import com.onul.photo.model.Space;
+import com.onul.shop.bo.ProductViewBO;
+import com.onul.shop.model.ProductView;
 
 @Controller
 public class CommunityController {
@@ -30,23 +34,27 @@ public class CommunityController {
 	@Autowired
 	private KnowhowViewBO knowhowBO;
 	
+	@Autowired
+	private ProductViewBO productBO;
+	
 	@RequestMapping("/community")
 	public String communityView(
 			Model model) {
 		
 		// post 가져오기
-		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewList(null);
+		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewList(null, null);
 		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null);
 		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, null);
 		
 		// product 가져오기
+		List<ProductView> productList = productBO.generateProductViewList(null);
 		
 		
-		
+		model.addAttribute("productList", productList);
 		model.addAttribute("photoList", photoViewList);
 		model.addAttribute("houseList", houseList);
 		model.addAttribute("knowhowList", knowhowList);
-		model.addAttribute("viewPath", "community/main");
+		model.addAttribute("viewPath", "community/main_v1");
 		return "template/layout";
 	}
 	
@@ -118,10 +126,11 @@ public class CommunityController {
 	
 	@RequestMapping("/community/photo_view")
 	public String photoListView(
+			@RequestParam(value="space", required=false) Space space,
 			Model model) {
 				
 		// DB select
-		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(null);
+		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(space, null);
 		
 		model.addAttribute("postList", photoList);
 		model.addAttribute("viewPath", "community/photo_list");
@@ -141,7 +150,7 @@ public class CommunityController {
 	
 	@RequestMapping("/community/knowhow_view")
 	public String knowhowListView(
-			@RequestParam(value="category", required=false) String category,
+			@RequestParam(value="category", required=false) Category category,
 			Model model) {
 		// DB select
 		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(category, null);

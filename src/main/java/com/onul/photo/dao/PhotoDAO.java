@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.onul.photo.model.Photo;
+import com.onul.photo.model.Space;
 
 @Repository
 public interface PhotoDAO {
@@ -17,6 +18,8 @@ public interface PhotoDAO {
 	public Photo selectPhotoById(int id);
 	
 	public List<Photo> selectPhotoListByUserId(int userId);
+	
+	public List<Photo> selectPhotoListBySpace(Space space); 
 	
 	public void updateHit(int id);
 	

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.onul.knowhowPost.model.Category" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
     
 <div id="createknowhow" class="w60">
 	<div class="requiredArea">
@@ -15,13 +17,9 @@
 				<div class="requiredContent">
 					<select id="category" class="form-control">
 						<option value="" selected>선택해주세요.</option>
-						<option value="시공정보">시공정보</option>
-						<option value="수납">수납</option>
-						<option value="꾸미기 팁">꾸미기 팁</option>
-						<option value="청소">청소</option>
-						<option value="DIY&리폼">DIY&리폼</option>
-						<option value="생활정보">생활정보</option>
-						<option value="기타">기타</option>
+						<c:forEach var="category" items="${Category.values()}">
+							<option value="${category}">${category.label}</option>
+						</c:forEach>
 					</select>
 					<span id="" class="confirm-msg redText d-none"><b>필수 입력 항목입니다.</b></span>
 				</div>
@@ -56,10 +54,8 @@
 		<input type="file" id="file" accept=".jpg, .jpeg, .gif, .png" multiple="multiple">
 		<span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
 	  	<div class="fileListArea my-3" id="fileNameArea">
-			<ul class="fileList">
-				
-			</ul>
-		</div>
+	  		
+	  	</div>
 	</div>
 </div>
 
@@ -105,20 +101,6 @@ $(document).ready(function() {
 		}
 	}
 	
-	$('#subject').keydown(function() {
-		let subject = $('#subject').val();
-		if (subject == '') {
-			$(this).next('.confirm-msg').removeClass('d-none');
-			$(this).css('border-bottom', '1px solid rgb(255, 119, 119)');
-			return;
-		} else {
-			$(this).next('.confirm-msg').addClass('d-none');
-			$(this).css('border-bottom', '1px solid #d6d6d6');
-			return;
-		}
-	});
-	
-	
 	// file 선택
 	let inputFileList = new Array();
 
@@ -130,9 +112,11 @@ $(document).ready(function() {
 	    filesArr.forEach(function(f){
 	    	let reader = new FileReader();
 	    	reader.onload = function(e){
+	    		$('.fileListArea').append('<div><div class="filesPrev"><img width="200px" src="' + e.target.result + '"></div><button type="button" class="mt-2 btn btn-block">삭제</button></div>');
 	    		inputFileList.push(f);
 	    	}
 	    	reader.readAsDataURL(f);
+	    	//console.log(f);
 	    })
 	    
 	    for(let i = 0; i < fileList.length; i++){
@@ -147,9 +131,23 @@ $(document).ready(function() {
 				$(this).val('');	// 잘못된 파일 비워주기
 				return;
 			} else {
-				$('.fileList').append('<li class="fileName mb-1">' + file.name + '<button class="delBtn btn">삭제하기</button></li>');
+				//$('.fileList').append('<li class="fileName mb-1">' + file.name + '<button class="delBtn btn" onclick="delete">삭제하기</button></li>');
 			}     	
 	    }
+	    
+	});
+	
+	$('#subject').keydown(function() {
+		let subject = $('#subject').val();
+		if (subject == '') {
+			$(this).next('.confirm-msg').removeClass('d-none');
+			$(this).css('border-bottom', '1px solid rgb(255, 119, 119)');
+			return;
+		} else {
+			$(this).next('.confirm-msg').addClass('d-none');
+			$(this).css('border-bottom', '1px solid #d6d6d6');
+			return;
+		}
 	});
 	
 	// saveBtn

@@ -45,9 +45,17 @@ public class UserController {
 	@RequestMapping("/user/{uId}")
 	public String myPage(
 			@PathVariable("uId") int uId,
+			HttpSession session,
 			Model model) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		UserView user = new UserView();
+		
 		// DB 가져오기
-		UserView user = userViewBO.generateUserView(uId);
+		if (userId != null) {
+			user = userViewBO.generateUserView(uId, userId);
+		} else {
+			user = userViewBO.generateUserView(uId, null);
+		}
 		
 		model.addAttribute("user", user);
 		model.addAttribute("menuPath", "profile-all");
@@ -58,9 +66,17 @@ public class UserController {
 	public String myPageMenu(
 			@PathVariable("uId") int uId,
 			@PathVariable("profileMenu") String profileMenu,
+			HttpSession session,
 			Model model) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		UserView user = new UserView();
+		
 		// DB 가져오기
-		UserView user = userViewBO.generateUserView(uId);
+		if (userId != null) {
+			user = userViewBO.generateUserView(uId, userId);
+		} else {
+			user = userViewBO.generateUserView(uId, null);
+		}
 		
 		model.addAttribute("user", user);
 		

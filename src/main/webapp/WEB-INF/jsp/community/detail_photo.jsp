@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div id="photoDetail" class="w80">
 	<div class="postArea">
+		<div class="d-flex justify-content-between my-3">
+			<div class="spaceLabel">${photoView.photo.space.label}</div>
+			<div class="label"><fmt:formatDate value="${photoView.photo.createdAt}" pattern="yyyy-MM-dd"/></div>
+		</div>
 		<div class="photoArea">
 			<img alt="${photoView.photo.nickName}님의 사진" src="${photoView.photo.imagePath}" class="w-100">
 		</div>
@@ -132,9 +137,9 @@ $(document).ready(function() {
 	});
 	
 	// follow
-	$('.followBtn').on('click', function() {
+	$('.followBtn').on('click', function(e) {
+		e.preventDefault();
 		let followId = $(this).data('user-id');
-		
 		$.ajax({
 			type: "GET"
 			, url: "/follow/create"

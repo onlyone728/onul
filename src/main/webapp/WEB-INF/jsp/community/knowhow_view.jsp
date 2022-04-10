@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.onul.knowhowPost.model.Category" %>
 
 <div id="knowhowList" class="w80">
 	<div class="categoryTabArea">
-		<input type="button" class="all categoryTab btn" value="전체">
-		<input type="button" class="constructionInfoTab categoryTab btn" value="시공정보">
-		<input type="button" class="storageTab categoryTab btn" value="수납">
-		<input type="button" class="decoTab categoryTab btn" value="꾸미기 팁">
-		<input type="button" class="cleaningTab categoryTab btn" value="청소">
-		<input type="button" class="diyTab categoryTab btn" value="DIY&리폼">
-		<input type="button" class="lifeInfoTab categoryTab btn" value="생활정보">
-		<input type="button" class="etcTab categoryTab btn" value="기타">
+		<button type="button" class="categoryTab btn" value="ALL">ALL</button>
+		<c:forEach var="category" items="${Category.values()}">
+			<button type="button" class="categoryTab btn" value="${category}">${category.label}</button>
+		</c:forEach>
 	</div>
 	<div class="gridBetween">
 		<c:forEach var="post" items="${postList}">
@@ -35,7 +32,7 @@
 $(document).ready(function() {
 	$('.categoryTab').on('click', function() {
 		let category = $(this).val();
-		if (category == '전체') {
+		if (category == 'ALL') {
 			location.href = "/community/knowhow_view"
 		} else {
 			location.href = "/community/knowhow_view?category=" + category;

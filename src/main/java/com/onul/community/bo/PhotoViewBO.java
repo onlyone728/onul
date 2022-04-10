@@ -14,6 +14,7 @@ import com.onul.community.model.PhotoView;
 import com.onul.like.bo.LikeBO;
 import com.onul.photo.bo.PhotoBO;
 import com.onul.photo.model.Photo;
+import com.onul.photo.model.Space;
 import com.onul.user.bo.UserBO;
 import com.onul.user.model.User;
 
@@ -36,16 +37,19 @@ public class PhotoViewBO {
 	private LikeBO likeBO;
 
 	public List<PhotoView> generatePhotoViewList(
+			@RequestParam(value="space", required=false) Space space,
 			@RequestParam(value="userId", required=false) Integer uId) {
 		
 		List<PhotoView> photoViewList = new ArrayList<>();
 		List<Photo> photoList = new ArrayList<>();
 		String postType = "photo";
 		
-		if (uId == null) {
-			photoList = photoBO.getPhotoList();
-		} else {
+		if(space != null) {
+			photoList = photoBO.getPhotoListBySpace(space);
+		} else if (uId != null) {
 			photoList = photoBO.getPhotoListByUserId(uId);
+		} else {
+			photoList = photoBO.getPhotoList();
 		}
 		
 		for(Photo photo : photoList) {

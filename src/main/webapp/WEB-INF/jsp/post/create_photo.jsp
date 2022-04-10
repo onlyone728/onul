@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.onul.photo.model.Space" %>	
 
 <div id="photoCreate" class="w70">
 	<div class="d-flex justify-content-between">
@@ -10,12 +12,21 @@
 			<div class="photoBtn">
 				<a href="#"> 
 					<img alt="" src="/image/photo.png" width="64">
-					<div class="">사진 올리기</div>
+					<div>사진 올리기</div>
 				</a>
 			</div>
 			<input type="file" id="file" class="d-none" accept=".jpg, .jpeg, .gif, .png">
 		</div>
 		<div class="contentArea">
+			<div class="requiredContent">
+				<select id="space">
+					<option value="" selected disabled>선택하세요.</option>
+					<c:forEach var="space" items="${Space.values()}">
+						<option value="${space}">${space.label}</option>
+					</c:forEach>
+				</select>
+				<div class="confirm-msg redText my-2 d-none">필수 입력항목입니다.</div>
+			</div>
 			<textarea rows="15" id="content" class="box-radius-5 border-1-gray"></textarea>
 		</div>
 	</div>
@@ -68,10 +79,21 @@
 			}
 		});
 		
+		// space validation
+		$('#space').focusout(function() {
+			let space = $(this).val();
+			if (space == '') {
+				$(this).next('.confirm-msg').removeClass('d-none');
+			} else {
+				$(this).next('.confirm-msg').addClass('d-none');
+			}
+		});
+		
 		// 글 올리기
 		$('.saveBtn').on('click', function() {
 			let content = $('#content').val();
 			let file = $('#file').val();
+			let space = $('#space').val();
 			
 			if (file == '') {
 				alert("이미지 파일을 업로드해주세요.");
@@ -85,6 +107,11 @@
 				}
 			}
 			
+			if (space == '') {
+				alert("공간을 선택해주세요.");
+				return;
+			}
+			
 			if (content == '') {
 				alert("내용을 입력해주세요.");
 				return;
@@ -93,6 +120,7 @@
 			// form 
 			let formData = new FormData();
 			formData.append('postType', 'photo');
+			formData.append('space', space);
 			formData.append('content', content);
 			formData.append('file', $('#file')[0].files[0]);
 			

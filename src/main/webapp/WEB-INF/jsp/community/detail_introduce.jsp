@@ -127,9 +127,9 @@
 $(document).ready(function() {
 	let postType = "introduceHouse";
 	// follow
-	$('.followBtn').on('click', function() {
+	$('.followBtn').on('click', function(e) {
+		e.preventDefault();
 		let followId = $(this).data('user-id');
-		
 		$.ajax({
 			type: "GET"
 			, url: "/follow/create"
@@ -149,6 +149,7 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
 	// like
 	$('.likeBtn').on('click', function(e) {
 		e.preventDefault();

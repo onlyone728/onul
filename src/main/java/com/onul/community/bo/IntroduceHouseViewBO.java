@@ -37,7 +37,7 @@ public class IntroduceHouseViewBO {
 	private LikeBO likeBO;
 	
 	public List<IntroduceHouseView> generateIntroduceHouseList(
-			@RequestParam(value="userId", required=false) Integer uId) {
+			@RequestParam(value = "userId", required = false) Integer uId) {
 		
 		List<IntroduceHouseView> introduceHouseViewList = new ArrayList<>();
 		List<IntroduceHouse> introduceHouseList = new ArrayList<>();

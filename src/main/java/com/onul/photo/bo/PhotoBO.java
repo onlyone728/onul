@@ -12,6 +12,7 @@ import com.onul.common.FileManagerService;
 import com.onul.like.bo.LikeBO;
 import com.onul.photo.dao.PhotoDAO;
 import com.onul.photo.model.Photo;
+import com.onul.photo.model.Space;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +38,10 @@ public class PhotoBO {
 	
 	public List<Photo> getPhotoList() {
 		return photoDAO.selectPhotoList();
+	}
+	
+	public List<Photo> getPhotoListBySpace(Space space) {
+		return photoDAO.selectPhotoListBySpace(space);
 	}
 	
 	public Photo getPhotoById(int id) {

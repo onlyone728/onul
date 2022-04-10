@@ -13,6 +13,7 @@ public class Photo {
 	private String nickName;
 	private String profileImage;
 	private String postType;
+	private Space space;
 	private String content;
 	private String imagePath;
 	private int hit;

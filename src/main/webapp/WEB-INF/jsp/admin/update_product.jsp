@@ -1,28 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.onul.product.model.ProductCategory" %>
 
 <div id="createProductView" class="w80">
 	<div class="pageTitle">상품 등록</div>
 	<div class="formArea">
 		<div class="form-group">
 			<label for="productName" class="label">상품명</label>
-			<input type="text" id="productName" class="productInput">
+			<input type="text" id="productName" class="productInput" value="${item.productName}">
 		</div>
 		<div class="message d-none">필수 입력 항목입니다.</div>
 		<div class="form-group">
 			<label for="price" class="label">상품 가격</label>
-			<input type="text" id="price" class="productInput" onlyNumber>
+			<input type="text" id="price" class="productInput" value="${item.price}" onlyNumber>
 		</div>
 		<div class="message d-none">필수 입력 항목입니다.</div>
 		<div class="form-group">
 			<label for="productCategory" class="label">상품 카테고리</label>
 			<select id="productCategory" class="productInput">
-				<option value="" selected>선택하세요.</option>
-				<c:forEach var="category" items="${ProductCategory.values()}">
-					<option value="${category}">${category.label}</option>
-				</c:forEach>
+				<option value="" selected>선택하세요.</option>	
+				<option value="FURNITURE">가구</option>	
+				<option value="FABRIC">패브릭</option>	
+				<option value="LIGHT">조명</option>	
+				<option value="HOMEAPPLIANCES">가전</option>	
+				<option value="KITCHEN">주방용품</option>	
+				<option value="DECO">데코/식물</option>	
+				<option value="ORGANIZE">수납정리</option>	
+				<option value="HOUSEHOLDGOODS">생활용품</option>	
+				<option value="DRAWER">서랍/수납장</option>	
+				<option value="DAILYNECESSITY">생필품</option>	
 			</select>
 		</div>
 		<div class="message d-none">필수 입력 항목입니다.</div>
@@ -43,7 +49,7 @@
 			<label for="origin" class="d-block label">썸네일 등록</label>
 			<input type="file" id="thumbnail" accept=".jpg, .jpeg, .gif, .png">
 			<div class="coverImgBox img-center">
-				<div class="photoBtn">
+				<div class="photoBtn d-none">
 					<a href="#"> 
 						<img alt="" src="/image/photo.png" width="64">
 						<div>썸네일 올리기</div>
@@ -51,7 +57,7 @@
 					</a>
 				</div>
 				<div class="img-center">
-					<img src="" alt="미리보기 이미지" class="prevImg img d-none reselectBtn" height="100%">
+					<img src="${item.thumbNail}" alt="미리보기 이미지" class="prevImg img reselectBtn" height="100%">
 				</div>
 			</div>
 		</div>
@@ -64,7 +70,7 @@
 		
 		<div class="form-group">
 			<label for="origin" class="d-block label">상품 설명</label>
-			<textarea id="content" rows="15" cols=""></textarea>
+			<textarea id="content" rows="15" cols="">${item.content}</textarea>
 		</div>
 		<div class="message d-none">필수 입력 항목입니다.</div>
 		
@@ -81,15 +87,10 @@
 
 <script>
 $(document).ready(function() {
+	$('#productCategory').val('${item.productCategory}');
 	// input 숫자만
 	$('input[onlyNumber]').on('keyup', function () {
 	    $(this).val($(this).val().replace(/[^0-9]/g, ""));
-	});
-	
-	// productCategory test
-	$('#productCategory').change(function() {
-		let productCategory = $(this).val();
-		console.log(productCategory);
 	});
 	
 	// productName

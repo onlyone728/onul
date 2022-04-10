@@ -8,7 +8,7 @@
 	</div>
 	
 	<div class="d-flex">
-		<a href="/community" class="btn cancelBtn">취소</a>
+		<a href="#" class="btn cancelBtn">취소</a>
 		<button type="button" class="btn saveBtn">올리기</button>
 	</div>
 </div>
@@ -24,6 +24,13 @@ $(document).ready(function() {
 		} else {
 			$('header').css('position', 'relative');
 		}	
+	});
+	$('.cancelBtn').on('click', function(e) {
+		e.preventDefault();
+		let result = confirm('작성을 취소하시겠습니까?');
+		if(result) {
+			location.href = "/community";
+		}
 	});
 });
 </script>

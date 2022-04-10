@@ -13,7 +13,7 @@ public class Knowhow {
 	private String nickName;
 	private String profileImage;
 	private String postType;
-	private String category;
+	private Category category;
 	private String subject;
 	private String content;
 	private String coverImage;

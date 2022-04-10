@@ -59,7 +59,7 @@ button:focus {outline: 0;}
 
 
 header {border-bottom: 1px solid #EDEDED; height: 100px; background-color: #fff; position: relative; top: 0; left: 0; right: 0; z-index: 100;}
-.contents {padding-top: 50px; /* padding-bottom: 50px; */ min-height: 550px;}
+.contents {padding-top: 0;/* v2: 50px; */ /* padding-bottom: 50px; */ min-height: 550px;}
 footer {height: 100px; text-align: center; line-height: 100px;}
 
 /* #myPage {margin-bottom: 50px;} */
@@ -70,7 +70,7 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 #myPage .nav .mainMyMenu > .profileTab:hover > .subMyMenu {z-index: 60;} 
 #myPage .nav .mainMyMenu > .myShoppintab:hover > .subMyMenu {z-index: 60; visibility: visible;} 
 #myPage .nav .mainMyMenu > .configTab:hover > .subMyMenu {z-index: 60; visibility: visible;} 
-#myPage .nav .mainMyMenu .subMyMenu {padding: 0; display: flex; justify-content: center; margin: auto; height: 100%; text-align: center; background-color: #fff; border-bottom: 1px solid #EDEDED; position: absolute; top: 60px; left: 0; right: 0; height: 50px;}
+#myPage .nav .mainMyMenu .subMyMenu {padding: 0; display: flex; justify-content: center; margin: auto; height: 100%; text-align: center; background-color: #fff; border-bottom: 1px solid #EDEDED; border-top: 1px solid #EDEDED; position: absolute; top: 60px; left: 0; right: 0; height: 50px;}
 #myPage .nav .mainMyMenu .subMyMenu > li {margin: 0 10px; padding: 0 20px; text-align: center;}
 #myPage .nav .mainMyMenu .subMyMenu > li > a {display: block; width: 100%; height: 100%; margin: auto; line-height: 50px;}
 #myPage .nav .mainMyMenu .subMyMenu > li:hover {border-bottom: 3px solid #35C5F0;} 
@@ -110,7 +110,8 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 
 /* header */
 #mainMenu {height: 100%;}
-#mainMenu > li {margin: auto; line-height: 80px; padding-right: 30px; vertical-align: top;}
+/* v1 : padding-right: 10px; v2 : 30px; */
+#mainMenu > li {margin: auto; font-size: 18px; line-height: 80px; padding-right: 10px; vertical-align: top;}
 #mainMenu > li > a {display: block;} 
 #mainMenu > #communityMenuBtn:hover > ul#communityMenu {z-index: 100;}
 #mainMenu > #storeMenuBtn > ul#storeMenu {visibility: hidden;}
@@ -225,6 +226,8 @@ input[type="checkbox"]:checked + .cb:after {display: block;}
 .reselectBtn {cursor: pointer;}
 
 #photoCreate .contentArea {width: 48%;}
+#photoCreate .contentArea .requiredContent {margin-bottom: 10px; }
+#photoCreate .contentArea #space {padding: 0 10px; width: 200px; height: 40px; border: 1px solid #DBDBDB; border-radius: 5px;}
 #photoCreate .contentArea > #content {width: 100%; height: 420px; padding: 20px; resize: none;}
 #photoCreate .contentArea .btnArea {display: flex; justify-content: end;}
 #photoCreate .contentArea .cancelBtn {font-weight: 600; margin-top: 10px; margin-right: 10px;}
@@ -232,6 +235,8 @@ input[type="checkbox"]:checked + .cb:after {display: block;}
 
 #photoDetail {display: flex;}
 #photoDetail .postArea {width: 70%; height: 100%; padding: 0; margin: 0; padding-top: 30px; padding-right: 30px; border-right: 1px solid #EDEDED;}
+#photoDetail .postArea .spaceLabel {background-color: #F5F5F5; border-radius: 5px; font-size: 15px; font-weight: 700; color: #757575; margin-right: 10px; padding: 5px 7px;}
+#photoDetail .postArea .label {color: #757575; font-size: 15px;}
 #photoDetail .userArea {width: 342px; padding-top: 30px; position: fixed; right: 10%; top: 150px;}
 #photoDetail .photoArea {width: 100%; overflow: hidden;}
 #photoDetail .contentArea {width: 100%; padding: 30px 30px;}
@@ -267,7 +272,7 @@ input[type="checkbox"]:checked + .cb:after {display: block;}
 #photoDetail .userArea .editPostArea .delBtn {background-color: rgb(255, 119, 119); color: #fff;}
 
 
-
+#createHouse {margin-top: 30px;}
 #createHouse .requiredArea .openInputBtn {cursor: pointer; width: 100%; padding: 20px 30px; background-color: #fff; text-align: left; font-weight: 700; color: rgb(63, 71, 77); display: flex; justify-content: space-between;}
 #createHouse .requiredArea .requiredContents {padding: 30px; display:none; border-radius: 0 0 5px 5px; border-top: 0;}
 #createHouse .requiredArea .requiredContents .required {display: flex; padding: 5px 0;}
@@ -308,6 +313,7 @@ input[type="checkbox"]:checked + .cb:after {display: block;}
 
 #detailIntroduce .postContent .postTextArea .postText {font-size: 16px; color: #2F3438;}
 
+#createknowhow {margin-top: 30px;}
 #createknowhow .requiredArea .openInputBtn {cursor: pointer; width: 100%; padding: 20px 30px; background-color: #fff; text-align: left; font-weight: 700; color: rgb(63, 71, 77); display: flex; justify-content: space-between;}
 #createknowhow .requiredArea .requiredContents {padding: 30px; display:none; border-radius: 0 0 5px 5px; border-top: 0;}
 #createknowhow .requiredArea .requiredContents .required {display: flex; padding: 5px 0;}
@@ -322,7 +328,8 @@ input[type="checkbox"]:checked + .cb:after {display: block;}
 #createknowhow .coverImgArea .coverImgBox {width: 500px; height: 500px; margin: auto; background-color: #F7F8FA; text-align: center; border: 1px dashed #d6d6d6;}
 #createknowhow .contentArea #subject {width: 100%; height: 70px; color: rgb(63, 71, 77); font-size: 34px; font-weight: 600; padding: 5px 0; border: none; border-bottom: 1px solid #d6d6d6;}
 #createknowhow .contentArea #content {width: 100%; color: rgb(63, 71, 77); font-size: 17px; margin: 30px 0; border: none; resize: none;}
-
+#createknowhow .fileListArea {width: 100%; display: grid; grid-template-columns: 200px 200px 200px 200px; justify-content: space-between; row-gap: 20px;}
+#createknowhow .fileListArea .filesPrev	{width: 250px; height: auto; overflow: hidden;}
 #createknowhow .delBtn {margin-left: 20px;}
 
 #list {margin-top: 30px;}
@@ -349,8 +356,8 @@ input[type="checkbox"]:checked + .cb:after {display: block;}
 #introduceList .introduceCard .infoArea .postInfo {font-size: 13px; font-weight: 400; color: #757575;}
 
 #knowhowList {margin-top: 30px;}
-#knowhowList .categoryTabArea {margin-bottom: 30px;}
-#knowhowList .categoryTabArea .categoryTab {font-size: 15px; font-weight: 700; color: #757575; margin-right: 10px; padding: 5px 7px 6px;}
+.categoryTabArea {margin-bottom: 30px;}
+.categoryTabArea .categoryTab {font-size: 15px; font-weight: 700; color: #757575; margin-right: 10px; padding: 5px 7px 6px;}
 #knowhowList .knowhowCard {width: 100%;}
 #knowhowList .knowhowCard .postImgBox {width: 100%; height: 180px; border-radius: 10px; overflow: hidden;}
 #knowhowList .knowhowCard .postInfoArea {margin: 20px 0; font-size: 12px; font-weight: 400; color: #757575;}
@@ -402,18 +409,19 @@ input[type="checkbox"]:checked + .cb:after {display: block;}
 
 
 
-#cartView {background-color: #F5F5F5; height: 500px; padding: 30px 0; position: relative;}
+#cartView {background-color: #F5F5F5; min-height: 500px; padding: 30px 0; position: relative;}
 #cartView  .left {width: 70%;}
-#cartView  .right {width: 320px; position: fixed; right: 10%;}
+#cartView  .right {width: 330px; position: fixed; min-height: 100%; overflow-x: hidden; right: 10%; padding-bottom: 30px;}
 #cartView .checkbox {position: relative;}
 #cartView .checkLabel {font-size: 16px; margin-top: 3px; margin-left: 20px;}
 #cartView .cartCard {background-color: #fff; border: 1px solid #ededed; border-radius: 10px;}
 #cartView .cartCard .storeName {padding: 15px 0; text-align: center; font-size: 15px; color: #424242; font-weight: 500; border-bottom: 1px solid #ededed;}
 #cartView .cartCard .productInfoArea {display: flex; padding: 20px; border-bottom: 1px solid #ededed; position: relative;}
-#cartView .cartCard .productInfoArea .productInfo {margin-left: 30px; display: flex;}
+#cartView .cartCard .productInfoArea .productInfo {width: 100%; margin-left: 30px; display: flex; justify-content: space-between;}
 #cartView .cartCard .productInfoArea .productInfo .productImgArea {width: 70px; height: 70px; border-radius: 10px; overflow: hidden; margin-right: 10px;}
 #cartView .cartCard .productInfoArea .productInfo .info .productName {font-size: 15px; font-weight: 500; margin-bottom: 10px;}
 #cartView .cartCard .productInfoArea .productInfo .info .deliveryInfo {font-size: 11px; color: #757575;}
+#cartView .cartCard .productInfoArea .productInfo .price {display: flex; align-items: flex-end;}
 #cartView .cartCard .deliveryFee {padding: 15px 0; text-align: center; font-size: 15px; color: #424242; font-weight: 500;}
 #cartView .billCard {background-color: #fff; border: 1px solid #ededed; border-radius: 10px; padding: 20px; margin-top: 35px;}
 #cartView .billCard .billTable {width: 100%;}
@@ -421,3 +429,18 @@ input[type="checkbox"]:checked + .cb:after {display: block;}
 #cartView .billCard .billTable tr, th {border: 0; font-size: 15px; color: #424242; font-weight: 400;}
 #cartView .billCard .billTable td {border: 0; text-align: right; font-size: 15px; font-weight: 700; color: #424242;}
 #cartView .billCard .billTable .finalPrice {font-size: 24px; font-weight: 700;}
+#cartView .orderBtn {width: 100%; height: 50px; margin-top: 10px; border: 0; border-radius: 5px; cursor: pointer; background-color: #35C5F0; color: #fff; font-size: 17px; font-weight: 700;}
+
+
+#productDetailView {width: 100%;}
+#productDetailView .topArea {display: flex;}
+#productDetailView .topArea .imgArea {width: 560px; height: 500px; border-radius: 10px;}
+
+
+#followListView .pageTitle {margin-bottom: 30px; font-weight: 700; font-size: 18px;}
+#followListView .followArea {display: flex; justify-content: space-between; margin: 20px 0;}
+#followListView .followArea .imgBox {width: 40px; height: 40px; border-radius: 20px; overflow: hidden;}
+#followListView .followBtn {font-weight: 700; color: #fff; background-color: #35C5F0;}
+
+#followListView .followArea .nickName {font-size: 14px; color: #424242; font-weight: 700; margin-top: 2px;}
+#followListView .followArea .introduce {font-size: 12px; color: #828C94;}

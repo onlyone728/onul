@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ page import="com.onul.photo.model.Space" %>   
 
 <div id="list" class="w80">
+	<div class="categoryTabArea">
+		<button type="button" class="categoryTab btn" value="ALL">ALL</button>
+		<c:forEach var="space" items="${Space.values()}">
+			<button type="button" class="categoryTab btn" value="${space}">${space.label}</button>
+		</c:forEach>
+	</div>
 	<div class="gridBetween">
 		<c:forEach var="post" items="${postList}">
 			<div class="photoCard column4 relative">
@@ -17,7 +24,7 @@
 								<a href="/user/${post.user.id}">
 									<div class="writerNickName">${post.user.nickName}</div>
 								</a>
-								<c:if test="${userId != post.user.id && post.follow == false}">
+								<c:if test="${userId != post.user.id && post.follow == 'true'}">
 									<div> · </div>
 									<div class="followBtnArea">
 										<a class="followBtn" href="#" data-user-id="${post.user.id}">팔로우</a>
@@ -75,11 +82,20 @@
 
 <script>
 $(document).ready(function() {
+	// 카테고리 탭 클릭
+	$('.categoryTab').on('click', function() {
+		let space = $(this).val();
+		if (space == 'ALL') {
+			location.href = "/community/photo_view"
+		} else {
+			location.href = "/community/photo_view?space=" + space;
+		}
+	});
+	
 	// follow
 	$('.followBtn').on('click', function(e) {
 		e.preventDefault();
 		let followId = $(this).data('user-id');
-		
 		$.ajax({
 			type: "GET"
 			, url: "/follow/create"

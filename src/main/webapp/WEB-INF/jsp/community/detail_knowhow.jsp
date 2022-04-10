@@ -9,7 +9,7 @@
 	</div>
 	<div class="w50">
 		<div class="categoryIndexBox2 ">
-			<div class="categoryIndex mb-2">노하우 / ${post.knowhow.category}</div>
+			<div class="categoryIndex mb-2">노하우 / ${post.knowhow.category.label}</div>
 			<div class="d-flex justify-content-between">
 				<div class="postTitle">${post.knowhow.subject}</div>
 				<c:if test="${post.user.id == userId}">
@@ -118,16 +118,16 @@
 $(document).ready(function() {
 	let postType = "knowhow";
 	// follow
-	$('.followBtn').on('click', function() {
+	$('.followBtn').on('click', function(e) {
+		e.preventDefault();
 		let followId = $(this).data('user-id');
-		
 		$.ajax({
 			type: "GET"
 			, url: "/follow/create"
 			, data: {"followId": followId}
 			, success: function(data) {
 				if (data.result == "success") {
-					alert("팔로우를 추가하였습니다.");
+					alert(data.message);
 					location.reload();
 				} else {
 					alert(data.errorMessage);
@@ -140,6 +140,7 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
 	// like
 	$('.likeBtn').on('click', function() {
 		let postId = $(this).data('post-id');

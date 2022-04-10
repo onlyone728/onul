@@ -118,7 +118,7 @@
  		ORDER BY `id` DESC
  	</select>
  	
- 	<select id="selectKnowhowListByCategory" parameterType="String" resultType="com.onul.knowhowPost.model.Knowhow">
+ 	<select id="selectKnowhowListByCategory" resultType="com.onul.knowhowPost.model.Knowhow">
  		SELECT
  			`id`
 			, `userId`

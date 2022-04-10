@@ -12,6 +12,7 @@ import com.onul.comment.follow.bo.FollowBO;
 import com.onul.comment.model.Comment;
 import com.onul.community.model.KnowhowView;
 import com.onul.knowhowPost.bo.KnowhowBO;
+import com.onul.knowhowPost.model.Category;
 import com.onul.knowhowPost.model.Knowhow;
 import com.onul.knowhowPost.model.KnowhowFiles;
 import com.onul.like.bo.LikeBO;
@@ -37,7 +38,7 @@ public class KnowhowViewBO {
 	private LikeBO likeBO;
 
 	public List<KnowhowView> generateKnowhowList(
-			@RequestParam(value="category", required=false) String category,
+			@RequestParam(value="category", required=false) Category category,
 			@RequestParam(value="userId", required=false) Integer uId) {
 		List<KnowhowView> knowhowViewList = new ArrayList<>();
 		List<Knowhow> knowhowList = new ArrayList<>();

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.onul.knowhowPost.model.Category;
 import com.onul.knowhowPost.model.Knowhow;
 import com.onul.knowhowPost.model.KnowhowFiles;
 
@@ -27,7 +28,7 @@ public interface KnowhowDAO {
 	
 	public List<Knowhow> selectKnowhowList();
 	
-	public List<Knowhow> selectKnowhowListByCategory(String category);
+	public List<Knowhow> selectKnowhowListByCategory(Category category);
 	
 	public List<Knowhow> selectKnowhowListByUserId(int userId);
 	

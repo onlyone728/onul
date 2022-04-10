@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.onul.common.FileManagerService;
 import com.onul.knowhowPost.dao.KnowhowDAO;
+import com.onul.knowhowPost.model.Category;
 import com.onul.knowhowPost.model.Knowhow;
 import com.onul.knowhowPost.model.KnowhowFiles;
 
@@ -87,7 +88,7 @@ public class KnowhowBO {
 		return knowhowDAO.selectKnowhowList();
 	}
 	
-	public List<Knowhow> getKnowhowListByCategory(String category) {
+	public List<Knowhow> getKnowhowListByCategory(Category category) {
 		return knowhowDAO.selectKnowhowListByCategory(category);
 	}
 	
