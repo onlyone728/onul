@@ -18,6 +18,28 @@
  		)
  	</insert>
  	
+ 	<select id="selectFollowListByUserId" resultType="com.onul.comment.follow.model.Follow">
+ 		SELECT
+ 			`userId`
+			, `followId`
+			, `createdAt`
+		FROM 
+			`follow`
+		WHERE
+			`userId` = #{userId}		
+ 	</select>
+ 	
+ 	<select id="selectFollowListByFollowId" resultType="com.onul.comment.follow.model.Follow">
+ 		SELECT
+ 			`userId`
+			, `followId`
+			, `createdAt`
+		FROM 
+			`follow`
+		WHERE
+			`followId` = #{followId}		
+ 	</select>
+ 	
  	<select id="selectFollowCountByUserIdAndFollowId" parameterType="map" resultType="int">
  		SELECT
  			count(*)

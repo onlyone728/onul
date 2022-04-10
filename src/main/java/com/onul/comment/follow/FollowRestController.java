@@ -38,7 +38,11 @@ public class FollowRestController {
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 시도해주세요.");
 			return result;
-		} 
+		} else if (userId == followId) {
+			result.put("result", "error");
+			result.put("errorMessage", "유저 본인은 팔로우 할 수 없습니다.");
+			return result;
+		}
 		
 		// insert BO
 		String resultStr = followBO.addFollow(userId, followId);

@@ -14,8 +14,8 @@
 		</div>
 		<div class="userNickNameArea">${user.user.nickName}</div>
 		<div class="followInfoArea">
-			<div class="followInfo" style="border-right: 1px solid #424242">팔로워 <b>${user.followedCount}</b></div>
-			<div class="followInfo">  팔로잉 <b>${user.followCount}</b></div>
+			<div class="followInfo" style="border-right: 1px solid #424242">팔로워 <a href="/user/${userId}/follower"><b>${user.followedCount}</b></a></div>
+			<div class="followInfo">  팔로잉 <a href="/user/${userId}/following"><b>${user.followCount}</b></a></div>
 		</div>
 		<div class="btnArea">
 			<c:choose>

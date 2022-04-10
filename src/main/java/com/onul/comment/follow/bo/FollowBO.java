@@ -1,9 +1,12 @@
 package com.onul.comment.follow.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onul.comment.follow.dao.FollowDAO;
+import com.onul.comment.follow.model.Follow;
 
 @Service
 public class FollowBO {
@@ -35,6 +38,14 @@ public class FollowBO {
 		int count = followDAO.selectFollowCountByUserIdAndFollowId(userId, followId);
 		
 		return count > 0 ? true:false;
+	}
+	
+	public List<Follow> getFollowListByUserId(int userId) {
+		return followDAO.selectFollowListByUserId(userId);
+	}
+	
+	public List<Follow> getFollowListByFollowId(int followId) {
+		return followDAO.selectFollowListByFollowId(followId);
 	}
 	
 	public int getFollowCountByUserIdAndFollowId(int userId, int followId) {

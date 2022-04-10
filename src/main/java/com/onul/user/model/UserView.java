@@ -2,6 +2,7 @@ package com.onul.user.model;
 
 import java.util.List;
 
+import com.onul.community.model.FollowView;
 import com.onul.community.model.IntroduceHouseView;
 import com.onul.community.model.KnowhowView;
 import com.onul.community.model.PhotoView;
@@ -18,6 +19,9 @@ public class UserView {
 	private List<IntroduceHouseView> houseList;
 	private List<KnowhowView> knowhowList;
 	private List<Like> likeList;
+	private List<FollowView> followerList;
+	private List<FollowView> followingList;
+	private boolean isFollow;
 	private int followCount;
 	private int followedCount;
 }
