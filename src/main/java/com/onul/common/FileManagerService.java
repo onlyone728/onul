@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,12 +32,18 @@ public class FileManagerService {
 			return null;
 		}
 		
+		
 		// 파일을 바이트 단위로 업로드
 		try {
+			String fileName = file.getOriginalFilename();
+			String ext = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+			UUID uuid = UUID.randomUUID();
+			String newFileName = uuid.toString() + ext;
+			
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get(filePath + file.getOriginalFilename());
+			Path path = Paths.get(filePath + newFileName);
 			Files.write(path, bytes);
-			return "/images/" + directoryName + file.getOriginalFilename();
+			return "/images/" + directoryName + newFileName;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,10 +69,15 @@ public class FileManagerService {
 		List<String> imagePaths = new ArrayList<>();
 		
 		for (int i = 0; i < fileList.size(); i++) {
+			String fileName = fileList.get(i).getOriginalFilename();
+			String ext = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+			UUID uuid = UUID.randomUUID();
+			String newFileName = uuid.toString() + ext;
+			
 			byte[] bytes = fileList.get(i).getBytes();
-			Path path = Paths.get(filePath + fileList.get(i).getOriginalFilename());
+			Path path = Paths.get(filePath + newFileName);
 			Files.write(path, bytes); // 파일 생성
-			imagePaths.add("/images/" + directoryName + fileList.get(i).getOriginalFilename());
+			imagePaths.add("/images/" + directoryName + newFileName);
 		}
 		return imagePaths;
 	}
@@ -95,26 +107,15 @@ public class FileManagerService {
 	
 	public void deleteFiles(List<String> imagePaths) throws IOException {
 		// /images/jaeyong_1649588582473/FAB54EA0-9BB2-4DCB-93AF-3F1F30518D85_4_5005_c.jpeg
-		Path path = null;
-		List<Path> directoryList = new ArrayList<>();
-		
 		for(int i = 0; i < imagePaths.size(); i++) {
-			path = Paths.get(FILE_UPLOAD_PATH + imagePaths.get(i).replace("/images/", ""));
-			Path directoryName = path.getParent();
-			for(int j = 0; j < directoryList.size(); j++) {
-				if (directoryList.get(j).equals(directoryName)) {
-					directoryList.add(directoryName);
-				}
-			}
-			
-			if (Files.exists(path)) {	// 이미지 파일이 있으면 삭제
-				Files.delete(path);
-			}
+			deleteOneFile(imagePaths.get(i));
 		}
 		// 디렉토리(폴더) 삭제
-		for (int i = 0; i < directoryList.size(); i++) {
-			if (Files.exists(directoryList.get(i))) {
-				Files.delete(directoryList.get(i));
+		for (int i = 0; i < imagePaths.size(); i++) {
+			Path path = Paths.get(FILE_UPLOAD_PATH + imagePaths.get(i).replace("/images/", ""));
+			path = path.getParent();
+			if (Files.exists(path)) {
+				Files.delete(path);
 			}
 		}
 	}
