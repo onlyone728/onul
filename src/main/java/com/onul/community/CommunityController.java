@@ -42,9 +42,9 @@ public class CommunityController {
 			Model model) {
 		
 		// post 가져오기
-		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewList(null, null);
-		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null);
-		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, null);
+		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewList(null, null, null);
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null, null);
+		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, null, null);
 		IntroduceHouseView mainPost = introduceBO.generateIntroduceHouseView(16, null);
 		KnowhowView subPost = knowhowBO.generateKnowhowView(12, null);
 		
@@ -133,7 +133,7 @@ public class CommunityController {
 			Model model) {
 				
 		// DB select
-		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(space, null);
+		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(space, null, null);
 		
 		model.addAttribute("postList", photoList);
 		model.addAttribute("viewPath", "community/photo_list");
@@ -144,7 +144,7 @@ public class CommunityController {
 	public String introduceListView(
 			Model model) {
 		// DB select
-		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null);
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null, null);
 		
 		model.addAttribute("houseList", houseList);
 		model.addAttribute("viewPath", "community/introduceHouse_list");
@@ -156,12 +156,27 @@ public class CommunityController {
 			@RequestParam(value="category", required=false) Category category,
 			Model model) {
 		// DB select
-		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(category, null);
+		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(category, null, null);
 			
 		model.addAttribute("postList", knowhowList);
 		model.addAttribute("viewPath", "community/knowhow_view");
 		return "template/layout";
 	}
 	
-	
+	@RequestMapping("/community/search")
+	public String searchView(
+			@RequestParam("keyword") String keyword,
+			Model model) {
+		// postType별 List 생성
+		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(null, null, keyword);
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null, keyword);	
+		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, null, keyword);
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("knowhowList", knowhowList);
+		model.addAttribute("houseList", houseList);
+		model.addAttribute("photoList", photoList);
+		model.addAttribute("viewPath", "community/search");
+		return "template/layout";
+	}
 }

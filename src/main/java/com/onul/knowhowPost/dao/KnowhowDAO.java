@@ -32,6 +32,8 @@ public interface KnowhowDAO {
 	
 	public List<Knowhow> selectKnowhowListByUserId(int userId);
 	
+	public List<Knowhow> selectKnowhowListByKeyword(String keyword);
+	
 	public Knowhow selectKnowhowByIdUserId(
 			@Param("id") int id, 
 			@Param("userId") int userId);

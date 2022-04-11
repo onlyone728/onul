@@ -44,6 +44,10 @@ public class PhotoBO {
 		return photoDAO.selectPhotoListBySpace(space);
 	}
 	
+	public List<Photo> getPhotoListByKeyword(String keyword) {
+		return photoDAO.selectPhotoListByKeyword(keyword);
+	}
+	
 	public Photo getPhotoById(int id) {
 		return photoDAO.selectPhotoById(id);
 	}

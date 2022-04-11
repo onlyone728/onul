@@ -13,6 +13,8 @@ public interface IntroduceHouseDAO {
 
 	public List<IntroduceHouse> selectIntroduceListOrderByHit();
 	
+	public List<IntroduceHouse> selectIntroduceHouseListByKeyword(String keyword);
+	
 	public int insertIntroduceHouse(IntroduceHouse house);
 	
 	public int updateIntroduceHouse(

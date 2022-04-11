@@ -152,7 +152,11 @@ public class KnowhowBO {
 	public List<Knowhow> getKnowhowListByUserId(int userId) {
 		return knowhowDAO.selectKnowhowListByUserId(userId);
 	}
-
+	
+	public List<Knowhow> getKnowhowListByKeyword(String keyword) {
+		return knowhowDAO.selectKnowhowListByKeyword(keyword);
+	}
+ 
 	public List<KnowhowFiles> getKnowhowFilesListByPostId(int postId) {
 		return knowhowDAO.selectKnowhowFilesListByPostId(postId);
 	}

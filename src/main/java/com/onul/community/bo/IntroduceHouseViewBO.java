@@ -37,13 +37,16 @@ public class IntroduceHouseViewBO {
 	private LikeBO likeBO;
 	
 	public List<IntroduceHouseView> generateIntroduceHouseList(
-			@RequestParam(value = "userId", required = false) Integer uId) {
+			@RequestParam(value = "userId", required = false) Integer uId,
+			@RequestParam(value="keyword", required=false) String keyword) {
 		
 		List<IntroduceHouseView> introduceHouseViewList = new ArrayList<>();
 		List<IntroduceHouse> introduceHouseList = new ArrayList<>();
 		
 		if (uId != null) {
 			introduceHouseList = introduceBO.getIntroduceHouseListByUserId(uId);
+		} else if (keyword != null) {
+			introduceHouseList = introduceBO.getIntroduceHouseListByKeyword(keyword);
 		} else {
 			introduceHouseList = introduceBO.getIntroduceHouseList();
 		}

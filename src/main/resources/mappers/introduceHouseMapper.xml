@@ -188,6 +188,32 @@
 			AND `userId` = #{userId}
  	</select>
  	
+ 	<select id="selectIntroduceHouseListByKeyword" parameterType="String" resultType="com.onul.introduceHousePost.model.IntroduceHouse">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickName`
+			, `profileImage`
+			, `postType`
+			, `type`
+			, `area`
+			, `familyType`
+			, `fieldOfWork`
+			, `worker`
+			, `subject`
+			, `content`
+			, `coverImage`
+			, `hit`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`introduceHouse`
+		WHERE
+			`subject` LIKE CONCAT('%',#{keyword},'%')
+			OR `content` LIKE CONCAT('%',#{keyword},'%') 
+			OR `nickName` LIKE CONCAT('%',#{keyword},'%') 
+ 	</select>
+ 	
  	<update id="updateHit" parameterType="int">
  		UPDATE 
  			`introduceHouse`

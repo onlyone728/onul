@@ -160,6 +160,28 @@
  			AND `userId` = #{userId}
  	</select>
  	
+ 	<select id="selectKnowhowListByKeyword" parameterType="String" resultType="com.onul.knowhowPost.model.Knowhow">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickName`
+			, `profileImage`
+			, `postType`
+			, `category`
+			, `subject`
+			, `content`
+			, `coverImage`
+			, `hit`
+			, `createdAt`
+			, `updatedAt`
+		FROM	
+ 			`knowhow`
+ 		WHERE
+ 			`subject` LIKE CONCAT('%',#{keyword},'%')
+ 			OR `content` LIKE CONCAT('%',#{keyword},'%')
+ 			OR `nickName` LIKE CONCAT('%',#{keyword},'%')
+ 	</select>
+ 	
  	<update id="updateKnowhow" parameterType="map">
  		UPDATE
  			`knowhow`

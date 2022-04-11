@@ -21,6 +21,8 @@ public interface PhotoDAO {
 	
 	public List<Photo> selectPhotoListBySpace(Space space); 
 	
+	public List<Photo> selectPhotoListByKeyword(String keyword);
+	
 	public void updateHit(int id);
 	
 	public int insertPhoto(Photo photo);

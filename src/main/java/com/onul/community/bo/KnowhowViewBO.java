@@ -39,7 +39,8 @@ public class KnowhowViewBO {
 
 	public List<KnowhowView> generateKnowhowList(
 			@RequestParam(value="category", required=false) Category category,
-			@RequestParam(value="userId", required=false) Integer uId) {
+			@RequestParam(value="userId", required=false) Integer uId,
+			@RequestParam(value="keyword", required=false) String keyword) {
 		List<KnowhowView> knowhowViewList = new ArrayList<>();
 		List<Knowhow> knowhowList = new ArrayList<>();
 		
@@ -47,6 +48,8 @@ public class KnowhowViewBO {
 			knowhowList = knowhowBO.getKnowhowListByCategory(category);
 		} else if (uId != null) {
 			knowhowList = knowhowBO.getKnowhowListByUserId(uId);
+		} else if (keyword != null) {
+			knowhowList = knowhowBO.getKnowhowListByKeyword(keyword);
 		} else {
 			knowhowList = knowhowBO.getKnowhowList();
 		}

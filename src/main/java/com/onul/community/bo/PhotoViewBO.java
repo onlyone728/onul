@@ -38,7 +38,8 @@ public class PhotoViewBO {
 
 	public List<PhotoView> generatePhotoViewList(
 			@RequestParam(value="space", required=false) Space space,
-			@RequestParam(value="userId", required=false) Integer uId) {
+			@RequestParam(value="userId", required=false) Integer uId,
+			@RequestParam(value="keyword", required=false) String keyword) {
 		
 		List<PhotoView> photoViewList = new ArrayList<>();
 		List<Photo> photoList = new ArrayList<>();
@@ -48,6 +49,8 @@ public class PhotoViewBO {
 			photoList = photoBO.getPhotoListBySpace(space);
 		} else if (uId != null) {
 			photoList = photoBO.getPhotoListByUserId(uId);
+		} else if (keyword != null) {
+			photoList = photoBO.getPhotoListByKeyword(keyword);
 		} else {
 			photoList = photoBO.getPhotoList();
 		}

@@ -156,6 +156,10 @@ public class IntroduceHouseBO {
 		return introduceDAO.selectIntroduceFilesByPostId(postId);
 	}
 	
+	public List<IntroduceHouse> getIntroduceHouseListByKeyword(String keyword) {
+		return introduceDAO.selectIntroduceHouseListByKeyword(keyword);
+	}
+	
 	public IntroduceHouse getIntroduceHouseByIdUserId(int id, int userId) {
 		return introduceDAO.selectIntroduceHouseByIdUserId(id, userId);
 	}
