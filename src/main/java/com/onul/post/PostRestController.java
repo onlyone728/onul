@@ -209,6 +209,38 @@ public class PostRestController {
 		}
 	}
 	
+	@PutMapping("/post/update_knowhow")
+	public Map<String, Object> updateKnowhow(
+			@RequestParam("postId") int postId,
+			@ModelAttribute Knowhow knowhow,
+			@RequestParam(value="coverImageFile", required=false) MultipartFile coverImageFile,
+			@RequestParam(value="images", required=false) List<MultipartFile> files,
+			HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		String loginId = (String) session.getAttribute("userLoginId");
+		
+		if (userId == null) {
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 시도해주세요.");
+			return result;
+		} else {
+			// DB insert
+			int count = knowhowBO.updateKnowhowById(postId, userId, loginId, knowhow, coverImageFile, files);
+			
+			if (count < 1) {
+				result.put("result", "error");
+				result.put("errorMessage", "업데이트에 실패했습니다. 관리자에게 문의하세요.");
+			} else if (count == -1) {
+				result.put("result", "error");
+				result.put("errorMessage", "수정할 글이 존재하지 않습니다. 확인 후 시도해주세요.");
+			}
+		}
+		return result;
+	}
+	
 	@DeleteMapping("/post/phote_delete")
 	public Map<String, Object> deletePhoto(int postId,
 			HttpSession session) {
@@ -265,6 +297,33 @@ public class PostRestController {
 		if (count < 1) {
 			result.put("result", "error");
 			result.put("errorMessage", "삭제에 실패하였습니다. 관리자에게 문의하세요.");
+		}
+		return result;
+	}
+	
+	@DeleteMapping("/post/knowhow_delete")
+	public Map<String, Object> deleteKnowhow (
+			@RequestParam("postId") int id,
+			HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		if (userId == null) {
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 시도해주세요.");
+			return result;
+		} else {
+			Knowhow knowhow = knowhowBO.getKnowhowByIdUserId(id, userId);
+			
+			if (knowhow == null) {
+				result.put("result", "error");
+				result.put("errorMessage", "잘못된 접근입니다. 확인 후 시도해주세요.");
+				return result;
+			} else {
+				// BO
+				knowhowBO.deleteKnowhow(id, userId);
+			}
 		}
 		return result;
 	}

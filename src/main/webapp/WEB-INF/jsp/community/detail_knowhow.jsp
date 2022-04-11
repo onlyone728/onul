@@ -210,5 +210,43 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	// 수정하기
+	$('.editBtn').on('click', function() {
+		let postId = $(this).data('post-id');
+		let writerId = $(this).data('user-id');
+		let userId = ${userId};
+		
+		if (writerId != userId) {
+			alert("잘못된 접근입니다.");
+			return;
+		}
+		location.href = "/post/knowhow_update_view?postId=" + postId;
+	});
+	
+	// 삭제하기
+	$('.delBtn').on('click', function() {
+		let postId = $(this).data('post-id');
+		
+		let choice = confirm("삭제하시겠습니까?");
+		if (choice) {
+			$.ajax({
+				type: "DELETE"
+				, url: "/post/knowhow_delete"
+				, data: {"postId":postId}
+				, success: function(data) {
+					if (data.result == "success") {
+						alert("글이 삭제되었습니다.");
+						location.href = "/community/knowhow_view";
+					} else {
+						alert(data.message);
+					}
+				}
+				, error: function(e) {
+					alert("삭제에 실패하였습니다.");
+				}
+			});		
+		}
+	});
 });
 </script>

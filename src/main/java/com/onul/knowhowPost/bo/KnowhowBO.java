@@ -1,6 +1,7 @@
 package com.onul.knowhowPost.bo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,28 +80,123 @@ public class KnowhowBO {
 		}
 		return postId;
 	}
-	
+
+	public int updateKnowhowById(int id, int userId, String loginId, Knowhow knowhow, MultipartFile coverImage,
+			List<MultipartFile> files) {
+		// coverImage 1개
+		String coverImagePath = null;
+		// 첨부 이미지 1개
+		String imagePath = null;
+		// 이미지 2개 이상
+		List<String> imagePaths = null;
+
+		Knowhow origin = knowhowDAO.selectKnowhowByIdUserId(id, userId);
+
+		if (origin == null) {
+			return -1;
+		} else {
+			if (coverImage != null) {
+				// 파일 삭제
+				try {
+					fms.deleteFile(origin.getCoverImage());
+				} catch (IOException e) {
+					log.error("[file delete] 파일 삭제 실패 {} {}", id, origin.getCoverImage());
+				}
+
+				// 파일 저장
+				coverImagePath = fms.saveFile(loginId, coverImage);
+
+				// DB insert
+				knowhow.setCoverImage(coverImagePath);
+			}
+
+			if (files != null) {
+				if (files.size() == 1) {
+					imagePath = fms.saveFile(loginId, files.get(0));
+					knowhowDAO.insertFile(id, imagePath);
+				} else {
+					try {
+						imagePaths = fms.saveFiles(loginId, files);
+						for (int i = 0; i < imagePaths.size(); i++) {
+							knowhowDAO.insertFile(id, imagePaths.get(i));
+						}
+					} catch (IOException e) {
+						log.error("[knowhow] 업데이트 중 첨부파일 저장에 실패하였습니다. {}", id);
+					}
+				}
+			}
+		}
+		return knowhowDAO.updateKnowhow(id, knowhow);
+	}
+
 	public Knowhow getKnowhowById(int id) {
 		return knowhowDAO.selectKnowhowById(id);
 	}
-	
+
 	public List<Knowhow> getKnowhowList() {
 		return knowhowDAO.selectKnowhowList();
 	}
-	
+
 	public List<Knowhow> getKnowhowListByCategory(Category category) {
 		return knowhowDAO.selectKnowhowListByCategory(category);
 	}
-	
+
 	public List<Knowhow> getKnowhowListByUserId(int userId) {
 		return knowhowDAO.selectKnowhowListByUserId(userId);
 	}
-	
+
 	public List<KnowhowFiles> getKnowhowFilesListByPostId(int postId) {
 		return knowhowDAO.selectKnowhowFilesListByPostId(postId);
 	}
-	
+
+	public Knowhow getKnowhowByIdUserId(int id, int userId) {
+		return knowhowDAO.selectKnowhowByIdUserId(id, userId);
+	}
+
+	public void deleteFileByPostIdImagePath(int postId, String imagePath) {
+		try {
+			fms.deleteOneFile(imagePath);
+		} catch (IOException e) {
+			log.error("[file delete] 이미지 삭제에 실패했습니다. {} {}", postId, imagePath);
+		}
+		knowhowDAO.deleteFileByPostIdImagePath(postId, imagePath);
+	}
+
 	public void deleteKnowhowById(int id) {
+		knowhowDAO.deleteKnowhowById(id);
+	}
+
+	@SuppressWarnings("null")
+	public void deleteKnowhow(int id, int userId) {
+		Knowhow knowhow = knowhowDAO.selectKnowhowByIdUserId(id, userId);
+		
+		// file 삭제하기
+		// coverImage
+		try {
+			fms.deleteFile(knowhow.getCoverImage());
+		} catch (IOException e1) {
+			log.error("[file delete] 노하우 커버이미지 삭제 실패 {}", id);
+		}
+		
+		// 첨부파일
+		List<KnowhowFiles> files = knowhowDAO.selectKnowhowFilesListByPostId(id);
+		if (files != null) {
+			List<String> pathList = new ArrayList<>();
+			for (int i = 0; i < files.size(); i++) {
+				pathList.add(files.get(i).getImagePath());
+			}
+			try {
+				fms.deleteFiles(pathList);
+			} catch (IOException e) {
+				log.error("[file delete] 노하우 첨부파일 삭제 실패 {}", id);
+			}
+		}
+		
+		// DB 삭제하기
+		// fileDB
+		knowhowDAO.deleteFileById(id);
+		
+		// knowhowDB
 		knowhowDAO.deleteKnowhowById(id);
 	}
 }

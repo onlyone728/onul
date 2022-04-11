@@ -17,7 +17,6 @@ public class Knowhow {
 	private String subject;
 	private String content;
 	private String coverImage;
-	private String imagePath;
 	private int hit;
 	private Date createdAt;
 	private Date updatedAt;

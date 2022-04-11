@@ -72,6 +72,7 @@ public class FileManagerService {
 	
 	// delete 
 	public void deleteFile(String imagePath) throws IOException {
+		// 디렉토리당 1개일때
 		// imagePath의 /images/onlyone728_173943/sun.png에서 /images/ 를 제거한 path를 실제 저장경로 뒤에 붙인다.
 		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
 		if (Files.exists(path)) {	// 이미지 파일이 있으면 삭제
@@ -85,11 +86,36 @@ public class FileManagerService {
 		}
 	}
 	
-	public void deleteOneFile(int postId, String imagePath) throws IOException {
+	public void deleteOneFile(String imagePath) throws IOException {
 		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
 		if (Files.exists(path)) {
 			Files.delete(path);
 		}
 	}
 	
+	public void deleteFiles(List<String> imagePaths) throws IOException {
+		// /images/jaeyong_1649588582473/FAB54EA0-9BB2-4DCB-93AF-3F1F30518D85_4_5005_c.jpeg
+		Path path = null;
+		List<Path> directoryList = new ArrayList<>();
+		
+		for(int i = 0; i < imagePaths.size(); i++) {
+			path = Paths.get(FILE_UPLOAD_PATH + imagePaths.get(i).replace("/images/", ""));
+			Path directoryName = path.getParent();
+			for(int j = 0; j < directoryList.size(); j++) {
+				if (directoryList.get(j).equals(directoryName)) {
+					directoryList.add(directoryName);
+				}
+			}
+			
+			if (Files.exists(path)) {	// 이미지 파일이 있으면 삭제
+				Files.delete(path);
+			}
+		}
+		// 디렉토리(폴더) 삭제
+		for (int i = 0; i < directoryList.size(); i++) {
+			if (Files.exists(directoryList.get(i))) {
+				Files.delete(directoryList.get(i));
+			}
+		}
+	}
 }

@@ -32,4 +32,21 @@
 		WHERE
 			`postId` = #{postId}	
  	</select>
+ 	
+ 	<delete id="deleteFileByPostIdImagePath" parameterType="map">
+ 		DELETE
+ 		FROM
+ 			`knowhowFiles`
+ 		WHERE
+ 			`postId` = #{postId}
+ 			AND `imagePath`	= #{imagePath}
+ 	</delete>
+ 	
+ 	<delete id="deleteFileById" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`knowhowFiles`
+ 		WHERE
+ 			`postId` = #{postId}	
+ 	</delete>
  </mapper>

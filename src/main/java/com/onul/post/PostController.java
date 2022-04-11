@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.onul.introduceHousePost.bo.IntroduceHouseBO;
 import com.onul.introduceHousePost.model.IntroduceFiles;
 import com.onul.introduceHousePost.model.IntroduceHouse;
+import com.onul.knowhowPost.bo.KnowhowBO;
+import com.onul.knowhowPost.model.Knowhow;
+import com.onul.knowhowPost.model.KnowhowFiles;
 import com.onul.photo.bo.PhotoBO;
 import com.onul.photo.model.Photo;
 
@@ -22,6 +25,9 @@ public class PostController {
 	
 	@Autowired
 	private IntroduceHouseBO houseBO;
+	
+	@Autowired
+	private KnowhowBO knowhowBO;
 	
 	@RequestMapping("/post/photo_create_view")
 	public String photoCreateView(Model model) {
@@ -69,4 +75,17 @@ public class PostController {
 		return "template/post-layout";
 	}
 	
+	@RequestMapping("/post/knowhow_update_view")
+	public String updateKnowhow(
+			@RequestParam("postId") int postId,
+			Model model) {
+		
+		Knowhow knowhow = knowhowBO.getKnowhowById(postId);
+		List<KnowhowFiles> fileList = knowhowBO.getKnowhowFilesListByPostId(postId);
+		
+		model.addAttribute("fileList", fileList);
+		model.addAttribute("knowhow", knowhow);
+		model.addAttribute("viewPath", "post/update_knowhow");
+		return "template/post-layout";
+	}
 }

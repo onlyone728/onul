@@ -160,6 +160,21 @@
  			AND `userId` = #{userId}
  	</select>
  	
+ 	<update id="updateKnowhow" parameterType="map">
+ 		UPDATE
+ 			`knowhow`
+ 		SET
+ 			`category` = #{knowhow.category}
+			, `subject` = #{knowhow.subject}
+			, `content` = #{knowhow.content}
+			<if test="knowhow.coverImage != null">
+			, `coverImage` = #{knowhow.coverImage}
+			</if>
+			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{id}	
+ 	</update>
+ 	
  	<update id="updateHit" parameterType="int">
  		UPDATE 
  			`knowhow`

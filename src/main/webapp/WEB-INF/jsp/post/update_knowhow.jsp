@@ -31,8 +31,8 @@
 	<div class="coverImgArea">
 		<input type="file" id="coverImg" accept=".jpg, .jpeg, .gif, .png">
 		<div class="coverImgBox img-center">
-			<img src="" alt="미리보기 이미지" class="prevImg img d-none reselectBtn" width="500">
-			<div class="photoBtn">
+			<img src="${knowhow.coverImage}" alt="미리보기 이미지" class="prevImg img reselectBtn" width="500">
+			<div class="photoBtn d-none">
 				<a href="#"> 
 					<img alt="" src="/image/photo.png" width="64">
 					<div>커버 사진 올리기</div>
@@ -54,13 +54,23 @@
 		<input type="file" id="file" onchange="addFile(this)" accept=".jpg, .jpeg, .gif, .png" multiple="multiple">
 		<span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
 	  	<div class="fileListArea my-3" id="fileNameArea">
-	  		
+	  		<c:forEach var="file" items="${fileList}" varStatus="status">
+	  			<div id="file${status}" class="filebox">
+	  				<div class="filesPrev">
+	  					<img width="200px" src="${file.imagePath}">
+  					</div>
+  					<button type="button" class="fileDelBtn mt-2 btn btn-block" data-post-id="${knowhow.id}" data-file-name="${file.imagePath}">삭제</button>
+  				</div>
+	  		</c:forEach>
 	  	</div>
 	</div>
 </div>
 
 <script>
 $(document).ready(function() {
+	$("#category").val('${knowhow.category}');
+	$("#subject").val('${knowhow.subject}');
+	$("#content").val('${knowhow.content}');
 	
 	$('#category').focusout(function() {
 		let category = $(this).val();
@@ -72,6 +82,34 @@ $(document).ready(function() {
 			$(this).next('.confirm-msg').addClass('d-none');
 			$(this).removeClass('border-1-red');
 			return;
+		}
+	});
+	
+	// fileDelBtn
+	$('.fileDelBtn').on('click', function() {
+		let result = confirm("선택하신 파일을 삭제하시겠습니까?");
+		if (result) {
+			let postType = 'knowhow';
+			let postId = $(this).data('post-id');
+			let imagePath = $(this).data('file-name');
+			$(this).parent().addClass('d-none');
+			
+			$.ajax({
+				type: "DELETE"
+				, url: "/post/file-delete"
+				, data: {"postType":postType, "postId":postId, "imagePath": imagePath}
+				, success: function(data) {
+					if(data.result) {
+						alert("파일이 삭제되었습니다.");
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error: function(e) {
+					alert("파일 삭제에 실패했습니다. 관리자에게 문의하세요.");
+					return;
+				}
+			});
 		}
 	});
 	
@@ -126,10 +164,7 @@ $(document).ready(function() {
 		}
 		
 		let coverImg = $('#coverImg').val();
-		if (coverImg == '') {
-			alert('커버이미지를 업로드해주세요.');
-			return;
-		} else if (coverImg != '') {
+		if (coverImg != '') {
 			let ext = coverImg.split('.').pop().toLowerCase();
 			if ($.inArray(ext, ['jpg', 'gif', 'png', 'jpeg']) == -1) {
 				alert("gif, jpg, jpeg, png 파일만 업로드 할 수 있습니다.");
@@ -137,6 +172,7 @@ $(document).ready(function() {
 				return;
 			}
 		}
+		
 		let subject = $('#subject').val();
 		if (subject == '') {
 			alert('제목을 입력해주세요.');
@@ -148,6 +184,7 @@ $(document).ready(function() {
 			return;
 		}
 		let formData = new FormData();
+		formData.append('postId', ${knowhow.id});
 		formData.append('postType', 'knowhow');
 		formData.append('category', category);
 		formData.append('coverImageFile', $('#coverImg')[0].files[0]);
@@ -163,19 +200,19 @@ $(document).ready(function() {
 		
 		// ajax
 		$.ajax({
-			type: "POST"
-			, url: "/post/knowhow_create"
+			type: "PUT"
+			, url: "/post/update_knowhow"
 			, data: formData
 			, enctype: "multipart/form-data"
 			, processData: false
 			, contentType: false
 			, success: function(data) {
 				if (data.result == "success") {
-					alert("글이 등록되었습니다.");
-					location.href = "/community/knowhow_detail_view?postId=" + data.postId;
+					alert("글이 수정되었습니다.");
+					location.href = "/community/knowhow_detail_view?postId=" + ${knowhow.id}
 				} else {
 					alert(data.errorMessage);
-					location.href = "/community";
+					location.reload();
 				}
 			}
 		});

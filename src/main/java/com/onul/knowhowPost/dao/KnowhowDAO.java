@@ -32,5 +32,19 @@ public interface KnowhowDAO {
 	
 	public List<Knowhow> selectKnowhowListByUserId(int userId);
 	
+	public Knowhow selectKnowhowByIdUserId(
+			@Param("id") int id, 
+			@Param("userId") int userId);
+	
 	public List<KnowhowFiles> selectKnowhowFilesListByPostId(int postId);
+	
+	public int updateKnowhow(
+			@Param("id") int id,
+			@Param("knowhow") Knowhow knowhow);
+	
+	public void deleteFileByPostIdImagePath(
+			@Param("postId") int postId, 
+			@Param("imagePath") String imagePath);
+	
+	public void deleteFileById(int postId);
 }
