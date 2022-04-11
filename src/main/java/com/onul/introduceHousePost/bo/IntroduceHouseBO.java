@@ -165,7 +165,7 @@ public class IntroduceHouseBO {
 	
 	public void deleteFileByPostIdImagePath(int postId, String imagePath) {
 		try {
-			fms.deleteOneFile(postId, imagePath);
+			fms.deleteOneFile(imagePath);
 		} catch (IOException e) {
 			log.error("[delete file] 이미지 삭제 실패, postId{}, path{}", postId, imagePath);
 		}

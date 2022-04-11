@@ -39,7 +39,7 @@ public class UserController {
 		session.removeAttribute("userNickName");
 		session.removeAttribute("userImage");
 		
-		return "redirect:/user/sign_in_view";
+		return "redirect:/community";
 	}
 	
 	@RequestMapping("/user/{uId}")
@@ -79,13 +79,21 @@ public class UserController {
 		}
 		
 		model.addAttribute("user", user);
-		
-		if (profileMenu.equals("update") || profileMenu.equals("edit-password")) {
-			model.addAttribute("menuPath", "user-" + profileMenu);
-			model.addAttribute("viewPath", "user/update");
+		if (uId == userId) {
+			if (profileMenu.equals("update") || profileMenu.equals("edit-password")) {
+				model.addAttribute("menuPath", "user-" + profileMenu);
+				model.addAttribute("viewPath", "user/update");
+			} else {
+				model.addAttribute("menuPath", "profile-" + profileMenu);
+				model.addAttribute("viewPath", "user/profile");
+			}
 		} else {
-			model.addAttribute("menuPath", "profile-" + profileMenu);
-			model.addAttribute("viewPath", "user/profile");
+			if (profileMenu.equals("update") || profileMenu.equals("edit-password")) {
+				return "redirect:/user/sign_in_view";
+			} else {
+				model.addAttribute("menuPath", "profile-" + profileMenu);
+				model.addAttribute("viewPath", "user/profile");
+			}
 		}
 		return "template/layout";
 	}

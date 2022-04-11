@@ -70,8 +70,12 @@ public class UserViewBO {
 		List<FollowView> followingList = followvBO.generateFollowingList(uId);
 		userView.setFollowingList(followingList);
 		
-		boolean isFollow = followBO.existFollow(uId, userId);
-		userView.setFollow(isFollow);
+		if (userId != null) {
+			boolean isFollow = followBO.existFollow(uId, userId);
+			userView.setFollow(isFollow);
+		} else {
+			userView.setFollow(false);
+		}
 		
 		int followCount = followBO.getFollowCountByUserId(uId);
 		int followedCount = followBO.getFollowCountByFollowId(uId);
