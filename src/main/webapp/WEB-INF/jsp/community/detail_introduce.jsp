@@ -40,14 +40,14 @@
 						<button class="likeBtn btn mr-2" data-post-id="${post.house.id}">+ 좋아요</button>
 					</c:when>
 					<c:when test="${post.filledLike == true}">
-						<button class="likeBtn btn mr-2" data-post-id="${post.house.id}">- 좋아요</button>
+						<button class="likeBtn btn mr-2" data-post-id="${post.house.id}">좋아요 취소</button>
 					</c:when>
 				</c:choose>
 				<c:if test="${userId != post.house.userId && post.follow == false}">
 					<button class="followBtn btn" data-user-id="${post.house.userId}">+ 팔로우</button>
 				</c:if>
 				<c:if test="${userId != post.house.userId && post.follow == true}">
-					<button class="followBtn btn" data-user-id="${post.house.userId}">- 팔로우</button>
+					<button class="followBtn followCancle btn" data-user-id="${post.house.userId}">팔로우 취소</button>
 				</c:if>
 			</div>
 		</div>
@@ -149,6 +149,33 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	// followCancle
+	$('.followCancle').on('click', function(e) {
+		e.preventDefault();
+		let result = confirm("팔로우를 취소하시겠습니까?");
+		if(result) {
+			let followId = $(this).data('user-id');
+			$.ajax({
+				type: "GET"
+				, url: "/follow/create"
+				, data: {"followId": followId}
+				, success: function(data) {
+					if (data.result == "success") {
+						alert(data.message);
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+						location.reload();
+					}
+				}
+				, error: function(e) {
+					alert("팔로우에 실패하였습니다. 관리자에게 문의하세요.");
+					location.reload();
+				}
+			});
+		}
+	})
 	
 	// like
 	$('.likeBtn').on('click', function(e) {

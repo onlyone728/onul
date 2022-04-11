@@ -15,6 +15,10 @@ public interface IntroduceHouseDAO {
 	
 	public int insertIntroduceHouse(IntroduceHouse house);
 	
+	public int updateIntroduceHouse(
+			@Param("postId") int postId,
+			@Param("house") IntroduceHouse house);
+	
 	public void insertFile(
 			@Param("postId") int postId,
 			@Param("imagePath") String imagePath);
@@ -29,7 +33,15 @@ public interface IntroduceHouseDAO {
 	
 	public List<IntroduceFiles> selectIntroduceFilesByPostId(int postId);
 	
+	public IntroduceHouse selectIntroduceHouseByIdUserId(
+			@Param("id") int id, 
+			@Param("userId") int userId);
+	
 	public void deleteIntrodeceFilesByPostId(int postId);
+	
+	public void deleteFileByPostIdImagePath(
+			@Param("postId") int postId, 
+			@Param("imagePath") String imagePath);
 	
 	public void updateHit(int id);
 }

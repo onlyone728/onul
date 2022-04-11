@@ -40,4 +40,13 @@
 		WHERE
 			`postId` = #{postId}	
 	</delete>
+	
+	<delete id="deleteFileByPostIdImagePath" parameterType="map">
+		DELETE
+		FROM
+			`introduceFiles`
+		WHERE
+			`postId` = #{postId}
+			AND `imagePath` = #{imagePath}
+	</delete>
  </mapper>

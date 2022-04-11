@@ -109,13 +109,9 @@
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">첨부파일</div>
 		</div>
-		<input type="file" id="file" accept=".jpg, .jpeg, .gif, .png" multiple="multiple">
+		<input type="file" id="file" onchange="addFile(this)" accept=".jpg, .jpeg, .gif, .png" multiple="multiple">
 		<span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-	  	<div class="fileListArea my-3" id="fileNameArea">
-			<ul class="fileList">
-				
-			</ul>
-		</div>
+	  	<div class="fileListArea my-3" id="fileNameArea"></div>
 	</div>
 </div>
 
@@ -324,10 +320,12 @@ $(document).ready(function() {
 		formData.append('subject', subject);
 		formData.append('content', content);
 
-		for(let i = 0; i < inputFileList.length; i++){
-			// 이미지 값
-			formData.append("images", inputFileList[i]);
-		}
+		for (let i = 0; i < filesArr.length; i++) {
+	        // 삭제되지 않은 파일만 폼데이터에 담기
+	        if (!filesArr[i].is_delete) {
+	            formData.append("images", filesArr[i]);
+	        }
+	    }
 		
 		// ajax
 		$.ajax({
@@ -362,5 +360,76 @@ function openClose() {
 		$('.openInputBtn').css({'border-radius':'5px', 'border': '1px solid #d6d6d6'});
 		$('.requiredContents').hide();
 	}  
+}
+
+//file 첨부 
+let fileNo = 0;
+let filesArr = new Array();
+
+/* 첨부파일 추가 */
+function addFile(obj){
+    let maxFileCnt = 5;   // 첨부파일 최대 개수
+    let attFileCnt = document.querySelectorAll('.filebox').length;    // 기존 추가된 첨부파일 개수
+    let remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
+    let curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
+
+    // 첨부파일 개수 확인
+    if (curFileCnt > remainFileCnt) {
+        alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
+    } else {
+        for (const file of obj.files) {
+            // 첨부파일 검증
+            if (validation(file)) {
+                // 파일 배열에 담기
+                var reader = new FileReader();
+                var fileUrl = '';
+                reader.onload = function (e) {
+                    filesArr.push(file);
+                    fileUrl = e.target.result;
+                    
+	                // 목록 추가
+	                let htmlData = '';
+	                htmlData += '<div id="file' + fileNo + '" class="filebox">';
+	                htmlData += '<div class="filesPrev"><img width="200px" src="' + fileUrl + '"></div>';
+	                htmlData += '<button type="button" class="delete mt-2 btn btn-block" onclick="deleteFile(' + fileNo + ');">삭제</button>';
+	                htmlData += '</div>';
+	                $('#fileNameArea').append(htmlData);
+	                fileNo++;
+                };
+                reader.readAsDataURL(file);
+
+            } else {
+                continue;
+            }
+        }
+    }
+    // 초기화
+    document.querySelector('#file').value = "";
+}
+
+/* 첨부파일 검증 */
+function validation(obj){
+    const fileTypes = ['application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tif', 'application/haansofthwp', 'application/x-hwp'];
+    if (obj.name.length > 100) {
+        alert("파일명이 100자 이상인 파일은 제외되었습니다.");
+        return false;
+    } else if (obj.size > (100 * 1024 * 1024)) {
+        alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
+        return false;
+    } else if (obj.name.lastIndexOf('.') == -1) {
+        alert("확장자가 없는 파일은 제외되었습니다.");
+        return false;
+    } else if (!fileTypes.includes(obj.type)) {
+        alert("첨부가 불가능한 파일은 제외되었습니다.");
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/* 첨부파일 삭제 */
+function deleteFile(num) {
+    document.querySelector("#file" + num).remove();
+    filesArr[num].is_delete = true;
 }
 </script>

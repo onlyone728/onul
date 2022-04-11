@@ -85,6 +85,56 @@ public class IntroduceHouseBO {
 		return postId;
 	}
 	
+	public int updateIntroduceHouse(int postId, int userId, String loginId, IntroduceHouse house, MultipartFile coverImage, List<MultipartFile> files) {
+		// coverImage 1개
+		String coverImagePath = null;
+		// 첨부 이미지 1개
+		String imagePath = null;
+		// 이미지 2개 이상
+		List<String> imagePaths = null;
+		
+		IntroduceHouse origin = introduceDAO.selectIntroduceHouseByIdUserId(postId, userId);
+		
+		if (origin == null) {
+			return -1;
+		} else {
+			if(coverImage != null) {
+				// 파일 삭제
+				try {
+					fms.deleteFile(origin.getCoverImage());
+				} catch (IOException e) {
+					log.error("[file delete] 파일 삭제 실패 {} {}", postId, origin.getCoverImage());
+				}
+				
+				// 파일 저장
+				coverImagePath = fms.saveFile(loginId, coverImage);
+				
+				// DB insert
+				house.setCoverImage(coverImagePath);
+			}
+			
+			if (files != null) {
+				if (files.size() == 1) {
+					imagePath = fms.saveFile(loginId, files.get(0));
+					introduceDAO.insertFile(postId, imagePath);
+				} else {
+					// 파일 저장
+					try {
+						imagePaths = fms.saveFiles(loginId, files);
+					} catch (IOException e) {
+						log.error("[introduceHouse] 업데이트 중 첨부파일 저장에 실패하였습니다. {}", postId);
+					}
+					
+					// DB insert
+					for (int i = 0; i < imagePaths.size(); i++) {
+						introduceDAO.insertFile(postId, imagePaths.get(i));
+					}
+				}
+			}
+			return introduceDAO.updateIntroduceHouse(postId, house);
+		}
+	}
+	
 	public void deleteIntroduceHouseByPostPostId(int postId) {
 		introduceDAO.deleteIntroduceHouseByPostId(postId);
 	}
@@ -105,8 +155,21 @@ public class IntroduceHouseBO {
 		return introduceDAO.selectIntroduceFilesByPostId(postId);
 	}
 	
+	public IntroduceHouse getIntroduceHouseByIdUserId(int id, int userId) {
+		return introduceDAO.selectIntroduceHouseByIdUserId(id, userId);
+	}
+	
 	public void deleteIntrodeceFilesByPostId(int postId) {
-		
+		introduceDAO.deleteIntrodeceFilesByPostId(postId);
+	}
+	
+	public void deleteFileByPostIdImagePath(int postId, String imagePath) {
+		try {
+			fms.deleteOneFile(postId, imagePath);
+		} catch (IOException e) {
+			log.error("[delete file] 이미지 삭제 실패, postId{}, path{}", postId, imagePath);
+		}
+		introduceDAO.deleteFileByPostIdImagePath(postId, imagePath);
 	}
 	
 	public void addHit(int id) {

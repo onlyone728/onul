@@ -85,4 +85,11 @@ public class FileManagerService {
 		}
 	}
 	
+	public void deleteOneFile(int postId, String imagePath) throws IOException {
+		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
+		if (Files.exists(path)) {
+			Files.delete(path);
+		}
+	}
+	
 }

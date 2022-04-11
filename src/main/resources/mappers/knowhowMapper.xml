@@ -139,6 +139,27 @@
  		ORDER BY `id` DESC
  	</select>
  	
+ 	<select id="selectKnowhowByIdUserId" parameterType="map" resultType="com.onul.knowhowPost.model.Knowhow">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nickName`
+			, `profileImage`
+			, `postType`
+			, `category`
+			, `subject`
+			, `content`
+			, `coverImage`
+			, `hit`
+			, `createdAt`
+			, `updatedAt`
+		FROM	
+ 			`knowhow`
+ 		WHERE
+ 			`id` = #{id}	
+ 			AND `userId` = #{userId}
+ 	</select>
+ 	
  	<update id="updateHit" parameterType="int">
  		UPDATE 
  			`knowhow`

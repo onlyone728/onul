@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -177,6 +178,37 @@ public class PostRestController {
 		return result;
 	}
 	
+	@PutMapping("/post/update_introduce")
+	public Map<String, Object> updateIntroduce(
+			@RequestParam("postId") int postId,
+			@ModelAttribute IntroduceHouse house,
+			@RequestParam(value="coverImageFile", required=false) MultipartFile coverImageFile,
+			@RequestParam(value="images", required=false) List<MultipartFile> files,
+			HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+
+		result.put("result", "success");
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		String loginId = (String) session.getAttribute("userLoginId");
+		if (userId == null) {
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 시도해주세요.");
+			return result;
+		} else {
+			int count = introduceBO.updateIntroduceHouse(postId, userId, loginId, house, coverImageFile, files);
+			if (count < 1) {
+				result.put("result", "error");
+				result.put("errorMessage", "수정에 실패했습니다. 관리자에게 문의하세요.");
+			} else if (count == -1) {
+				result.put("result", "error");
+				result.put("errorMessage", "수정할 글이 존재하지 않습니다. 확인 후 시도해주세요.");
+			}
+			
+			return result;
+		}
+	}
+	
 	@DeleteMapping("/post/phote_delete")
 	public Map<String, Object> deletePhoto(int postId,
 			HttpSession session) {
@@ -237,4 +269,42 @@ public class PostRestController {
 		return result;
 	}
 	
+	@DeleteMapping("/post/file-delete")
+	public Map<String, Object> fileDelete(
+			@RequestParam("postType") String postType,
+			@RequestParam("postId") int postId,
+			@RequestParam("imagePath") String imagePath,
+			HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", true);
+		
+		// session 가져와서 post 작성자 확인
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null) {
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 시도해주세요.");
+			return result;
+		}
+		
+		if (postType.equals("introduceHouse")) {
+			IntroduceHouse house = introduceBO.getIntroduceHouseByIdUserId(postId, userId);
+			if (house == null) {
+				result.put("result", "error");
+				result.put("errorMessage", "수정할 글이 존재하지 않습니다.");
+				return result;
+			} else {
+				introduceBO.deleteFileByPostIdImagePath(postId, imagePath);
+			}
+		} else if (postType.equals("knowhow")) {
+			Knowhow knowhow = knowhowBO.getKnowhowByIdUserId(postId, userId);
+			if (knowhow == null) {
+				result.put("result", "error");
+				result.put("errorMessage", "수정할 글이 존재하지 않습니다.");
+				return result;
+			} else {
+				knowhowBO.deleteFileByPostIdImagePath(postId, imagePath);
+			}
+		}
+		return result;
+	}
 }
