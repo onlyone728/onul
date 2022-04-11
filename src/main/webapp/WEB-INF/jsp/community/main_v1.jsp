@@ -6,25 +6,27 @@
 	<%-- 배너 영역 --%>
 	<div class="bannerArea">
 		<div class="mainBanner relative">
-			<div class="img-center">
-				<a href="#">
-					<img class="h-img" alt="이미지" src="https://cdn.pixabay.com/photo/2017/03/22/17/39/kitchen-2165756_1280.jpg" height="550">
+			<div class="w-100 h-100">
+				<a href="/community/introduce_detail_view?postId=${mainPost.house.id}" class="img-center d-block bg-dark">
+					<img class="img" alt="이미지" src="${mainPost.house.coverImage}" height="100%">
 				</a>	
 			</div>
 			<div class="infoArea absolute">
-				<div class="bannerTitle"><a href="#">bannerTitle</a></div>
-				<div class="postWritherImg border-1-white img-center m-0 mr-2">
-					<a href="#" class="d-flex">
-						<img alt="" src="https://cdn.pixabay.com/photo/2015/09/09/18/25/feet-932346_1280.jpg" class="h-img" width="100">
-					</a>
+				<div class="bannerTitle"><a href="#">${mainPost.house.subject}</a></div>
+				<div class="d-flex">
+					<div class="postWritherImg border-1-white img-center m-0 mr-2">
+						<a href="/user/${mainPost.user.id}" class="d-flex">
+							<img alt="" src="${mainPost.user.profileImage}" class="h-img" width="100">
+						</a>
+					</div>
+					<div class="text-white font15 textShadow2">${mainPost.user.nickName}</div>
 				</div>
-				<div class="text-white font15 textShadow2">writerNickName</div>
 			</div>
 		</div>
 		<div class="smallBanner">
-			<div class="img-center">
-				<a href="#">
-					<img class="h-img" alt="" src="https://cdn.pixabay.com/photo/2017/08/01/09/34/white-2563976_1280.jpg" height="550">
+			<div class="w-100 h-100">
+				<a href="/community/knowhow_detail_view?postId=${subPost.knowhow.id}" class="img-center d-block bg-dark">
+					<img class="h-img" alt="" src="${subPost.knowhow.coverImage}" height="100%">
 				</a>
 			</div>
 		</div>
@@ -110,39 +112,6 @@
 					</div>
 				</div>
 			</c:forEach>
-		</div>
-	</div>
-	
-	<%-- 오늘의딜 영역 --%>
-	<div class="postArea">
-		<div class="categoryIndexBox">
-			<div class="categoryIndex">오늘의딜</div>
-			<div class="moreBtn"><a href="#">더보기</a></div>
-		</div>
-		<div class="gridBetween">
-			<c:forEach var="product" items="${productList}" varStatus="status" end="3">
-				<div class="column4">
-					<a href="#">
-						<div class="dealImgBox img-center box-radius-5 bg-dark">
-							<img alt="오늘의딜 이미지" src="${product.product.thumbNail}" class="h-img" height="100%">
-						</div>
-						<div class="infoArea">
-							<div class="storeName">${product.store.storeName}</div>
-							<div class="dealTitle">${product.product.productName}</div>
-							<div>
-								<span class="discountRate">30%</span>
-								<span class="price">${product.product.price}원</span>
-							</div>
-							<div>
-								<svg class="icon" width="13" height="13" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path fill="#35C5F0" fill-rule="evenodd" d="M12 19.72l-5.677 2.405c-.76.322-1.318-.094-1.247-.906l.533-6.142-4.042-4.656c-.54-.624-.317-1.283.477-1.467l6.006-1.39L11.23 2.28c.426-.707 1.122-.699 1.542 0l3.179 5.282 6.006 1.391c.805.187 1.011.851.477 1.467l-4.042 4.656.533 6.142c.072.822-.497 1.224-1.247.906L12 19.72z"></path></svg>
-								<strong class="font12">4.7</strong>
-								<strong class="font12 text-secondary">리뷰 12,345</strong>
-							</div>
-						</div>
-					</a>
-				</div>
-			</c:forEach>
-			
 		</div>
 	</div>
 	

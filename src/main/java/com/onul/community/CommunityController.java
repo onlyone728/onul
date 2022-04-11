@@ -45,11 +45,14 @@ public class CommunityController {
 		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewList(null, null);
 		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null);
 		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, null);
+		IntroduceHouseView mainPost = introduceBO.generateIntroduceHouseView(16, null);
+		KnowhowView subPost = knowhowBO.generateKnowhowView(12, null);
 		
 		// product 가져오기
 		List<ProductView> productList = productBO.generateProductViewList(null);
 		
-		
+		model.addAttribute("mainPost", mainPost);
+		model.addAttribute("subPost", subPost);
 		model.addAttribute("productList", productList);
 		model.addAttribute("photoList", photoViewList);
 		model.addAttribute("houseList", houseList);

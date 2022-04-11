@@ -7,7 +7,7 @@
 	<c:forEach var="post" items="${houseList}">
 	<div class="introduceCard">
 		<div class="imgArea">
-			<a href="/community/introduce_detail_view?postId=${post.house.id}" class="img-center d-block">
+			<a href="/community/introduce_detail_view?postId=${post.house.id}" class="img-center d-block bg-dark">
 				<img alt="" src="${post.house.coverImage}" class="img" width="100%">
 			</a>
 		</div>

@@ -16,7 +16,9 @@
 	
 	<div class="searchBarArea form-group m-auto">
 		<svg class="layout-navigation-search__input__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" preserveAspectRatio="xMidYMid meet"><path d="M22 22l-5-5"></path><circle cx="11" cy="11" r="8"></circle></svg>
-		<input type="text" id="keyword" class="inline-form form-control" placeholder="검색">
+		<form method="get" action="">
+			<input type="text" id="keyword" class="inline-form form-control" placeholder="검색">
+		</form>
 	</div>
 	
 	<!-- <div class="basket">

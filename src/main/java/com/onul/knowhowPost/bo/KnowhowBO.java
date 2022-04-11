@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.onul.comment.bo.CommentBO;
 import com.onul.common.FileManagerService;
 import com.onul.knowhowPost.dao.KnowhowDAO;
 import com.onul.knowhowPost.model.Category;
 import com.onul.knowhowPost.model.Knowhow;
 import com.onul.knowhowPost.model.KnowhowFiles;
+import com.onul.like.bo.LikeBO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +24,12 @@ public class KnowhowBO {
 
 	@Autowired
 	private FileManagerService fms;
+	
+	@Autowired
+	private CommentBO commentBO;
+	
+	@Autowired
+	private LikeBO likeBO;
 
 	@Autowired
 	private KnowhowDAO knowhowDAO;
@@ -166,9 +174,9 @@ public class KnowhowBO {
 		knowhowDAO.deleteKnowhowById(id);
 	}
 
-	@SuppressWarnings("null")
 	public void deleteKnowhow(int id, int userId) {
 		Knowhow knowhow = knowhowDAO.selectKnowhowByIdUserId(id, userId);
+		String postType = knowhow.getPostType();
 		
 		// file 삭제하기
 		// coverImage
@@ -195,6 +203,12 @@ public class KnowhowBO {
 		// DB 삭제하기
 		// fileDB
 		knowhowDAO.deleteFileById(id);
+		
+		// comment 
+		commentBO.deleteCommentByPostIdPostType(id, postType);
+		
+		// like
+		likeBO.deleteLikeByPostIdPostType(id, postType);
 		
 		// knowhowDB
 		knowhowDAO.deleteKnowhowById(id);

@@ -1,6 +1,7 @@
 package com.onul.introduceHousePost.bo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Options;
@@ -177,7 +178,7 @@ public class IntroduceHouseBO {
 	}
 	
 	public int deleteIntroduceHouseByPostIdUserId(int postId, int userId) {
-		IntroduceHouse house = introduceDAO.selectIntroduceHouseById(postId);
+		IntroduceHouse house = introduceDAO.selectIntroduceHouseByIdUserId(postId, userId);
 		List<IntroduceFiles> files = introduceDAO.selectIntroduceFilesByPostId(postId);
 		String postType = house.getPostType();
 		
@@ -190,12 +191,14 @@ public class IntroduceHouseBO {
 		
 		// 첨부파일 삭제
 		if (files != null) {
-			for (int i =  0; i < files.size(); i++) {
-				try {
-					fms.deleteFile(files.get(i).getImagePath());
-				} catch (IOException e) {
-					log.error("[delete introduce] 첨부파일 삭제 실패 {}, {}", postId, files.get(i).getImagePath());
-				}
+			List<String> pathList = new ArrayList<>();
+			for (int i = 0; i < pathList.size(); i++) {
+				pathList.add(files.get(i).getImagePath());
+			}
+			try {
+				fms.deleteFiles(pathList);
+			} catch (IOException e) {
+				log.error("[file delete] 집들이 첨부파일 삭제 실패 {}", postId);
 			}
 		}
 		

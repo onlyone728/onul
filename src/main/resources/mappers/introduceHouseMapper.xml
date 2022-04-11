@@ -88,7 +88,7 @@
  		FROM 
  			`introduceHouse`
  		WHERE
- 			`postId` = #{postId}
+ 			`id` = #{postId}
  	</delete>
  	
  	<select id="selectIntroduceHouseById" resultType="com.onul.introduceHousePost.model.IntroduceHouse">
