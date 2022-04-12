@@ -78,7 +78,7 @@
 			<%-- 글 수정 --%>
 			<c:if test="${userId == photoView.user.id}">
 				<div class="editPostArea">
-					<button type="button" class="editBtn btn" data-post-id="${photoView.photo.id}" data-user-id="${userId}">수정하기</button>
+					<button type="button" class="editBtn btn" data-post-id="${photoView.photo.id}" data-writer-id="${userId}" data-user-id="${userId}">수정하기</button>
 					<button type="button" class="delBtn btn" data-post-id="${photoView.photo.id}" data-user-id="${userId}">삭제하기</button>
 				</div>
 			</c:if>
@@ -235,8 +235,8 @@ $(document).ready(function() {
 	// 수정하기
 	$('.editBtn').on('click', function() {
 		let postId = $(this).data('post-id');
-		let writerId = $(this).data('user-id');
-		let userId = ${userId};
+		let writerId = $(this).data('writer-id');
+		let userId = $(this).data('user-id');
 		
 		if (writerId != userId) {
 			alert("잘못된 접근입니다.");

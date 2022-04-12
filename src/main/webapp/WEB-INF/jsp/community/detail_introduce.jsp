@@ -122,7 +122,7 @@
 		</div>
 	</div>
 </div>
-
+<input type="hidden" id="userId" value="${userId}">
 <script>
 $(document).ready(function() {
 	let postType = "introduceHouse";
@@ -251,7 +251,7 @@ $(document).ready(function() {
 	$('.editBtn').on('click', function() {
 		let postId = $(this).data('post-id');
 		let writerId = $(this).data('user-id');
-		let userId = ${userId};
+		let userId = $('#userId').val();
 		
 		if (writerId != userId) {
 			alert("잘못된 접근입니다.");

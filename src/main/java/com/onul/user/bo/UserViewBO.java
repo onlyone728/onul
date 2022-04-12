@@ -52,13 +52,13 @@ public class UserViewBO {
 		User user = userDAO.selectUserById(uId);
 		userView.setUser(user);
 		
-		List<PhotoView> photoList = photoBO.generatePhotoViewList(null, uId);
+		List<PhotoView> photoList = photoBO.generatePhotoViewList(null, uId, null);
 		userView.setPhotoList(photoList);
 		
-		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(uId);
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(uId, null);
 		userView.setHouseList(houseList);
 		
-		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, uId);
+		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, uId, null);
 		userView.setKnowhowList(knowhowList);
 		
 		List<Like> likeList = likeBO.getLikeListByUserId(uId);
