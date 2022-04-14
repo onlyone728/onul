@@ -56,17 +56,13 @@ public class CommunityController {
 			Model model) {
 		
 		// post 가져오기
-		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewList(null, null, null);
-		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null, null);
-		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, null, null);
-		IntroduceHouseView mainPost = introduceBO.generateIntroduceHouseView(16, null);
-		KnowhowView subPost = knowhowBO.generateKnowhowView(12, null);
+		List<PhotoView> photoViewList = photoViewBO.generatePhotoViewListByHit(null);
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseListByHit(null);
+		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowListByHit(null);
 		
 		// product 가져오기
 		List<ProductView> productList = productBO.generateProductViewList(null);
 		
-		model.addAttribute("mainPost", mainPost);
-		model.addAttribute("subPost", subPost);
 		model.addAttribute("productList", productList);
 		model.addAttribute("photoList", photoViewList);
 		model.addAttribute("houseList", houseList);
@@ -269,6 +265,45 @@ public class CommunityController {
 		model.addAttribute("houseList", houseList);
 		model.addAttribute("photoList", photoList);
 		model.addAttribute("viewPath", "community/search");
+		return "template/layout";
+	}
+
+	@RequestMapping("/community/search/photo")
+	public String searchPhotoView(
+			@RequestParam("keyword") String keyword,
+			Model model) {
+		// postType별 List 생성
+		List<PhotoView> photoList = photoViewBO.generatePhotoViewList(null, null, keyword);
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("photoList", photoList);
+		model.addAttribute("viewPath", "community/search_photo");
+		return "template/layout";
+	}
+	
+	@RequestMapping("/community/search/house")
+	public String searchHouseView(
+			@RequestParam("keyword") String keyword,
+			Model model) {
+		// postType별 List 생성
+		List<IntroduceHouseView> houseList = introduceBO.generateIntroduceHouseList(null, keyword);	
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("houseList", houseList);
+		model.addAttribute("viewPath", "community/search_house");
+		return "template/layout";
+	}
+	
+	@RequestMapping("/community/search/knowhow")
+	public String searchKnowhowView(
+			@RequestParam("keyword") String keyword,
+			Model model) {
+		// postType별 List 생성
+		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowList(null, null, keyword);
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("knowhowList", knowhowList);
+		model.addAttribute("viewPath", "community/search_knowhow");
 		return "template/layout";
 	}
 }

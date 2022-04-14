@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="com.onul.knowhowPost.model.Category" %>
 
 <div id="knowhowList" class="w80">
@@ -21,7 +22,7 @@
 				<div class="postInfoArea">
 					<div class="postTitle"><a href="/community/knowhow_detail_view?postId=${post.knowhow.id}">${post.knowhow.subject}</a></div>
 					<div class="writerNic">${post.user.nickName}</div>
-					<div>조회수 ${post.knowhow.hit}회</div>
+					<div>조회수 ${post.knowhow.hit}회 · 댓글수 ${fn:length(post.commentList)}</div>
 				</div>
 			</div>
 		</c:forEach>

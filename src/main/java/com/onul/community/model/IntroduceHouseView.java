@@ -2,7 +2,6 @@ package com.onul.community.model;
 
 import java.util.List;
 
-import com.onul.comment.model.Comment;
 import com.onul.introduceHousePost.model.IntroduceFiles;
 import com.onul.introduceHousePost.model.IntroduceHouse;
 import com.onul.user.model.User;
@@ -16,8 +15,7 @@ public class IntroduceHouseView {
 	private List<IntroduceFiles> fileList; 
 	private User user;
 	private List<IntroduceHouse> houseList;
-	private List<Comment> commentList;
-	private int commentCount;
+	private List<CommentView> commentList;
 	private int followCount;
 	private boolean isFollow;
 	private int likeCount;

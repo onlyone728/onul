@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <div id="photoDetail" class="w80">
 	<div class="postArea">
@@ -16,7 +17,7 @@
 		<div class="photoInfo">
 			<div class="count">
 				<div class="mr-1">조회수 ${photoView.photo.hit}</div>
-				<div>· 댓글 ${photoView.commentCount}</div>
+				<div>· 댓글 ${fn:length(photoView.commentList)}</div>
 			</div>
 			<div class="commentArea">
 				<c:if test="${not empty userId}">
@@ -41,17 +42,17 @@
 						<div class="userImg img-center">
 							<a href="/user/${post.user.id}" class="img-center d-block">
 							<c:choose>
-								<c:when test="${empty comment.profileImage}">
+								<c:when test="${empty comment.user.profileImage}">
 									<img class="img" alt="작성자 프로필 이미지 없음" src="/image/avatar.webp" height="30">
 								</c:when>	
-								<c:when test="${not empty comment.profileImage}">
-									<img class="img" alt="${comment.nickName}님의 프로필 이미지" src="${comment.profileImage}" height="30">
+								<c:when test="${not empty comment.user.profileImage}">
+									<img class="img" alt="${comment.user.nickName}님의 프로필 이미지" src="${comment.user.profileImage}" height="30">
 								</c:when>
 							</c:choose>
 							</a>
 						</div>
-						<div class="comment-writer-id">${comment.nickName}</div>
-						<div class="writed-comment">${comment.content}</div>
+						<div class="comment-writer-id">${comment.user.nickName}</div>
+						<div class="writed-comment">${comment.comment.content}</div>
 					</div>
 					</c:forEach>
 				</div>
@@ -123,7 +124,7 @@
 	</div>
 	
 </div>
-
+<input type="hidden" id="postId" value="${photoView.photo.id}">
 <script>
 $(document).ready(function() {
 	// userArea fixed 
@@ -208,6 +209,30 @@ $(document).ready(function() {
 	});
 	
 	// 댓글 입력
+	$('#commentText').on('keyup', function(key) {
+		 if(key.keyCode==13) {
+			let comment = $('.comment').val();
+			let postId = $('#postId').val();
+			let postType = "photo";
+			
+			$.ajax({
+				type: "POST"
+				, url: "/comment/create"
+				, data: {"postType":postType, "postId":postId, "comment": comment}
+				, success: function(data) {
+					if (data.result == "success") {
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+						location.reload();
+					}
+				}
+				, error: function(e) {
+					alert("댓글 저장에 실패하였습니다.");
+				}
+			});
+		 }
+	});
 	$('.commentBtn').on('click', function(e) {
 		e.preventDefault();
 		let comment = $('.comment').val();

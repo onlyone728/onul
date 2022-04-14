@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.onul.comment.bo.CommentBO;
 import com.onul.comment.follow.bo.FollowBO;
-import com.onul.comment.model.Comment;
+import com.onul.community.model.CommentView;
 import com.onul.community.model.KnowhowView;
 import com.onul.knowhowPost.bo.KnowhowBO;
 import com.onul.knowhowPost.model.Category;
@@ -29,7 +28,7 @@ public class KnowhowViewBO {
 	private UserBO userBO;
 	
 	@Autowired
-	private CommentBO commentBO;
+	private CommentViewBO commentBO;
 	
 	@Autowired
 	private FollowBO followBO;
@@ -71,11 +70,8 @@ public class KnowhowViewBO {
 			List<Knowhow> writerKnowhowList = knowhowBO.getKnowhowListByUserId(userId);
 			knowhowView.setKnowhowList(writerKnowhowList);
 			
-			List<Comment> commentList = commentBO.getCommentListByPostTypeAndPostId(postType, postId);
+			List<CommentView> commentList = commentBO.generateCommentViewList(postId, postType);
 			knowhowView.setCommentList(commentList);
-			
-			int commentCount = commentBO.commentCount(postType, postId);
-			knowhowView.setCommentCount(commentCount);
 			
 			int followCount = followBO.getFollowCountByFollowId(userId);
 			knowhowView.setFollowCount(followCount);
@@ -96,6 +92,55 @@ public class KnowhowViewBO {
 		return knowhowViewList;
 	}
 	
+	public List<KnowhowView> generateKnowhowListByHit(
+			@RequestParam(value="userId", required=false) Integer uId) {
+		List<KnowhowView> knowhowViewList = new ArrayList<>();
+		List<Knowhow> knowhowList = new ArrayList<>();
+		
+		if (uId != null) {
+			knowhowList = knowhowBO.getKnowhowListByUserId(uId);
+		} else {
+			knowhowList = knowhowBO.getKnowhowOrderByHit();
+		}
+		
+		for (Knowhow knowhow : knowhowList) {
+			KnowhowView knowhowView = new KnowhowView();
+			knowhowView.setKnowhow(knowhow);
+			
+			int postId = knowhow.getId();
+			int userId = knowhow.getUserId();
+			String postType = knowhow.getPostType();
+			
+			List<KnowhowFiles> fileList = knowhowBO.getKnowhowFilesListByPostId(postId);
+			knowhowView.setFileList(fileList);
+			
+			User user = userBO.getUserById(userId);
+			knowhowView.setUser(user);
+			
+			List<Knowhow> writerKnowhowList = knowhowBO.getKnowhowListByUserId(userId);
+			knowhowView.setKnowhowList(writerKnowhowList);
+			
+			List<CommentView> commentList = commentBO.generateCommentViewList(postId, postType);
+			knowhowView.setCommentList(commentList);
+			
+			int followCount = followBO.getFollowCountByFollowId(userId);
+			knowhowView.setFollowCount(followCount);
+			
+			boolean isFollow = followBO.existFollow(uId, userId);
+			knowhowView.setFollow(isFollow);
+			
+			int likeCount = likeBO.getLikeCountByPostId(postId, postType);
+			knowhowView.setLikeCount(likeCount);
+			
+			boolean filledLike = likeBO.existLike(postId, postType, uId);
+			knowhowView.setFilledLike(filledLike);
+			
+			knowhowViewList.add(knowhowView);
+		}
+		
+		
+		return knowhowViewList;
+	}
 	
 	public KnowhowView generateKnowhowView(
 			@RequestParam("postId") int postId,
@@ -116,11 +161,8 @@ public class KnowhowViewBO {
 		List<Knowhow> knowhowList = knowhowBO.getKnowhowListByUserId(userId);
 		knowhowView.setKnowhowList(knowhowList);
 		
-		List<Comment> commnetList = commentBO.getCommentListByPostTypeAndPostId(postType, postId);
-		knowhowView.setCommentList(commnetList);
-		
-		int commentCount = commentBO.commentCount(postType, postId);
-		knowhowView.setCommentCount(commentCount);
+		List<CommentView> commentList = commentBO.generateCommentViewList(postId, postType);
+		knowhowView.setCommentList(commentList);
 		
 		int followCount = followBO.getFollowCountByFollowId(userId);
 		knowhowView.setFollowCount(followCount);

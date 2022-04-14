@@ -1,35 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
     
 <div id="communityMain" class="w80">
 	<%-- 배너 영역 --%>
 	<div class="bannerArea">
-		<div class="mainBanner relative">
-			<div class="w-100 h-100">
-				<a href="/community/introduce_detail_view?postId=${mainPost.house.id}" class="img-center d-block bg-dark">
-					<img class="img" alt="이미지" src="${mainPost.house.coverImage}" height="100%">
-				</a>	
-			</div>
-			<div class="infoArea absolute">
-				<div class="bannerTitle"><a href="#">${mainPost.house.subject}</a></div>
-				<div class="d-flex">
-					<div class="postWritherImg border-1-white img-center m-0 mr-2">
-						<a href="/user/${mainPost.user.id}" class="d-flex">
-							<img alt="" src="${mainPost.user.profileImage}" class="h-img" width="100">
-						</a>
+		<c:forEach var="main" items="${houseList}" varStatus="status" end="0">
+			<div class="mainBanner relative">
+				<div class="w-100 h-100">
+					<a href="/community/introduce_detail_view?postId=${main.house.id}" class="img-center d-block bg-dark">
+						<img class="img" alt="이미지" src="${main.house.coverImage}" height="100%">
+					</a>	
+				</div>
+				<div class="infoArea absolute">
+					<div class="bannerTitle"><a href="#">${main.house.subject}</a></div>
+					<div class="d-flex">
+						<div class="postWritherImg border-1-white img-center m-0 mr-2">
+							<a href="/user/${main.user.id}" class="d-flex">
+								<img alt="" src="${main.user.profileImage}" class="h-img" width="100">
+							</a>
+						</div>
+						<div class="text-white font15 textShadow2">${main.user.nickName}</div>
 					</div>
-					<div class="text-white font15 textShadow2">${mainPost.user.nickName}</div>
 				</div>
 			</div>
-		</div>
-		<div class="smallBanner">
-			<div class="w-100 h-100">
-				<a href="/community/knowhow_detail_view?postId=${subPost.knowhow.id}" class="img-center d-block bg-dark">
-					<img class="h-img" alt="" src="${subPost.knowhow.coverImage}" height="100%">
-				</a>
+		</c:forEach>
+		<c:forEach var="sub" items="${knowhowList}" varStatus="status" end="0">
+			<div class="smallBanner">
+				<div class="w-100 h-100">
+					<a href="/community/knowhow_detail_view?postId=${sub.knowhow.id}" class="img-center d-block bg-dark">
+						<img class="h-img" alt="" src="${sub.knowhow.coverImage}" height="100%">
+					</a>
+				</div>
 			</div>
-		</div>
+		</c:forEach>
 	</div>
 	
 	<%-- 아이콘 메뉴 영역 --%>
@@ -56,10 +61,12 @@
 	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">오늘의 스토리</div>
-			<div class="moreBtn"><a href="/community/introduce_view">더보기</a></div>
+			<c:if test="${fn:length(houseList) > 4}">
+				<div class="moreBtn"><a href="/community/introduce_view">더보기</a></div>
+			</c:if>
 		</div>
 		<div class="gridBetween">
-			<c:forEach var="house" items="${houseList}" varStatus="status" end="3">
+			<c:forEach var="house" items="${houseList}" varStatus="status" begin="1" end="4">
 				<div class="column4">
 					<div class="img-center box-radius-10 postImgBox bg-dark">
 						<a href="/community/introduce_detail_view?postId=${house.house.id}">
@@ -87,10 +94,12 @@
 	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">오늘의 노하우</div>
-			<div class="moreBtn"><a href="/community/knowhow_view">더보기</a></div>
+			<c:if test="${fn:length(knowhowList) > 4}">
+				<div class="moreBtn"><a href="/community/knowhow_view">더보기</a></div>
+			</c:if>
 		</div>
 		<div class="gridBetween">
-			<c:forEach var="knowhow" items="${knowhowList}" varStatus="status" end="3">
+			<c:forEach var="knowhow" items="${knowhowList}" varStatus="status" begin="1" end="4">
 				<div class="column4">
 					<div class="box-radius-10 postImgBox bg-dark">
 						<a class="img-center d-block d-box" href="/community/knowhow_detail_view?postId=${knowhow.knowhow.id}">
@@ -119,7 +128,9 @@
 	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">오늘의 인기 사진</div>
-			<div class="moreBtn"><a href="/community/photo_view">더보기</a></div>
+			<c:if test="${fn:length(photoList) > 4}">
+				<div class="moreBtn"><a href="/community/photo_view">더보기</a></div>
+			</c:if>	
 		</div>
 		<div class="gridBetween">
 			<c:forEach var="photo" items="${photoList}" varStatus="status" end="3">

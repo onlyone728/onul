@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="com.onul.photo.model.Space" %>   
 
 <div id="list" class="w80">
@@ -69,10 +70,10 @@
 				<div class="commentArea">
 					<c:forEach var="comment" items="${post.commentList}" varStatus="status" end="0">
 						<div class="commentWriterImg bg-dark">
-							<a href="#" class="d-block img-center"><img class="img" src="${comment.profileImage}" height="100%"></a>
+							<a href="#" class="d-block img-center"><img class="img" src="${comment.user.profileImage}" height="100%"></a>
 						</div>
-						<div class="commentId">${comment.nickName}</div>
-						<div class="comment">${comment.content}</div>
+						<div class="commentId">${comment.user.nickName}</div>
+						<div class="comment">${comment.comment.content}</div>
 					</c:forEach>
 				</div>
 			</div>

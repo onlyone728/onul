@@ -29,4 +29,6 @@ public interface CommentDAO {
 	public void deleteCommentByPostIdPostType(
 			@Param("postId") int postId, 
 			@Param("postType") String postType);
+	
+	public Comment selectCommentById(int id);
 }

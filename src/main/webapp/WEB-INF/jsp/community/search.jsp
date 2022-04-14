@@ -9,8 +9,8 @@
 	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">사진</div>
-			<c:if test="${fn:length(photoList) > 8}">
-				<div class="moreBtn"><a href="/community/photo_view">더보기</a></div>
+			<c:if test="${fn:length(photoList) > 4}">
+				<div class="moreBtn"><a href="/community/search/photo?keyword=${keyword}">더보기</a></div>
 			</c:if>
 		</div>
 		<c:if test="${empty photoList}">
@@ -18,7 +18,7 @@
 		</c:if>
 		<c:if test="${not empty photoList}">
 			<div class="gridBetween">
-				<c:forEach var="photo" items="${photoList}" varStatus="status" end="7">
+				<c:forEach var="photo" items="${photoList}" varStatus="status" end="3">
 					<div class="photoCard column4 relative">
 						<div class="dealImgBox box-radius-5">
 							<a href="/community/photo_detail_view?postId=${photo.photo.id}" class="d-block img-center bg-dark">
@@ -43,16 +43,16 @@
 	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">집들이</div>
-			<c:if test="${fn:length(houseList) > 8}">
-				<div class="moreBtn"><a href="/community/introduce_view">더보기</a></div>
+			<c:if test="${fn:length(houseList) > 4}">
+				<div class="moreBtn"><a href="/community/search/house?keyword=${keyword}">더보기</a></div>
 			</c:if>
 		</div>
-		<c:if test="${empty photoList}">
+		<c:if test="${empty houseList}">
 			<div class="noResult">검색 결과가 없습니다.</div>
 		</c:if>
-		<c:if test="${not empty photoList}">
+		<c:if test="${not empty houseList}">
 			<div class="gridBetween">
-				<c:forEach var="house" items="${houseList}" varStatus="status" end="7">
+				<c:forEach var="house" items="${houseList}" varStatus="status" end="3">
 					<div class="column4">
 						<div class="img-center box-radius-10 postImgBox bg-dark">
 							<a href="/community/introduce_detail_view?postId=${house.house.id}">
@@ -81,14 +81,14 @@
 	<div class="postArea">
 		<div class="categoryIndexBox">
 			<div class="categoryIndex">노하우</div>
-			<c:if test="${fn:length(knowhowList) > 8}">
-				<div class="moreBtn"><a href="/community/knowhow_view">더보기</a></div>
+			<c:if test="${fn:length(knowhowList) > 4}">
+				<div class="moreBtn"><a href="/community/search/knowhow?keyword=${keyword}">더보기</a></div>
 			</c:if>
 		</div>
-		<c:if test="${empty photoList}">
+		<c:if test="${empty knowhowList}">
 			<div class="noResult">검색 결과가 없습니다.</div>
 		</c:if>
-		<c:if test="${not empty photoList}">
+		<c:if test="${not empty knowhowList}">
 			<div class="gridBetween">
 				<c:forEach var="knowhow" items="${knowhowList}" varStatus="status" end="3">
 					<div class="column4">

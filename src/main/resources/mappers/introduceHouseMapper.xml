@@ -24,7 +24,6 @@
 		FROM
 			`introduceHouse`
 		ORDER BY `hit` DESC
-		LIMIT 4		
  	</select>
  	
  	<insert id="insertIntroduceHouse" parameterType="com.onul.introduceHousePost.model.IntroduceHouse" useGeneratedKeys="true" keyProperty="id">

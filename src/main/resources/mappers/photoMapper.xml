@@ -19,7 +19,6 @@
 		FROM
 			`photo`
 		ORDER BY `hit` DESC
-		LIMIT 4		
  	</select>
  		
  	<select id="selectPhotoById" resultType="com.onul.photo.model.Photo">

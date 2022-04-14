@@ -20,7 +20,6 @@
 		FROM
 			`knowhow`
 		ORDER BY `hit` DESC
-		LIMIT 4
  	</select>
  	
  	<insert id="insertKnowhow" parameterType="com.onul.knowhowPost.model.Knowhow" useGeneratedKeys="true" keyProperty="id">

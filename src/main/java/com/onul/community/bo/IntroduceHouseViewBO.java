@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.onul.comment.bo.CommentBO;
 import com.onul.comment.follow.bo.FollowBO;
-import com.onul.comment.model.Comment;
+import com.onul.community.model.CommentView;
 import com.onul.community.model.IntroduceHouseView;
 import com.onul.introduceHousePost.bo.IntroduceHouseBO;
 import com.onul.introduceHousePost.model.IntroduceFiles;
@@ -28,7 +27,7 @@ public class IntroduceHouseViewBO {
 	private UserBO userBO;
 	
 	@Autowired
-	private CommentBO commentBO;
+	private CommentViewBO commentBO;
 	
 	@Autowired
 	private FollowBO followBO;
@@ -68,11 +67,58 @@ public class IntroduceHouseViewBO {
 			List<IntroduceHouse> writerHouseList = introduceBO.getIntroduceHouseListByUserId(writerId);
 			houseView.setHouseList(writerHouseList);
 			
-			List<Comment> commentList = commentBO.getCommentListByPostTypeAndPostId(postType, postId);
+			List<CommentView> commentList = commentBO.generateCommentViewList(postId, postType);
 			houseView.setCommentList(commentList);
 			
-			int commentCount = commentBO.commentCount(postType, postId);
-			houseView.setCommentCount(commentCount);
+			int followCount = followBO.getFollowCountByFollowId(writerId);
+			houseView.setFollowCount(followCount);
+			
+			boolean isFollow = followBO.existFollow(uId, writerId);
+			houseView.setFollow(isFollow);
+			
+			int likeCount = likeBO.getLikeCountByPostId(postId, postType);
+			houseView.setLikeCount(likeCount);
+			
+			boolean filledLike = likeBO.existLike(postId, postType, uId);
+			houseView.setFilledLike(filledLike);
+			
+			
+			introduceHouseViewList.add(houseView);		
+		}
+		return introduceHouseViewList;
+	}
+	
+	public List<IntroduceHouseView> generateIntroduceHouseListByHit(
+			@RequestParam(value = "userId", required = false) Integer uId) {
+		
+		List<IntroduceHouseView> introduceHouseViewList = new ArrayList<>();
+		List<IntroduceHouse> introduceHouseList = new ArrayList<>();
+		
+		if (uId != null) {
+			introduceHouseList = introduceBO.getIntroduceHouseListByUserId(uId);
+		} else {
+			introduceHouseList = introduceBO.getIntroduceListOrderByHit();
+		}
+		
+		for (IntroduceHouse house : introduceHouseList) {
+			IntroduceHouseView houseView = new IntroduceHouseView();
+			houseView.setHouse(house);
+			
+			int postId = house.getId();
+			int writerId = house.getUserId();
+			String postType = house.getPostType();
+			
+			List<IntroduceFiles> fileList = introduceBO.getIntroduceFilesByPostId(postId);
+			houseView.setFileList(fileList);
+			
+			User user = userBO.getUserById(writerId);
+			houseView.setUser(user);
+			
+			List<IntroduceHouse> writerHouseList = introduceBO.getIntroduceHouseListByUserId(writerId);
+			houseView.setHouseList(writerHouseList);
+			
+			List<CommentView> commentList = commentBO.generateCommentViewList(postId, postType);
+			houseView.setCommentList(commentList);
 			
 			int followCount = followBO.getFollowCountByFollowId(writerId);
 			houseView.setFollowCount(followCount);
@@ -111,11 +157,8 @@ public class IntroduceHouseViewBO {
 		List<IntroduceHouse> houseList = introduceBO.getIntroduceHouseListByUserId(writerId);
 		houseView.setHouseList(houseList);
 		
-		List<Comment> commentList = commentBO.getCommentListByPostTypeAndPostId(postType, postId);
+		List<CommentView> commentList = commentBO.generateCommentViewList(postId, postType);
 		houseView.setCommentList(commentList);
-		
-		int commentCount = commentBO.commentCount(postType, postId);
-		houseView.setCommentCount(commentCount);
 		
 		int followCount = followBO.getFollowCountByFollowId(writerId);
 		houseView.setFollowCount(followCount);

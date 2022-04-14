@@ -22,8 +22,11 @@
 				<c:when test="${userId == user.user.id}">
 					<button type="button" class="btn settingBtn">설정</button>
 				</c:when>
-				<c:when test="${userId != user.user.id}">
+				<c:when test="${userId != user.user.id || user.follow == false}">
 					<button type="button" class="btn followBtn" data-user-id="${user.user.id}">팔로우</button>
+				</c:when>
+				<c:when test="${userId != user.user.id || user.follow == true}">
+					<button type="button" class="btn followBtn" data-user-id="${user.user.id}">팔로우 취소</button>
 				</c:when>
 			</c:choose>
 		</div>

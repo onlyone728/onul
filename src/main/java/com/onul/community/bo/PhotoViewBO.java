@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.onul.comment.bo.CommentBO;
 import com.onul.comment.follow.bo.FollowBO;
-import com.onul.comment.model.Comment;
+import com.onul.community.model.CommentView;
 import com.onul.community.model.PhotoView;
 import com.onul.like.bo.LikeBO;
 import com.onul.photo.bo.PhotoBO;
@@ -28,7 +27,7 @@ public class PhotoViewBO {
 	private UserBO userBO;
 	
 	@Autowired
-	private CommentBO commentBO;
+	private CommentViewBO commentBO;
 	
 	@Autowired
 	private FollowBO followBO;
@@ -68,11 +67,54 @@ public class PhotoViewBO {
 			List<Photo> writerPhotoList = photoBO.getPhotoListByUserId(writerId);
 			photoView.setPhotoList(writerPhotoList);
 			
-			List<Comment> commentList = commentBO.getCommentListByPostTypeAndPostId(postType, postId);
+			List<CommentView> commentList = commentBO.generateCommentViewList(postId, postType);
 			photoView.setCommentList(commentList);
 			
-			int commentCount = commentBO.commentCount(postType, postId);
-			photoView.setCommentCount(commentCount);
+			int followCount = followBO.getFollowCountByFollowId(writerId);
+			photoView.setFollowCount(followCount);
+			
+			boolean isFollow = followBO.existFollow(uId, writerId);
+			photoView.setFollow(isFollow);
+			
+			int likeCount = likeBO.getLikeCountByPostId(postId, postType);
+			photoView.setLikeCount(likeCount);
+			
+			boolean isLike = likeBO.existLike(postId, postType, uId);
+			photoView.setFilledLike(isLike);
+			
+			photoViewList.add(photoView);
+		}
+		return photoViewList;
+	}
+	
+	public List<PhotoView> generatePhotoViewListByHit(
+			@RequestParam(value="userId", required=false) Integer uId) {
+		
+		List<PhotoView> photoViewList = new ArrayList<>();
+		List<Photo> photoList = new ArrayList<>();
+		String postType = "photo";
+		
+		if (uId != null) {
+			photoList = photoBO.getPhotoListByUserId(uId);
+		} else {
+			photoList = photoBO.getphotoListOrderByHit();
+		}
+		
+		for(Photo photo : photoList) {
+			PhotoView photoView = new PhotoView();
+			photoView.setPhoto(photo);
+			
+			int postId = photo.getId();
+			int writerId = photo.getUserId();
+			
+			User user = userBO.getUserById(writerId);
+			photoView.setUser(user);
+			
+			List<Photo> writerPhotoList = photoBO.getPhotoListByUserId(writerId);
+			photoView.setPhotoList(writerPhotoList);
+			
+			List<CommentView> commentList = commentBO.generateCommentViewList(postId, postType);
+			photoView.setCommentList(commentList);
 			
 			int followCount = followBO.getFollowCountByFollowId(writerId);
 			photoView.setFollowCount(followCount);
@@ -108,11 +150,8 @@ public class PhotoViewBO {
 		List<Photo> photoList = photoBO.getPhotoListByUserId(userId);
 		photoView.setPhotoList(photoList);
 		
-		List<Comment> commentList = commentBO.getCommentListByPostTypeAndPostId(postType, postId);
+		List<CommentView> commentList = commentBO.generateCommentViewList(postId, postType);
 		photoView.setCommentList(commentList);
-		
-		int commentCount = commentBO.commentCount(postType, postId);
-		photoView.setCommentCount(commentCount);
 		
 		int followCount = followBO.getFollowCountByFollowId(userId);
 		photoView.setFollowCount(followCount);

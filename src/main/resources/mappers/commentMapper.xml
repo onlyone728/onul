@@ -57,6 +57,23 @@
 			AND `postId` = #{postId}		
 	</select>
 	
+	<select id="selectCommentById" resultType="com.onul.comment.model.Comment" parameterType="int">
+		SELECT
+			`id`
+			, `userId`
+			, `nickName`
+			, `profileImage`
+			, `postType`
+			, `postId`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`id` = #{id}		
+	</select>
+	
 	<delete id="deleteCommentByPostIdPostType" parameterType="map">
 		DELETE
 		FROM
