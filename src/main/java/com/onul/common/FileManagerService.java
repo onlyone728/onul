@@ -19,7 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 public class FileManagerService {
 
 	// 서버에 저장될 디렉토리
-	public final static String FILE_UPLOAD_PATH = "/Users/janghana/Desktop/java/megait/7_portfolio/onul/workspace/images/";
+//	public final static String FILE_UPLOAD_PATH = "/Users/janghana/Desktop/java/megait/7_portfolio/onul/workspace/images/";
+	public final static String FILE_UPLOAD_PATH = "/home/ec2-user/upload_images/";
 	
 	public String saveFile(String userLoginId, MultipartFile file) {
 		String directoryName = userLoginId + "_" + System.currentTimeMillis() + "/";

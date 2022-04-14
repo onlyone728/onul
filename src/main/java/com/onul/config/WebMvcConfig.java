@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.onul.common.FileManagerService;
 import com.onul.intercepter.PermissionInterceptor;
 
 @Configuration
@@ -18,7 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
 		.addResourceHandler("/images/**")
-		.addResourceLocations("file:/Users/janghana/Desktop/java/megait/7_portfolio/onul/workspace/images/");
+		.addResourceLocations("file://" + FileManagerService.FILE_UPLOAD_PATH);
 	}
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
