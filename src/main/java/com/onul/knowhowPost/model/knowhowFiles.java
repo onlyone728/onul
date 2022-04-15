@@ -12,4 +12,5 @@ public class KnowhowFiles {
 	private String imagePath;
 	private Date createdAt;
 	private Date updatedAt;
+	
 }
