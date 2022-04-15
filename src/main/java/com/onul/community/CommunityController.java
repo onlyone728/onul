@@ -24,8 +24,6 @@ import com.onul.knowhowPost.bo.KnowhowBO;
 import com.onul.knowhowPost.model.Category;
 import com.onul.photo.bo.PhotoBO;
 import com.onul.photo.model.Space;
-import com.onul.shop.bo.ProductViewBO;
-import com.onul.shop.model.ProductView;
 
 @Controller
 public class CommunityController {
@@ -48,8 +46,8 @@ public class CommunityController {
 	@Autowired
 	private KnowhowViewBO knowhowBO;
 	
-	@Autowired
-	private ProductViewBO productBO;
+//	@Autowired
+//	private ProductViewBO productBO;
 	
 	@RequestMapping("/community")
 	public String communityView(
@@ -61,9 +59,9 @@ public class CommunityController {
 		List<KnowhowView> knowhowList = knowhowBO.generateKnowhowListByHit(null);
 		
 		// product 가져오기
-		List<ProductView> productList = productBO.generateProductViewList(null);
+//		List<ProductView> productList = productBO.generateProductViewList(null);
 		
-		model.addAttribute("productList", productList);
+//		model.addAttribute("productList", productList);
 		model.addAttribute("photoList", photoViewList);
 		model.addAttribute("houseList", houseList);
 		model.addAttribute("knowhowList", knowhowList);

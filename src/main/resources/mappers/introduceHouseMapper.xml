@@ -41,6 +41,7 @@
 			, `subject`
 			, `content`
 			, `coverImage`
+			, `hit`
 			, `createdAt`
 			, `updatedAt` 		
  		)
@@ -58,6 +59,7 @@
  			, #{subject}
  			, #{content}
  			, #{coverImage}
+ 			, 0
  			, NOW()
  			, NOW()
  		)
