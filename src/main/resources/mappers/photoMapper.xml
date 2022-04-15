@@ -150,6 +150,7 @@
 			, `space`
 			, `content`
 			, `imagePath`
+			, `hit`
 			, `createdAt`
 			, `updatedAt`
  		)
@@ -162,6 +163,7 @@
  			, #{space}
  			, #{content}
  			, #{imagePath}
+ 			, 0
  			, NOW()
  			, NOW()
  		)
