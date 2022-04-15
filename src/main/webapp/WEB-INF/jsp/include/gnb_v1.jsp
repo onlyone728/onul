@@ -53,7 +53,7 @@
 			<div id="userMenu" class="d-none">
 				<ul>
 					<li><a href="/user/${userId}" class="myPageeBtn">마이페이지</a></li>
-					<li><a href="#" class="myShppingBtn">나의 쇼핑</a></li>
+					<!-- <li><a href="#" class="myShppingBtn">나의 쇼핑</a></li> -->
 					<li><a href="#" class="userInfoBtn">회원 정보</a></li>
 					<li><a href="/user/sign_out" class="logOutBtn">로그아웃</a></li>
 				</ul>
@@ -72,7 +72,7 @@
 			<li><a href="/post/photo_create_view" class="photoCreateBtn">사진올리기</a></li>
 			<li><a href="/post/introduce_create_view" class="introduceCreateBtn">집들이 글쓰기</a></li>
 			<li><a href="/post/knowhow_create_view" class="knowhowCreateBtn">노하우 글쓰기</a></li>
-			<li><a href="#" class="reviewCreateBtn">상품 리뷰 쓰기</a></li>
+			<!-- <li><a href="#" class="reviewCreateBtn">상품 리뷰 쓰기</a></li> -->
 		</ul>
 	</div>
 </div>
