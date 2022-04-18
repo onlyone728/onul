@@ -54,7 +54,7 @@
 				<ul>
 					<li><a href="/user/${userId}" class="myPageeBtn">마이페이지</a></li>
 					<!-- <li><a href="#" class="myShppingBtn">나의 쇼핑</a></li> -->
-					<li><a href="#" class="userInfoBtn">회원 정보</a></li>
+					<li><a href="/user/${userId}/update" class="userInfoBtn">회원 정보</a></li>
 					<li><a href="/user/sign_out" class="logOutBtn">로그아웃</a></li>
 				</ul>
 			</div>

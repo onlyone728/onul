@@ -26,7 +26,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		if (userId != null && uri.startsWith("/user/sign")) {
 			response.sendRedirect("/community");
 			return false;
-		} else if (userId == null && (uri.startsWith("/user/{uId}/update") || uri.startsWith("/user/{uId}/edit"))) {
+		} else if (userId == null && uri.startsWith("/post")) {
 			response.sendRedirect("/user/sign_in_view");
 			return false;
 		}
