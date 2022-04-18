@@ -6,10 +6,18 @@
 	<ul class="mainMyMenu">
 		<li class="profileTab"><a href="/user/${user.user.id}" class="blue">프로필</a>
 			<ul class="subMyMenu">
-				<li><a href="/user/${user.user.id}" class="blue">모두보기</a></li>
-				<li><a href="/user/${user.user.id}/photo" class="profileMenu blue" data-menu="photo">사진</a></li>
-				<li><a href="/user/${user.user.id}/introduce" class="profileMenu blue" data-menu="introduceHouse">집들이</a></li>
-				<li><a href="/user/${user.user.id}/knowhow" class="profileMenu blue" data-menu="knowhow">노하우</a></li>
+				<c:if test="${userId == user.user.id}">
+					<li><a href="/user/${userId}" class="blue">모두보기</a></li>
+					<li><a href="/user/${userId}/photo" class="profileMenu blue" data-menu="photo">사진</a></li>
+					<li><a href="/user/${userId}/introduce" class="profileMenu blue" data-menu="introduceHouse">집들이</a></li>
+					<li><a href="/user/${userId}/knowhow" class="profileMenu blue" data-menu="knowhow">노하우</a></li>
+				</c:if>
+				<c:if test="${userId != user.user.id}">
+					<li><a href="/user/${user.user.id}" class="blue">모두보기</a></li>
+					<li><a href="/user/${user.user.id}/photo" class="profileMenu blue" data-menu="photo">사진</a></li>
+					<li><a href="/user/${user.user.id}/introduce" class="profileMenu blue" data-menu="introduceHouse">집들이</a></li>
+					<li><a href="/user/${user.user.id}/knowhow" class="profileMenu blue" data-menu="knowhow">노하우</a></li>
+				</c:if>
 			</ul>
 		</li>
 		<c:if test="${userId == user.user.id}">

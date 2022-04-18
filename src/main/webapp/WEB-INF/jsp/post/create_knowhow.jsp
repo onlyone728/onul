@@ -202,7 +202,7 @@ let filesArr = new Array();
 
 /* 첨부파일 추가 */
 function addFile(obj){
-    let maxFileCnt = 5;   // 첨부파일 최대 개수
+    let maxFileCnt = 10;   // 첨부파일 최대 개수
     let attFileCnt = document.querySelectorAll('.filebox').length;    // 기존 추가된 첨부파일 개수
     let remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
     let curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
