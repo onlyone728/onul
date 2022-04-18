@@ -20,10 +20,10 @@
 		<div class="commentArea">
 			<c:forEach var="comment" items="${post.commentList}" varStatus="status" end="0">
 			<div class="commentWriterImg bg-dark">
-				<a href="#" class="d-block img-center"><img class="img" src="${comment.profileImage}" height="100%"></a>
+				<a href="#" class="d-block img-center"><img class="img" src="${comment.user.profileImage}" height="100%"></a>
 			</div>
-			<div class="commentId">${comment.nickName}</div>
-			<div class="comment">${comment.content}</div>
+			<div class="commentId">${comment.user.nickName}</div>
+			<div class="comment">${comment.comment.content}</div>
 			</c:forEach>
 		</div>
 	</div>
