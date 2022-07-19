@@ -5,6 +5,9 @@
 
 <div id="productListView" class="w80">
 	<div class="titleLabel">상품 리스트</div>
+	<div class="d-flex justify-content-end">
+		<button type="button" id="addProductBtn" class="btn mb-3">상품 올리기</button>
+	</div>
 	<table class="ListTable table">
 		<thead>
 			<tr>
@@ -34,3 +37,11 @@
 		</tbody>
 	</table>
 </div>
+
+<script>
+$(document).ready(function() {
+	$('#addProductBtn').on('click', function() {
+		location.href = "/admin/create_product_view";	
+	});
+});
+</script>
