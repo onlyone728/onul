@@ -39,11 +39,18 @@
 		<input type="text" id="introduceMySelf" class="form-control" placeholder="자기소개">
 	</div>
 	
-	<button type="button" id="updateBtn" class="btn btn-block">회원정보수정</button>
+	<button type="button" id="updateBtn" data-user-id="${userId}" class="btn btn-block">회원정보수정</button>
 </div>
 
 <script>
 $(document).ready(function() {
+	let id = $(updateBtn).data('user-id');
+	if (id != ${user.user.id}) {
+		alert("잘못된 접근입니다.");
+		location.href = "/user/" + ${user.user.id};
+		return;
+	}
+	
 	let email = '${user.user.email}';
 	let emailArr = email.split('@');
 	$('#email').val(emailArr[0]);

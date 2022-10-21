@@ -10,4 +10,6 @@ import com.onul.review.model.Review;
 public interface ReviewDAO {
 
 	public List<Review> selectReviewListByProductId(int productId);
+	
+	public int getPointAverage(int productId);
 }

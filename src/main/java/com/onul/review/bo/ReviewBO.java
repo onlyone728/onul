@@ -17,4 +17,8 @@ public class ReviewBO {
 	public List<Review> getReviewListByProductId(int productId) {
 		return reviewDAO.selectReviewListByProductId(productId);
 	}
+	
+	public int getPointAverage(int productId) {
+		return reviewDAO.getPointAverage(productId);
+	}
 }

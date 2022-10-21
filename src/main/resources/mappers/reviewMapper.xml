@@ -21,4 +21,13 @@
 			`productId` = #{productId}
 		ORDER BY `id` DESC			
  	</select>
+ 	
+ 	<select id="getPointAverage" parameterType="int" resultType="int">
+ 		SELECT
+ 			AVG(`point`)
+ 		FROM
+ 			`review`
+ 		WHERE
+ 			`productId` = #{productId}		
+ 	</select>
  </mapper>

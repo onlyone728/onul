@@ -64,3 +64,5 @@ footer {height: 100px; text-align: center; line-height: 100px;}
 .ListTable {width: 100%; text-align: center;}
 .ListTable thead {background-color: #F5F5F5; cursor: default;}
 .ListTable tr {height: 50px; border: 1px solid #DBDBDB;}
+
+#addProductBtn {background-color: #35C5F0; color: #fff;}

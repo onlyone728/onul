@@ -21,5 +21,6 @@ public class ProductView {
 	private List<Order> orderList;
 	private int orderCount;
 	private List<Review> reviewList;
+	private int pointAvg;
 	private List<Qna> qnaList;
 }
