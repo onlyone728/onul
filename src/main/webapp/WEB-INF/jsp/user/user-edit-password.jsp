@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 
 <div id="myInfoUpdate" class="w500">
 	<div class="title">비밀번호 변경</div>
@@ -26,6 +27,13 @@
 
 <script>
 $(document).ready(function() {
+	let id = $(updateBtn).data('user-id');
+	if (id != ${user.user.id}) {
+		alert("잘못된 접근입니다.");
+		location.href = "/user/" + ${user.user.id};
+		return;
+	}
+	
 	// 비밀번호 
 	$("#password").on('change', function(){
 	    let password = $('#password').val();

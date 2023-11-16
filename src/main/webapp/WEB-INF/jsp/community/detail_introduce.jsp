@@ -65,6 +65,7 @@
 		</div>
 		
 		<div class="postContent">
+			<img alt="커버 이미지" src="${post.house.coverImage}" width="100%">
 			<div class="postTextArea">
 				<div class="postText">${post.house.content}</div>
 			</div>

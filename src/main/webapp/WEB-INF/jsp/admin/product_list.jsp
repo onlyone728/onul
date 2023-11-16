@@ -5,17 +5,20 @@
 
 <div id="productListView" class="w80">
 	<div class="titleLabel">상품 리스트</div>
+	<div class="d-flex justify-content-end">
+		<button type="button" id="addProductBtn" class="btn mb-3">상품 올리기</button>
+	</div>
 	<table class="ListTable table">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>카테고리</th>
-				<th>상품명</th>
-				<th>상품가격</th>
-				<th>배송비</th>
-				<th>원산지</th>
-				<th>판매타입</th>
-				<th>판매량</th>
+				<th class="col-1">ID</th>
+				<th class="col-2">카테고리</th>
+				<th class="col-3">상품명</th>
+				<th class="col-2">상품가격</th>
+				<th class="col-1">배송비</th>
+				<th class="col-1">원산지</th>
+				<th class="col-1">판매타입</th>
+				<th class="col-1">판매량</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,3 +37,11 @@
 		</tbody>
 	</table>
 </div>
+
+<script>
+$(document).ready(function() {
+	$('#addProductBtn').on('click', function() {
+		location.href = "/admin/create_product_view";	
+	});
+});
+</script>

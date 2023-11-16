@@ -4,7 +4,7 @@
  
  <mapper namespace="com.onul.product.dao.ProductDAO">
  	<insert id="insertFile" parameterType="map">
- 		INSERT INTO `productFile`
+ 		INSERT INTO `productFiles`
  		(
  			`productId`
 			, `imagePath`
@@ -27,7 +27,7 @@
 			, `createdAt`
 			, `updatedAt`
 		FROM
-			`productFile`
+			`productFiles`
 		WHERE
 			`productId` = #{productId}		
  	</select>

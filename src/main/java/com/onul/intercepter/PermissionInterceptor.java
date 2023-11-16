@@ -23,12 +23,16 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		Integer userId = (Integer) session.getAttribute("userId");
 		String uri = request.getRequestURI();
 		
-		if (userId != null && uri.startsWith("/user/sign")) {
-			response.sendRedirect("/community");
-			return false;
-		} else if (userId == null && uri.startsWith("/post")) {
-			response.sendRedirect("/user/sign_in_view");
-			return false;
+		if (userId != null) {
+			if (uri.startsWith("/user/sign")) {
+				response.sendRedirect("/community");
+				return false;
+			} 
+		} else if (userId == null) {
+			if(uri.startsWith("/post") || uri.startsWith("user/update") || uri.startsWith("user/edit-")) {
+				response.sendRedirect("/user/sign_in_view");
+				return false;
+			}
 		}
 		log.warn("######## preHandle 호출, uri : {}", uri);
 		return true;

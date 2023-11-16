@@ -103,6 +103,9 @@ public class ProductViewBO {
 		List<Review> reviewList = reviewBO.getReviewListByProductId(productId);
 		productView.setReviewList(reviewList);
 		
+		int pointAvg = reviewBO.getPointAverage(productId);
+		productView.setPointAvg(pointAvg);
+		
 		List<Qna> qnaList = qnaBO.getQnaListByProductId(productId);
 		productView.setQnaList(qnaList);
 		

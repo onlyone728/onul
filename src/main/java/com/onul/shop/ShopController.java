@@ -8,14 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.onul.product.bo.ProductBO;
-import com.onul.product.model.Product;
+import com.onul.shop.bo.ProductViewBO;
+import com.onul.shop.model.ProductView;
 
 @Controller
 public class ShopController {
 	
 	@Autowired
-	private ProductBO productBO;
+	private ProductViewBO productBO;
 	
 	@RequestMapping("/store")
 	public String storeView(Model model) {
@@ -23,9 +23,9 @@ public class ShopController {
 		// post 가져오기
 		
 		// product 가져오기
-		List<Product> todayDealList = productBO.getProductListBySalesType("todayDeal");
+		List<ProductView> productList = productBO.generateProductViewList(null);
 		
-		model.addAttribute("todayDeal", todayDealList);
+		model.addAttribute("productList", productList);
 		model.addAttribute("viewPath", "shop/main");
 		
 		return "template/layout";

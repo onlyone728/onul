@@ -67,6 +67,42 @@
 	</c:if>
 </div>
 
+<div class="postHistoryArea">
+	<div class="categoryLabel">
+		노하우 <span class="blueText ml-1">${fn:length(user.knowhowList)}</span>
+	</div>
+	<c:if test="${empty user.knowhowList}">
+		<div class="emptyArea">
+			<c:if test="${userId == user.user.id}">
+				<div>
+					<a href="/post/knowhow_create_view">+ 첫번째 사진을 올려보세요.</a>
+				</div>
+			</c:if>
+			<c:if test="${userId != user.user.id}">
+				<div>사진이 없습니다.</div>
+			</c:if>
+		</div>
+	</c:if>
+	<c:if test="${not empty user.knowhowList}">
+		<div class="notEmptyArea">
+			<c:forEach var="post" items="${user.knowhowList}">
+				<div class="houseArea">
+					<a href="/community/introduce_detail_view?postId=${post.knowhow.id}"
+						class="img-center d-block bg-dark"> <img class="img" alt=""
+						src="${post.knowhow.coverImage}" width="100%">
+					</a>
+					<div class="infoArea">
+						<div class="title">
+							<a href="/community/introduce_detail_view?postId=${post.knowhow.id}">
+								${post.knowhow.subject} </a>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</c:if>
+</div>
+
 <script>
 $(document).ready(function() {
 	

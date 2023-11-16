@@ -19,7 +19,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
 		.addResourceHandler("/images/**")
+<<<<<<< HEAD
 		.addResourceLocations("file://" + FileManagerService.FILE_UPLOAD_PATH);
+=======
+		.addResourceLocations("file:/Users/wonny/Desktop/workspace/workspace_onul/images/");
+>>>>>>> develop
 	}
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
