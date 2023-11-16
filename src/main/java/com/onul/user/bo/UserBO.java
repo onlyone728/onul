@@ -1,5 +1,6 @@
 package com.onul.user.bo;
 
+
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,15 +62,19 @@ public class UserBO {
 			return 0;
 		}
 		
-		String imagePath = null;
-		
-		if (file != null) {
-			imagePath = fms.saveFile(loginId, file);
+		if(user.getProfileImage() != null) {
 			try {
 				fms.deleteFile(user.getProfileImage());
 			} catch (IOException e) {
-				log.error("[update user] 파일 수정중 에러. postId:{}, error:{}", id, e.getMessage());
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+		}
+		
+		String imagePath = null;
+		
+		if (file != null) {
+			imagePath = fms.saveFile(loginId, file);			
 		}
 		
 		return userDAO.updateUser(id, email, imagePath, introduce);

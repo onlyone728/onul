@@ -55,6 +55,7 @@
 		
 		
 		<div class="postContent">
+			<img alt="커버 이미지" src="${post.knowhow.coverImage}" width="100%">
 			<div class="postTextArea">
 				<div class="postText">${post.knowhow.content}</div>
 			</div>

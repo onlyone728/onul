@@ -10,7 +10,7 @@ public class Review {
 
 	private int id;
 	private int userId;
-	private String nickname;
+	private String nickName;
 	private int storeId;
 	private int productId;
 	private int point;
