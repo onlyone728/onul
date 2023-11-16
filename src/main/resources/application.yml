@@ -3,11 +3,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/onul?characterEncoding=UTF-8
     username: root
-<<<<<<< HEAD
+
     password: Awkdgksk728!
-=======
-    password: zerone
->>>>>>> develop
+
   mvc:
     view:
      prefix: /WEB-INF/jsp/
